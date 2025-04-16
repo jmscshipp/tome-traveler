@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapLocation : MonoBehaviour
 {
     [SerializeField]
-    private MapLocation[] connectedLocations;
+    private List<MapLocation> connectedLocations = new List<MapLocation>();
     private bool connectionSetUp = false;
     private bool traversable = false;
     [SerializeField]
@@ -31,7 +31,7 @@ public class MapLocation : MonoBehaviour
             MapController.Instance().SendPlayerToNewLocation(this);
     }
 
-    public MapLocation[] GetConnectedLocations() => connectedLocations;
+    public List<MapLocation> GetConnectedLocations() => connectedLocations;
     public bool GetConnectionSetUp() => connectionSetUp;
     public void SetConnectionSetup(bool setUp)
     {
