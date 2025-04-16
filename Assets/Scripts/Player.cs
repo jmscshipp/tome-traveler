@@ -109,6 +109,11 @@ public class Player : MonoBehaviour
         return true;
     }
 
+    public bool IsInWilderness()
+    {
+        return currentLocation.GetComponent(typeof(Wild)) as Wild != null;
+    }
+
     private void ArrivedAtLocation()
     {
         traversing = false;
