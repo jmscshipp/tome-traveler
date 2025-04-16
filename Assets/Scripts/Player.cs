@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     private Vector2 endPos;
     private MapLocation currentLocation;
 
+    private PlayerResources playerResources;
+
     public Inventory PlayerInventory = new Inventory();
     [SerializeField]
     public bool KnowsTeleportation = false;
@@ -30,11 +32,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     public bool KnowsClairvoyance = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        playerResources = GetComponent<PlayerResources>();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -109,6 +111,8 @@ public class Player : MonoBehaviour
     private void ArrivedAtLocation()
     {
         traversing = false;
+        playerResources.AddExhaustion(1);
+        playerResources.AddHunger(1);
         currentLocation.ActivateLocation();
     }
 }
