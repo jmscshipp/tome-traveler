@@ -44,18 +44,28 @@ public class MapController : MonoBehaviour
         startingLocation.ActivateLocation();
     }
 
+    private void CreateConnectionGraphic(MapLocation location, MapLocation connectedLocation)
+    {
+        // create connection graphic
+        Vector3 dir = location.transform.position - connectedLocation.transform.position;
+        Vector2 connectionLocation = (location.transform.position + connectedLocation.transform.position) / 2f;
+        GameObject connection = Instantiate(connectionPrefab, connectionLocation, Quaternion.identity, connectionParent);
+        connection.transform.localScale = new Vector3(0.25f, dir.magnitude, 1f);
+        connection.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+    }
+
+    public void RevealSecretConnection(MapLocation location, MapLocation secretConnection)
+    {
+        CreateConnectionGraphic(location, secretConnection);
+    }
+
     // recursively explore map to set up connection graphics
     private void ConnectionSetup(MapLocation location)
     {
         location.SetConnectionSetup(true);
         foreach (MapLocation connectedLocation in location.GetConnectedLocations())
         {
-            // create connection graphic
-            Vector3 dir = location.transform.position - connectedLocation.transform.position;
-            Vector2 connectionLocation = (location.transform.position + connectedLocation.transform.position) / 2f;
-            GameObject connection = Instantiate(connectionPrefab, connectionLocation, Quaternion.identity, connectionParent);
-            connection.transform.localScale = new Vector3(0.25f, dir.magnitude, 1f);
-            connection.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+            CreateConnectionGraphic(location, connectedLocation);
 
             // only set up connections for this location if it's unexplored
             if (connectedLocation.GetConnectionSetUp() != true)

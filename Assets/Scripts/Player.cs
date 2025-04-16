@@ -113,9 +113,8 @@ public class Player : MonoBehaviour
         traversing = false;
         playerResources.AddExhaustion(1);
         playerResources.AddHunger(1);
-        currentLocation.ActivateLocation();
 
-        // After we have arrived, check to find out what kind of location we're in
+        // After we have arrived, check to see if there are any secrets in our new location
         // We do this by checking the current location, which has just been updated
         Secret secret = currentLocation.GetComponent(typeof(Secret)) as Secret;
         if (secret != null)
@@ -124,6 +123,20 @@ public class Player : MonoBehaviour
             secret.Activate();
         }
 
+        // After checking for secrets, check to see if we're inside of a secret that we've already discovered
+        // If we haven't found a secret revealing this Locale yet, we don't get the secret locale!
+        SecretLocale secretLocale = currentLocation.GetComponent(typeof(SecretLocale)) as SecretLocale;
+        if (secretLocale != null && secretLocale.IsDiscovered)
+        {
+            // reveal the secret to the player, update UI, etc
+            secretLocale.Activate();
+        }
+
+        currentLocation.ActivateLocation();
+
+        // After we have arrived, check to find out what kind of location we're in
+        // We do this by checking the current location, which has just been updated
+        // The normal Locale UI popup should happen *after* the SecretLocale UI popup
         Locale locale = currentLocation.GetComponent(typeof(Locale)) as Locale;
         if (locale != null)
         {
@@ -131,15 +144,7 @@ public class Player : MonoBehaviour
             // disable any actions that aren't permitted during UI interactions
             // disable and enable any shop-specific actions
             locale.Activate();
-            
-        }
 
-        Wild wild = currentLocation.GetComponent(typeof(Wild)) as Wild;
-        if (wild != null)
-        {
-            // open the shop UI window
-            // disable any actions that aren't permitted during UI interactions
-            // disable and enable any shop-specific actions
         }
     }
 }
