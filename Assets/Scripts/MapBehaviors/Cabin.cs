@@ -8,6 +8,10 @@ public class Cabin : Locale
     {
         Debug.LogError("Locale not implemented: " + this.GetType());
     }
+    public override void Deactivate()
+    {
+        Debug.LogError("Locale not implemented: " + this.GetType());
+    }
     // Start is called before the first frame update
     void Start()
     {

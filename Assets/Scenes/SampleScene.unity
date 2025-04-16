@@ -2614,7 +2614,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HuntSuccessChance: 0
---- !u!114 &1186226991
   SecretDestination: {fileID: 1747622837}
   tooltip: Woah, a secret!
 --- !u!114 &1186226994
@@ -4385,23 +4384,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HuntSuccessChance: 0
---- !u!1 &1919422986 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8520794942663227159, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
-  m_PrefabInstance: {fileID: 1919422985}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1919422987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919422986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b936895e435ef4b901e88a4871f2b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   localeDescription: 
 --- !u!1 &1941725914
 GameObject:
