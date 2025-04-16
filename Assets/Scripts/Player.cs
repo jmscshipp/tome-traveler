@@ -17,6 +17,18 @@ public class Player : MonoBehaviour
     private MapLocation currentLocation;
 
     public Inventory PlayerInventory = new Inventory();
+    [SerializeField]
+    public bool KnowsTeleportation = false;
+    [SerializeField]
+    public bool KnowsMindreading = false;
+    [SerializeField]
+    public bool KnowsSleepless = false;
+    [SerializeField]
+    public bool KnowsAbundance = false;
+    [SerializeField]
+    public bool KnowsWaterwalking = false;
+    [SerializeField]
+    public bool KnowsClairvoyance = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +59,35 @@ public class Player : MonoBehaviour
         currentLocation = newLocation;
         traverseTimer = 0f;
         traversing = true;
+    }
+
+    public bool Learn(Tome tome)
+    {
+        switch (tome.item_id)
+        {
+            case Items.AbundanceTome:
+                KnowsAbundance = true;
+                break;
+            case Items.ClairvoyanceTome:
+                KnowsClairvoyance = true;
+                break;
+            case Items.MindreadingTome:
+                KnowsMindreading = true;
+                break;
+            case Items.SleeplessTome:
+                KnowsSleepless = true;
+                break;
+            case Items.TeleportationTome:
+                KnowsTeleportation = true;
+                break;
+            case Items.WaterwalkingTome:
+                KnowsWaterwalking = true;
+                break;
+            default:
+                Debug.LogError("Error: Can't Learn Tome because no case in switch statement for " + tome.item_id);
+                return false;
+        }
+        return true;
     }
 
     public bool Sleep()

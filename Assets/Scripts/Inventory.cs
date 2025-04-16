@@ -13,6 +13,7 @@ public enum Items : ushort
     AbundanceTome,
     ClairvoyanceTome,
     MindreadingTome,
+    WaterwalkingTome,
 }
 
 
