@@ -119,11 +119,12 @@ public class LocalePopupUI : MonoBehaviour
 
     public void Buy()
     {
-
+        // make merchant inventory available for selling
     }
 
     public void Sell()
     {
+        // make player inventory available for selling
     }
 
     public void Leave()
