@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Wild : Locale
 {
+    RandomTable WildsRandomTable = new RandomTable(
+        new List<RandomEvent>() {
+            new GetRobbed(likelihood:1),
+            new GetConcussed(likelihood: 1),
+            new NothingHappens(likelihood: 20),
+        });
+
     [SerializeField]
     public float HuntSuccessChance;
 
@@ -12,7 +19,7 @@ public class Wild : Locale
         Debug.Log("Activate Not Implemented");
     }
 
-    public void Hunt(Player player)
+    public void Hunt()
     {
         if (Random.Range(0, 1) < HuntSuccessChance)
         {
@@ -21,11 +28,15 @@ public class Wild : Locale
                 player.PlayerInventory.AddItem(new Food());
             }
         }
+
+        WildsRandomTable.ChooseRandom().Activate();
     }
 
-    public void Camp(Player player)
+    public void Camp()
     {
         player.SleepWilderness();
+        // Trigger a random event
+        WildsRandomTable.ChooseRandom().Activate();
     }
 
     // Start is called before the first frame update

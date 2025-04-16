@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     // variables for moving between locations
     [SerializeField]
     private AnimationCurve movementCurve;
@@ -35,8 +36,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     public int InventorySizeLimit = 24;
 
+
+    private static Player instance;
+
+    public static Player Instance() => instance;
+
     private void Awake()
     {
+        // setting up singleton
+        if (instance != null && instance != this)
+            Destroy(this);
+        instance = this;
+
         playerResources = GetComponent<PlayerResources>();
         PlayerInventory.SizeLimit = InventorySizeLimit;
     }
