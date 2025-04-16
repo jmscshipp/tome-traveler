@@ -143,10 +143,7 @@ public class Player : MonoBehaviour
             // open the locale UI window
             // disable any actions that aren't permitted during UI interactions
             // disable and enable any shop-specific actions
-            locale.Activate();
-
+            UIManager.Instance().OpenLocalePopup(locale);
         }
-        Item tent = new Item(Items.Tent);
-        PlayerInventory.AddItem(tent);
     }
 }

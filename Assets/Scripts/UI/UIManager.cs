@@ -11,6 +11,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text dialoguePopupText;
 
+    // location popup variables
+    [SerializeField]
+    private LocalePopupUI localePopup;
+
     private static UIManager instance;
 
     private void Awake()
@@ -24,6 +28,17 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance()
     {
         return instance;
+    }
+
+    public void OpenLocalePopup(Locale locale)
+    {
+        localePopup.gameObject.SetActive(true);
+        localePopup.ActivatePopup(locale);
+    }
+
+    public void CloseLocalePopup()
+    {
+        localePopup.gameObject.SetActive(false);
     }
 
     public void OpenDialoguePopup(string dialogue)
