@@ -32,9 +32,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     public bool KnowsClairvoyance = false;
 
+    [SerializeField]
+    public int InventorySizeLimit = 24;
+
     private void Awake()
     {
         playerResources = GetComponent<PlayerResources>();
+        PlayerInventory.SizeLimit = InventorySizeLimit;
     }
 
     // Update is called once per frame
@@ -92,11 +96,8 @@ public class Player : MonoBehaviour
         return true;
     }
 
-    public bool Sleep()
+    public bool SleepWilderness()
     {
-        // check if in town
-        // check if in wilderness
-        //if in wilderness, see if u can sleep
         Tent tent = PlayerInventory.GetUsableTent();
         if (tent == null)
         {

@@ -6,7 +6,7 @@ public class HiddenShelter : SecretLocale
 {
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Activate Not Implemented");
     }
     // Start is called before the first frame update
     void Start()

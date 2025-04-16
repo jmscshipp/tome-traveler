@@ -4,9 +4,28 @@ using UnityEngine;
 
 public class Wild : Locale
 {
+    [SerializeField]
+    public float HuntSuccessChance;
+
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Activate Not Implemented");
+    }
+
+    public void Hunt(Player player)
+    {
+        if (Random.Range(0, 1) < HuntSuccessChance)
+        {
+            if (player.PlayerInventory.HasSpace())
+            {
+                player.PlayerInventory.AddItem(new Food());
+            }
+        }
+    }
+
+    public void Camp(Player player)
+    {
+        player.SleepWilderness();
     }
 
     // Start is called before the first frame update
