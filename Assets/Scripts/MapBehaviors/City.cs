@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Town : Locale
+public class City : Locale
 {
     public override void Activate()
     {

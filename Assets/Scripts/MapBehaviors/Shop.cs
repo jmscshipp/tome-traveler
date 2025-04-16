@@ -6,7 +6,7 @@ public class Shop : Locale
 {
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        Debug.LogError("Locale not implemented: " + this.GetType());
     }
 
     // Start is called before the first frame update

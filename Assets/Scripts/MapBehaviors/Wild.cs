@@ -12,7 +12,7 @@ public class Wild : Locale
         });
 
     [SerializeField]
-    public float HuntSuccessChance;
+    public float HuntSuccessChance = .35f;
 
     public override void Activate()
     {

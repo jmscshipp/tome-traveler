@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MapLocation))]
 public abstract class Locale : MonoBehaviour
 {
-    public Player player;
+    protected Player player;
     private void Awake()
     {
         player = Player.Instance();
