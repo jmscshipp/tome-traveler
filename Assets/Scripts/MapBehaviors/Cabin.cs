@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HiddenShelter : SecretLocale
+public class Cabin : Locale
 {
     public override void Activate()
     {
-        Debug.Log("Activate Not Implemented");
+        Debug.LogError("Locale not implemented: " + this.GetType());
     }
     // Start is called before the first frame update
     void Start()

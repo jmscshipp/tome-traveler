@@ -15,6 +15,11 @@ public enum LocaleTypes : ushort
 [RequireComponent(typeof(MapLocation))]
 public abstract class Locale : MonoBehaviour
 {
+    protected Player player;
+    private void Awake()
+    {
+        player = Player.Instance();
+    }
     [SerializeField]
     protected string localeDescription;
     protected LocaleTypes localeType;

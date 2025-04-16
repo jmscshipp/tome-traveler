@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     // variables for moving between locations
     [SerializeField]
     private AnimationCurve movementCurve;
@@ -32,9 +33,23 @@ public class Player : MonoBehaviour
     [SerializeField]
     public bool KnowsClairvoyance = false;
 
+    [SerializeField]
+    public int InventorySizeLimit = 24;
+
+
+    private static Player instance;
+
+    public static Player Instance() => instance;
+
     private void Awake()
     {
+        // setting up singleton
+        if (instance != null && instance != this)
+            Destroy(this);
+        instance = this;
+
         playerResources = GetComponent<PlayerResources>();
+        PlayerInventory.SizeLimit = InventorySizeLimit;
     }
 
     // Update is called once per frame
@@ -92,11 +107,8 @@ public class Player : MonoBehaviour
         return true;
     }
 
-    public bool Sleep()
+    public bool SleepWilderness()
     {
-        // check if in town
-        // check if in wilderness
-        //if in wilderness, see if u can sleep
         Tent tent = PlayerInventory.GetUsableTent();
         if (tent == null)
         {
@@ -106,6 +118,11 @@ public class Player : MonoBehaviour
 
         // This is where you'd update the exhaustion meter
         return true;
+    }
+
+    public bool IsInWilderness()
+    {
+        return currentLocation.GetComponent(typeof(Wild)) as Wild != null;
     }
 
     private void ArrivedAtLocation()

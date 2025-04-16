@@ -85,6 +85,8 @@ public class Inventory
         ui = uiRef;
     }
 
+    public int SizeLimit = 0;
+
     public void AddItem(Item item)
     {
         itemList.Add(item);
@@ -95,6 +97,11 @@ public class Inventory
     // check the inventory has an item
     {
         return itemList.Exists(x => x.item_id == ItemID);
+    }
+
+    public bool HasSpace()
+    {
+        return itemList.Count < SizeLimit;
     }
 
     public Tent GetUsableTent()
