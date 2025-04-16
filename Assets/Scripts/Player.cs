@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
         startPos = transform.position;
         endPos = newLocation.transform.position;
         currentLocation = newLocation;
+        currentLocation = newLocation;
         traverseTimer = 0f;
         traversing = true;
     }
@@ -114,5 +115,7 @@ public class Player : MonoBehaviour
         playerResources.AddExhaustion(1);
         playerResources.AddHunger(1);
         currentLocation.ActivateLocation();
+        Item tent = new Item(Items.Tent);
+        PlayerInventory.AddItem(tent);
     }
 }
