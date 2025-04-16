@@ -10,6 +10,8 @@ public class MapLocation : MonoBehaviour
     private bool traversable = false;
     [SerializeField]
     private GameObject highlightGraphics;
+    [SerializeField]
+    private bool finalLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,9 @@ public class MapLocation : MonoBehaviour
 
     public void ActivateLocation()
     {
+        // the player has made it to the end of the game - the Emerald City
+        if (finalLocation)
+            UIManager.Instance().OpenDialoguePopup("You've made it! You've made it to the Emerald City!");
         foreach (MapLocation location in connectedLocations)
             location.SetTraversable(true);
     }
