@@ -49,6 +49,22 @@ public class Player : MonoBehaviour
         traversing = true;
     }
 
+    public bool Sleep()
+    {
+        // check if in town
+        // check if in wilderness
+        //if in wilderness, see if u can sleep
+        Tent tent = PlayerInventory.GetUsableTent();
+        if (tent == null)
+        {
+            // We failed to find a usable tent so return false
+            return false;
+        }
+
+        // This is where you'd update the exhaustion meter
+        return true;
+    }
+
     private void ArrivedAtLocation()
     {
         traversing = false;

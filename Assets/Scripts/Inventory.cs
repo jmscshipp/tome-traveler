@@ -65,14 +65,20 @@ public class Treasure : Item
 
 public class Tent : Item
 {
-    public Tent() : base(Items.Tent)
+    public int Uses { get; set; }
+
+    public bool UseTent()
+    // returns true if tent breaks
     {
+        Uses -= 1;
+        return Uses < 0;
     }
+    public Tent() : base(Items.Tent) {}
 }
 
 public class Inventory
 {
-    List<Item> itemList = new List<Item>();
+    public List<Item> itemList = new List<Item>();
 
     public void AddItem(Item item)
     {
@@ -83,6 +89,24 @@ public class Inventory
     // check the inventory has an item
     {
         return itemList.Exists(x => x.item_id == ItemID);
+    }
+
+    public Tent GetUsableTent()
+    {
+        foreach (Item i in itemList)
+        {
+            if (i.item_id != Items.Tent)
+            {
+                continue;
+            }
+            Tent t = (Tent)i;
+            if (t.Uses <0) {
+                continue;
+            }
+            return t;
+        }
+        Debug.LogWarning("GetUsableTent failed: No tent with uses remaining");
+        return null;
     }
 
     public bool RemoveItem(Items ItemID)
