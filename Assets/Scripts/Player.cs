@@ -114,5 +114,32 @@ public class Player : MonoBehaviour
         playerResources.AddExhaustion(1);
         playerResources.AddHunger(1);
         currentLocation.ActivateLocation();
+
+        // After we have arrived, check to find out what kind of location we're in
+        // We do this by checking the current location, which has just been updated
+        Secret secret = currentLocation.GetComponent(typeof(Secret)) as Secret;
+        if (secret != null)
+        {
+            // reveal the secret to the player, update UI, etc
+            secret.Activate();
+        }
+
+        Locale locale = currentLocation.GetComponent(typeof(Locale)) as Locale;
+        if (locale != null)
+        {
+            // open the locale UI window
+            // disable any actions that aren't permitted during UI interactions
+            // disable and enable any shop-specific actions
+            locale.Activate();
+            
+        }
+
+        Wild wild = currentLocation.GetComponent(typeof(Wild)) as Wild;
+        if (wild != null)
+        {
+            // open the shop UI window
+            // disable any actions that aren't permitted during UI interactions
+            // disable and enable any shop-specific actions
+        }
     }
 }
