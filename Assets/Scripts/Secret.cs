@@ -25,6 +25,8 @@ public class Secret : MonoBehaviour
     {
         Debug.Log("New Secret Discovered!");
         SecretDestination.IsDiscovered = true;
+
+        UIManager.Instance().OpenDialoguePopup("You learn a secret. You note its location on your map.");
     }
 }
 
@@ -34,6 +36,9 @@ public abstract class SecretLocale : MonoBehaviour
 {
     [SerializeField]
     internal bool IsDiscovered;
+
+    [SerializeField]
+    public string Dialogue;
 
     public abstract void Activate();
 }
