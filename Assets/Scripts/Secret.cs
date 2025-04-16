@@ -16,6 +16,7 @@ public enum SecretType
 [RequireComponent(typeof(MapLocation))]
 public class Secret : MonoBehaviour
 {
+    public bool IsDiscovered = false;
     [SerializeField]
     public SecretLocale SecretDestination;
     [SerializeField]
@@ -25,6 +26,9 @@ public class Secret : MonoBehaviour
     {
         Debug.Log("New Secret Discovered!");
         SecretDestination.IsDiscovered = true;
+
+        UIManager.Instance().OpenDialoguePopup("You learn a secret. You note its location on your map.");
+        IsDiscovered = true;
     }
 }
 
@@ -33,7 +37,10 @@ public abstract class SecretLocale : MonoBehaviour
     // Abstract class for places a secret can point to
 {
     [SerializeField]
-    internal bool IsDiscovered;
+    public bool IsDiscovered = false;
+
+    [SerializeField]
+    public string Dialogue;
 
     public abstract void Activate();
 }
