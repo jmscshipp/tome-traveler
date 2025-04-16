@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Player : MonoBehaviour
 {
     // variables for moving between locations
@@ -14,15 +16,17 @@ public class Player : MonoBehaviour
     private Vector2 endPos;
     private MapLocation currentLocation;
 
+    public Inventory PlayerInventory = new Inventory();
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
     // Update is called once per frame
     void Update()
     {
+        // Advance player position while traversing
         if (traversing)
         {
             traverseTimer += Time.deltaTime;
