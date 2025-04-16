@@ -16,7 +16,6 @@ public enum Items : ushort
     WaterwalkingTome,
 }
 
-
 public class Item
 {
     // item ids are read-only
@@ -26,7 +25,6 @@ public class Item
         item_id = id;
     }
 }
-
 
 public class Tome : Item
 {
@@ -80,12 +78,19 @@ public class Tent : Item
 public class Inventory
 {
     public List<Item> itemList = new List<Item>();
+    private InventoryUI ui;
+
+    public void SetupUIRefs(InventoryUI uiRef)
+    {
+        ui = uiRef;
+    }
 
     public int SizeLimit = 0;
 
     public void AddItem(Item item)
     {
         itemList.Add(item);
+        ui.Add(item);
     }
 
     public bool HasItem(Items ItemID)
@@ -124,6 +129,7 @@ public class Inventory
         {
             if (i.item_id == ItemID)
             {
+                ui.Remove(i);
                 itemList.Remove(i);
                 return true;
             }

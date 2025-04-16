@@ -147,5 +147,7 @@ public class Player : MonoBehaviour
             locale.Activate();
 
         }
+        Item tent = new Item(Items.Tent);
+        PlayerInventory.AddItem(tent);
     }
 }
