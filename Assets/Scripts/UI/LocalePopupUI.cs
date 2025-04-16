@@ -27,6 +27,8 @@ public class LocalePopupUI : MonoBehaviour
     [SerializeField]
     private GameObject buyButtonPrefab;
 
+    private Locale currentLocal;
+
     public void ActivatePopup(Locale locale)
     {
         // turn on child objects
