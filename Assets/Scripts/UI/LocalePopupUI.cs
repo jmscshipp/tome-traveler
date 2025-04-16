@@ -46,6 +46,8 @@ public class LocalePopupUI : MonoBehaviour
         // turn off child objects
         foreach (Transform child in transform.GetComponentInChildren<Transform>())
             child.gameObject.SetActive(false);
+
+        UIManager.Instance().DialogueOpen = false;
     }
 
     public void AddButtons(LocaleTypes localeType)

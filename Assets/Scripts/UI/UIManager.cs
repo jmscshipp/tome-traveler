@@ -12,14 +12,19 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text dialoguePopupText;
 
+    public bool DialogueOpen = false;
+
     List<Popup> popupQueue = new List<Popup>();
 
+    [SerializeField]
     public abstract class Popup
     {
         public abstract void ActivateWindow();
     }
 
+    [SerializeField]
     public class DialoguePopup : Popup {
+        [SerializeField]
         public string dialogue;
 
         public DialoguePopup(string dialogue)
@@ -49,8 +54,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
     public class SecretLocalePopup : Popup
     {
+        [SerializeField]
         SecretLocale secretLocale;
         public SecretLocalePopup(SecretLocale secretLocale)
         {
@@ -69,6 +76,17 @@ public class UIManager : MonoBehaviour
     private LocalePopupUI localePopup;
 
     private static UIManager instance;
+
+    public void Update()
+    {
+        if (!DialogueOpen && popupQueue.Count > 0)
+        {
+            DialogueOpen = true;
+            Popup ActivePopup = popupQueue[0];
+            popupQueue.RemoveAt(0);
+            ActivePopup.ActivateWindow();
+        }
+    }
 
     private void Awake()
     {
@@ -91,6 +109,7 @@ public class UIManager : MonoBehaviour
     public void CloseLocalePopup()
     {
         localePopup.gameObject.SetActive(false);
+        DialogueOpen = false;
     }
 
     public void OpenDialoguePopup(string dialogue)
@@ -101,5 +120,6 @@ public class UIManager : MonoBehaviour
     public void CloseDialoguePopup()
     {
         dialoguePopup.SetActive(false);
+        DialogueOpen = false;
     }
 }

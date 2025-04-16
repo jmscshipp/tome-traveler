@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
         // After we have arrived, check to see if there are any secrets in our new location
         // We do this by checking the current location, which has just been updated
         Secret secret = currentLocation.GetComponent(typeof(Secret)) as Secret;
-        if (secret != null)
+        if (secret != null && !secret.IsDiscovered)
         {
             // reveal the secret to the player, update UI, etc
             secret.Activate();
