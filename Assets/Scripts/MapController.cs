@@ -119,4 +119,31 @@ public class MapController : MonoBehaviour
     {
         currentLocation = location;
     }
+
+    public Sprite GetLocaleSprite(Locale locale)
+    {
+        Sprite sprite = null;
+        switch (locale.GetLocaleType())
+        {
+            case LocaleTypes.Town:
+                sprite = townMapIcon;
+                break;
+            case LocaleTypes.Wilds:
+                sprite = wildsMapIcon;
+                break;
+            case LocaleTypes.Shop:
+                sprite = shopMapIcon;
+                break;
+            case LocaleTypes.City:
+                sprite = cityMapIcon;
+                break;
+            case LocaleTypes.Ruins:
+                sprite = ruinsMapIcon;
+                break;
+            case LocaleTypes.Cabin:
+                sprite = cabinMapIcon;
+                break;
+        }
+        return sprite;
+    }
 }

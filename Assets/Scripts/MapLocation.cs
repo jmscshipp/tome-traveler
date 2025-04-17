@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [SelectionBase]
@@ -11,9 +13,17 @@ public class MapLocation : MonoBehaviour
     bool connectionSetUp = false;
     private bool traversable = false;
     [SerializeField]
+    private SpriteRenderer iconGraphics;
+    [SerializeField]
     private GameObject highlightGraphics;
     [SerializeField]
     private bool finalLocation;
+
+    private void Start()
+    {
+        iconGraphics.gameObject.SetActive(true);
+        GetComponent<Locale>().SetupIconGraphics();
+    }
 
     private void OnMouseDown()
     {
@@ -23,6 +33,7 @@ public class MapLocation : MonoBehaviour
 
     public List<MapLocation> GetConnectedLocations() => connectedLocations;
     public bool GetConnectionSetUp() => connectionSetUp;
+    public SpriteRenderer GetIconGraphics() => iconGraphics;
 
     public void ConnectTwoWays(MapLocation other)
     {
@@ -58,5 +69,25 @@ public class MapLocation : MonoBehaviour
     {
         foreach (MapLocation location in connectedLocations)
             location.SetTraversable(selectable);
+    }
+
+    private void OnDrawGizmos()
+    {
+        string sprite = "";
+        if (GetComponent<Town>())
+            sprite = "town.png";
+        else if (GetComponent<Wild>())
+            sprite = "wilds.png";
+        else if (GetComponent<Shop>())
+            sprite = "shop.png";
+        else if (GetComponent<City>())
+            sprite = "city.png";
+        else if (GetComponent<Ruins>())
+            sprite = "ruins.png";
+        else if (GetComponent<Cabin>())
+            sprite = "cabin.png";
+
+        Gizmos.DrawIcon(transform.position, "circle.png", true, Color.white);
+        Gizmos.DrawIcon(transform.position, sprite, true, Color.black);
     }
 }

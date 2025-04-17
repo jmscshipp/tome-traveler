@@ -15,6 +15,11 @@ public class InsideShop : Locale
         Debug.LogError("Locale not implemented: " + this.GetType());
     }
 
+    public override void SetupIconGraphics()
+    {
+        // doesn't use this function
+    }
+
     private void Awake()
     {
         localeType = LocaleTypes.InsideShop;

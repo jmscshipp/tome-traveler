@@ -29,6 +29,11 @@ public class Shop : Locale
         throw new System.NotImplementedException();
     }
 
+    public override void SetupIconGraphics()
+    {
+        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
+    }
+
     private void Awake()
     {
         localeType = LocaleTypes.Shop;

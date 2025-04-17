@@ -20,6 +20,10 @@ public class Wild : Locale
     {
         Debug.Log("Activate Not Implemented");
     }
+    public override void SetupIconGraphics()
+    {
+        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
+    }
 
     private void Awake()
     {

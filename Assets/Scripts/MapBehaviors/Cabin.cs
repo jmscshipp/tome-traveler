@@ -14,6 +14,11 @@ public class Cabin : Locale
     {
         Debug.LogError("Locale not implemented: " + this.GetType());
     }
+    public override void SetupIconGraphics()
+    {
+        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
+    }
+
 
     private void Awake()
     {
