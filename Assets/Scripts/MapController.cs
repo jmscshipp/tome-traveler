@@ -20,6 +20,20 @@ public class MapController : MonoBehaviour
     private MapLocation currentLocation;
     private static MapController instance;
 
+    // icons for different locales
+    [SerializeField]
+    private Sprite townMapIcon;
+    [SerializeField]
+    private Sprite wildsMapIcon;
+    [SerializeField]
+    private Sprite shopMapIcon;
+    [SerializeField]
+    private Sprite cityMapIcon;
+    [SerializeField]
+    private Sprite cabinMapIcon;
+    [SerializeField]
+    private Sprite ruinsMapIcon;
+
     public static MapController Instance() => instance;
     private void Awake()
     {
