@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class Player : MonoBehaviour
 {
 
@@ -20,18 +19,34 @@ public class Player : MonoBehaviour
     private PlayerResources playerResources;
 
     public Inventory PlayerInventory = new Inventory();
+
     [SerializeField]
-    public bool KnowsTeleportation = false;
-    [SerializeField]
-    public bool KnowsMindreading = false;
-    [SerializeField]
-    public bool KnowsSleepless = false;
-    [SerializeField]
-    public bool KnowsAbundance = false;
-    [SerializeField]
-    public bool KnowsWaterwalking = false;
-    [SerializeField]
-    public bool KnowsClairvoyance = false;
+    public bool KnowsTeleportation ()
+    {
+        return Spells.Exists(x => x is Teleportation);
+    }
+    public bool KnowsMindreading()
+    {
+        return Spells.Exists(x => x is Mindreading);
+    }
+    public bool KnowsClairvoyance()
+    {
+        return Spells.Exists(x => x is Clairvoyance);
+    }
+    public bool KnowsAbundance()
+    {
+        return Spells.Exists(x => x is Abundance);
+    }
+    public bool KnowsWaterwalking()
+    {
+        return Spells.Exists(x => x is Waterwalking);
+    }
+    public bool KnowsSleepless()
+    {
+        return Spells.Exists(x => x is Sleepless);
+    }
+
+    public List<Spell> Spells = new List<Spell>();
 
     [SerializeField]
     public int InventorySizeLimit = 24;
@@ -78,33 +93,9 @@ public class Player : MonoBehaviour
         traversing = true;
     }
 
-    public bool Learn(Tome tome)
+    public void Learn(Tome tome)
     {
-        switch (tome.item_id)
-        {
-            case Items.AbundanceTome:
-                KnowsAbundance = true;
-                break;
-            case Items.ClairvoyanceTome:
-                KnowsClairvoyance = true;
-                break;
-            case Items.MindreadingTome:
-                KnowsMindreading = true;
-                break;
-            case Items.SleeplessTome:
-                KnowsSleepless = true;
-                break;
-            case Items.TeleportationTome:
-                KnowsTeleportation = true;
-                break;
-            case Items.WaterwalkingTome:
-                KnowsWaterwalking = true;
-                break;
-            default:
-                Debug.LogError("Error: Can't Learn Tome because no case in switch statement for " + tome.item_id);
-                return false;
-        }
-        return true;
+        Spells.Add(tome.Spell);
     }
 
     public bool SleepWilderness()

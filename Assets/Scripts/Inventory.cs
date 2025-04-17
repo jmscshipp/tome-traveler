@@ -28,28 +28,31 @@ public class Item
 
 public class Tome : Item
 {
-    public Tome(Items item) : base(item) { }
+    public Spell Spell;
+    public Tome(Items item, Spell spell) : base(item) {
+        Spell = spell;
+    }
 }
 
 public class TeleportationTome : Tome
 {
-    public TeleportationTome() : base(Items.TeleportationTome) { }
+    public TeleportationTome() : base(Items.TeleportationTome, new Teleportation()) { }
 }
 public class SleeplessTome : Tome
 {
-    public SleeplessTome() : base(Items.SleeplessTome) { }
+    public SleeplessTome() : base(Items.SleeplessTome, new Sleepless()) { }
 }
 public class AbundanceTome : Tome
 {
-    public AbundanceTome() : base(Items.AbundanceTome) { }
+    public AbundanceTome() : base(Items.AbundanceTome, new Abundance()) { }
 }
 public class ClairvoyanceTome : Tome
 {
-    public ClairvoyanceTome() : base(Items.ClairvoyanceTome) { }
+    public ClairvoyanceTome() : base(Items.ClairvoyanceTome, new Clairvoyance()) { }
 }
 public class MindreadingTome : Tome
 {
-    public MindreadingTome() : base(Items.MindreadingTome) { }
+    public MindreadingTome() : base(Items.MindreadingTome, new Mindreading()) { }
 }
 
 public class Food : Item
