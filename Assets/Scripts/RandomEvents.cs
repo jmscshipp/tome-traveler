@@ -51,7 +51,10 @@ public class GetRobbed : RandomEvent
 
     public override void Activate()
     {
-        Debug.LogError("You got robbed but it wasn't implemented");
+        int amount = Random.Range(1, Player.Instance().GetComponent<PlayerResources>().GetCoins());
+        Player.Instance().GetComponent<PlayerResources>().AddCoins(-amount);
+        UIManager.Instance().OpenDialoguePopup("You were robbed. You lost " + amount + " gold. Be happy you kept your life.");
+        //Debug.LogError("You got robbed but it wasn't implemented");
     }
 }
 
@@ -60,7 +63,19 @@ public class GetConcussed : RandomEvent
     public GetConcussed(int likelihood) : base(likelihood) { }
 
     public override void Activate()
-    {
-        Debug.LogError("You got concussed but it wasn't implemented");
+    { 
+
+        List<Spell> pspells = Player.Instance().Spells;
+        if (pspells.Count == 0)
+        {
+            UIManager.Instance().OpenDialoguePopup("Bandits fall upon you, but you fight back. In the ensuing chaos, you are struck and fall unconscious. When you awake, you can't remember something important.");
+        }
+        else
+        {
+            Spell forgottenSpell = pspells[Random.Range(0, pspells.Count)];
+            pspells.Remove(forgottenSpell);
+            UIManager.Instance().OpenDialoguePopup("Bandits fall upon you, but you fight back. In the ensuing chaos, you are struck and fall unconscious. When you awake, you can't remember " + forgottenSpell.sd.Name);
+            //Debug.LogError("You got concussed but it wasn't implemented");
+        }
     }
 }

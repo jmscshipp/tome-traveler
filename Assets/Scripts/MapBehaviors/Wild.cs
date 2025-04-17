@@ -30,26 +30,28 @@ public class Wild : Locale
 
     public void Hunt()
     {
+        if (Random.Range(0f, 1f) < gm.GameState.HuntExhaustionChance)
+        {
+            Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.HuntExhaustionPenalty);
+        }
+
         if (Random.Range(0f, 1f) < HuntSuccessChance)
         {
-                int num_food = Random.Range(1, gm.GameState.MaxFoodFromHunt);
-                for (int i =0; i<num_food; i++)
-                {
-                    if (player.PlayerInventory.HasSpace())
-                        player.PlayerInventory.AddItem(new Food());
-                }
-
-                UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
-                UIManager.Instance().OpenLocalePopup(this);
-                UIManager.Instance().CloseLocalePopup();
+            int num_food = Random.Range(1, gm.GameState.MaxFoodFromHunt);
+            for (int i =0; i<num_food; i++)
+            {
+                if (player.PlayerInventory.HasSpace())
+                    player.PlayerInventory.AddItem(new Food());
+            }
+             UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
         } else
         {
             UIManager.Instance().OpenDialoguePopup("You hunt but find no food.");
-            UIManager.Instance().OpenLocalePopup(this);
-            UIManager.Instance().CloseLocalePopup();
         }
 
         WildsRandomTable.ChooseRandom().Activate();
+        UIManager.Instance().OpenLocalePopup(this);
+        UIManager.Instance().CloseLocalePopup();
     }
 
     public void Camp()
@@ -60,17 +62,15 @@ public class Wild : Locale
             int exhaustionReduction = Random.Range(1, gm.GameState.MaxRestFromTent);
             Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-gm.GameState.ExploreExhaustionPenalty);
             UIManager.Instance().OpenDialoguePopup("You curl up in your sleeping bag and watch the stars. In the morning, you feel refreshed.");
-            UIManager.Instance().OpenLocalePopup(this);
-            UIManager.Instance().CloseLocalePopup();
         }
         else
         {
             UIManager.Instance().OpenDialoguePopup("You have nothing suitable to sleep with here. It isn't safe.");
-            UIManager.Instance().OpenLocalePopup(this);
-            UIManager.Instance().CloseLocalePopup();
         }
         // Trigger a random event
         WildsRandomTable.ChooseRandom().Activate();
+        UIManager.Instance().OpenLocalePopup(this);
+        UIManager.Instance().CloseLocalePopup();
     }
 
     public void Explore()
@@ -85,14 +85,12 @@ public class Wild : Locale
         {
             UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
             secretLocale.Activate();
-            UIManager.Instance().OpenLocalePopup(this);
-            UIManager.Instance().CloseLocalePopup();
         } else
         {
             UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
-            UIManager.Instance().OpenLocalePopup(this);
-            UIManager.Instance().CloseLocalePopup();
         }
+        UIManager.Instance().OpenLocalePopup(this);
+        UIManager.Instance().CloseLocalePopup();
     }
 
     public override void Deactivate()

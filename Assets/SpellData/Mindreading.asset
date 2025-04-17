@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381ffed9439d84843bdaf150136c76ef, type: 3}
   m_Name: Mindreading
   m_EditorClassIdentifier: 
+  Name: Mindreading Spell
+  Cooldown: 3
+  Strength: 1

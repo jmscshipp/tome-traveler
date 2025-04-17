@@ -15,3 +15,5 @@ MonoBehaviour:
   ExploreExhaustionPenalty: 1
   MaxFoodFromHunt: 3
   MaxRestFromTent: 3
+  HuntExhaustionChance: 0.5
+  HuntExhaustionPenalty: 1

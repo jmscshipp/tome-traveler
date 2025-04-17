@@ -4,19 +4,19 @@ using UnityEngine;
 
 public abstract class Spell
 {
+    public SpellData sd;
     public int cooldown = 0;
     public int BaseCooldown = 1;
 
-    public Spell(int cooldown)
+    public Spell(SpellData sd)
     {
-        this.BaseCooldown = cooldown;
+        this.BaseCooldown = sd.Cooldown;
     }
     public abstract void Use();
 }
 public class Waterwalking : Spell
 {
-    SpellData sd = GameManager.Instance().Waterwalking;
-    public Waterwalking() : base(cooldown: GameManager.Instance().Waterwalking.Cooldown) { }
+    public Waterwalking() : base(sd: GameManager.Instance().Waterwalking) { }
     public override void Use()
     {
         this.cooldown = BaseCooldown;
@@ -25,8 +25,8 @@ public class Waterwalking : Spell
 
 public class Abundance : Spell
 {
-    SpellData sd = GameManager.Instance().Abundance;
-    public Abundance() : base(cooldown: GameManager.Instance().Abundance.Cooldown) { }
+    public SpellData sd = GameManager.Instance().Abundance;
+    public Abundance() : base(sd: GameManager.Instance().Abundance) { }
     public override void Use()
     {
         Player.Instance().GetComponent<PlayerResources>().AddHunger(-sd.Strength);
@@ -36,8 +36,7 @@ public class Abundance : Spell
 
 public class Sleepless : Spell
 {
-    SpellData sd = GameManager.Instance().Sleepless;
-    public Sleepless() : base(cooldown: GameManager.Instance().Sleepless.Cooldown) { }
+    public Sleepless() : base(sd: GameManager.Instance().Sleepless) { }
     public override void Use()
     {
         Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-sd.Strength);
@@ -48,7 +47,7 @@ public class Sleepless : Spell
 public class Clairvoyance : Spell
 {
     SpellData sd = GameManager.Instance().Clairvoyance;
-    public Clairvoyance() : base(cooldown: GameManager.Instance().Clairvoyance.Cooldown) { }
+    public Clairvoyance() : base(sd: GameManager.Instance().Clairvoyance) { }
     public override void Use()
     {
         // Change Fog of War size (lerp it?) by Strength
@@ -59,7 +58,7 @@ public class Clairvoyance : Spell
 public class Teleportation : Spell
 {
     SpellData sd = GameManager.Instance().Teleportation;
-    public Teleportation() : base(cooldown: GameManager.Instance().Teleportation.Cooldown) { }
+    public Teleportation() : base(sd: GameManager.Instance().Teleportation) { }
     public override void Use()
     {
         // enter UI state machine
@@ -73,7 +72,7 @@ public class Teleportation : Spell
 public class Mindreading : Spell
 {
     SpellData sd = GameManager.Instance().Mindreading;
-    public Mindreading() : base(cooldown:GameManager.Instance().Mindreading.Cooldown) {}
+    public Mindreading() : base(sd:GameManager.Instance().Mindreading) {}
     public override void Use()
     {
         // highlight locations with secrets to discover. Automatically succeed on Talk in this location.
