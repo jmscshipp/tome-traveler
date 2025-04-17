@@ -2,28 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class MapLocation : MonoBehaviour
 {
     [SerializeField]
     private List<MapLocation> connectedLocations = new List<MapLocation>();
-    private bool connectionSetUp = false;
+    [SerializeField]
+    bool connectionSetUp = false;
     private bool traversable = false;
     [SerializeField]
     private GameObject highlightGraphics;
     [SerializeField]
     private bool finalLocation;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnMouseDown()
     {
@@ -33,6 +23,19 @@ public class MapLocation : MonoBehaviour
 
     public List<MapLocation> GetConnectedLocations() => connectedLocations;
     public bool GetConnectionSetUp() => connectionSetUp;
+
+    public void ConnectTwoWays(MapLocation other)
+    {
+        if (!connectedLocations.Contains(other))
+        {
+            connectedLocations.Add(other);
+        }
+        if (!other.GetConnectedLocations().Contains(this))
+        {
+            other.GetConnectedLocations().Add(this);
+        }
+    }
+    
     public void SetConnectionSetup(bool setUp)
     {
         connectionSetUp = setUp;
