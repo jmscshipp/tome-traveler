@@ -40,10 +40,14 @@ public class Wild : Locale
                     player.PlayerInventory.AddItem(new Food());
 
                 UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
+                UIManager.Instance().OpenLocalePopup(this);
+                UIManager.Instance().CloseLocalePopup();
             }
         } else
         {
             UIManager.Instance().OpenDialoguePopup("You hunt but find no food.");
+            UIManager.Instance().OpenLocalePopup(this);
+            UIManager.Instance().CloseLocalePopup();
         }
 
         WildsRandomTable.ChooseRandom().Activate();
@@ -51,7 +55,21 @@ public class Wild : Locale
 
     public void Camp()
     {
-        player.SleepWilderness();
+        bool result = player.SleepWilderness();
+        if (result)
+        {
+            int exhaustionReduction = Random.Range(1, gm.GameState.MaxRestFromTent);
+            Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-gm.GameState.ExploreExhaustionPenalty);
+            UIManager.Instance().OpenDialoguePopup("You curl up in your sleeping bag and watch the stars. In the morning, you feel refreshed.");
+            UIManager.Instance().OpenLocalePopup(this);
+            UIManager.Instance().CloseLocalePopup();
+        }
+        else
+        {
+            UIManager.Instance().OpenDialoguePopup("You have nothing suitable to sleep with here. It isn't safe.");
+            UIManager.Instance().OpenLocalePopup(this);
+            UIManager.Instance().CloseLocalePopup();
+        }
         // Trigger a random event
         WildsRandomTable.ChooseRandom().Activate();
     }
@@ -62,15 +80,19 @@ public class Wild : Locale
         // if secret, give it 
         SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
         //add exhaustion as penalty
-        player.GetPlayerResources().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
+        Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
 
         if (secretLocale != null)
         {
             UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
             secretLocale.Activate();
+            UIManager.Instance().OpenLocalePopup(this);
+            UIManager.Instance().CloseLocalePopup();
         } else
         {
             UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
+            UIManager.Instance().OpenLocalePopup(this);
+            UIManager.Instance().CloseLocalePopup();
         }
     }
 

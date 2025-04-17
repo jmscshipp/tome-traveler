@@ -18,11 +18,12 @@ public abstract class Locale : MonoBehaviour
 {
     protected Player player;
     protected GameManager gm;
-    private void Awake()
+    private void Start()
     {
         player = Player.Instance();
         gm = GameManager.Instance();
     }
+
     [SerializeField]
     protected string localeDescription;
     protected LocaleTypes localeType;
