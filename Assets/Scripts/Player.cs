@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
 
     public static Player Instance() => instance;
 
+    private void Start()
+    { 
+        Spells.Add(GetComponent<GameManager>().GameState.StarterSpell);
+    }
     void Awake()
     {
         // setting up singleton
@@ -66,6 +70,11 @@ public class Player : MonoBehaviour
 
         playerResources = GetComponent<PlayerResources>();
         PlayerInventory.SizeLimit = InventorySizeLimit;
+    }
+
+    public bool HasSpell(int i)
+    {
+       return Spells.Exists(x => x.sd.id == i);
     }
 
     // Update is called once per frame
@@ -78,6 +87,38 @@ public class Player : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, endPos, movementCurve.Evaluate(traverseTimer));
             if (traverseTimer > 1f)
                 ArrivedAtLocation();
+        }
+
+        if (HasSpell(0)) {
+            Abundance abundance = (Abundance) Spells.Find(x => x is Abundance);
+            if (Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
+            {
+                abundance.Use();
+            }
+        }
+        if (HasSpell(1))
+        {
+            Sleepless sleepless = (Sleepless)Spells.Find(x => x is Sleepless);
+            if (Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
+            {
+                sleepless.Use();
+            }
+        }
+        if (HasSpell(2))
+        {
+
+        }
+        if (HasSpell(3))
+        {
+
+        }
+        if (HasSpell(4))
+        {
+
+        }
+        if (HasSpell(5))
+        {
+
         }
     }
 
