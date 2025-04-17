@@ -17,6 +17,7 @@ public class MapController : MonoBehaviour
     [SerializeField]
     private Player player;
 
+    private MapLocation currentLocation;
     private static MapController instance;
 
     public static MapController Instance() => instance;
@@ -42,6 +43,7 @@ public class MapController : MonoBehaviour
         // position player at start
         player.transform.position = startingLocation.transform.position;
         startingLocation.ActivateLocation();
+        startingLocation.MakeConnectionsSelectable(true);
     }
 
     private void CreateConnectionGraphic(MapLocation location, MapLocation connectedLocation)
@@ -95,5 +97,12 @@ public class MapController : MonoBehaviour
     {
         foreach(MapLocation location in allLocations)
             location.SetTraversable(false);
+    }
+
+    public MapLocation GetCurrentLocation() => currentLocation;
+
+    public void SetCurrentLocation(MapLocation location)
+    {
+        currentLocation = location;
     }
 }

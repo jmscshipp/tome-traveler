@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class UIManager : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class UIManager : MonoBehaviour
     {
         if (!DialogueOpen && popupQueue.Count > 0)
         {
+            MapController.Instance().GetCurrentLocation().MakeConnectionsSelectable(false);
             DialogueOpen = true;
             Popup ActivePopup = popupQueue[0];
             popupQueue.RemoveAt(0);
@@ -110,6 +112,7 @@ public class UIManager : MonoBehaviour
     {
         localePopup.gameObject.SetActive(false);
         DialogueOpen = false;
+        MapController.Instance().GetCurrentLocation().MakeConnectionsSelectable(true);
     }
 
     public void OpenDialoguePopup(string dialogue)
@@ -121,5 +124,6 @@ public class UIManager : MonoBehaviour
     {
         dialoguePopup.SetActive(false);
         DialogueOpen = false;
+        MapController.Instance().GetCurrentLocation().MakeConnectionsSelectable(true);
     }
 }

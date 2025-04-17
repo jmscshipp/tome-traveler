@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Cabin : Locale
 {
+    private string defaultShopLocaleDescription = "You arrived at the cabin.";
+
     public override void Activate()
     {
         Debug.LogError("Locale not implemented: " + this.GetType());
@@ -12,15 +14,26 @@ public class Cabin : Locale
     {
         Debug.LogError("Locale not implemented: " + this.GetType());
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        localeType = LocaleTypes.Shop;
+
+        if (localeDescription == "")
+            localeDescription = defaultShopLocaleDescription;
+    }
+    public void Talk()
+    {
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Sleep()
     {
-        
+
+    }
+
+    public void Explore()
+    {
+
     }
 }

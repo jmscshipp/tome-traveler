@@ -27,10 +27,12 @@ public class LocalePopupUI : MonoBehaviour
     [SerializeField]
     private GameObject buyButtonPrefab;
 
-    private Locale currentLocal;
+    private Locale currentLocale;
 
     public void ActivatePopup(Locale locale)
     {
+        currentLocale = locale;
+
         // turn on child objects
         foreach (Transform child in transform.GetComponentInChildren<Transform>())
             child.gameObject.SetActive(true);
@@ -50,6 +52,7 @@ public class LocalePopupUI : MonoBehaviour
             child.gameObject.SetActive(false);
 
         UIManager.Instance().DialogueOpen = false;
+        MapController.Instance().GetCurrentLocation().MakeConnectionsSelectable(true);
     }
 
     public void AddButtons(LocaleTypes localeType)
@@ -98,37 +101,121 @@ public class LocalePopupUI : MonoBehaviour
 
     public void Explore()
     {
-
+        switch (currentLocale.GetLocaleType())
+        {
+            case LocaleTypes.Town:
+                Town castTown = (Town)currentLocale;
+                castTown.Explore();
+                break;
+            case LocaleTypes.Wilds:
+                Wild castWild = (Wild)currentLocale;
+                castWild.Explore();
+                break;
+            case LocaleTypes.Shop:
+                Shop castShop = (Shop)currentLocale;
+                castShop.Explore();
+                break;
+            case LocaleTypes.City:
+                City castCity = (City)currentLocale;
+                castCity.Explore();
+                break;
+            case LocaleTypes.Ruins:
+                Ruins castRuins = (Ruins)currentLocale;
+                castRuins.Explore();
+                break;
+            case LocaleTypes.Cabin:
+                Cabin castCabin = (Cabin)currentLocale;
+                castCabin.Explore();
+                break;
+        }
     }
 
     public void Camp()
     {
-
+        Wild castLocale = (Wild)currentLocale;
+        castLocale.Camp();
     }
 
     public void Hunt()
     {
-
+        Wild castLocale = (Wild)currentLocale;
+        castLocale.Hunt();
     }
 
     public void Sleep()
     {
-
+        // cabin
+        if (currentLocale.GetLocaleType() == LocaleTypes.Cabin)
+        {
+            Cabin castLocale = (Cabin)currentLocale;
+            castLocale.Sleep();
+        }
+        // city
+        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
+        {
+            City castLocale = (City)currentLocale;
+            castLocale.Sleep();
+        }
+        //town
+        else
+        {
+            Town castLocale = (Town)currentLocale;
+            castLocale.Sleep();
+        }
     }
 
     public void Talk()
     {
-
+        // cabin
+        if (currentLocale.GetLocaleType() == LocaleTypes.Cabin)
+        {
+            Cabin castLocale = (Cabin)currentLocale;
+            castLocale.Talk();
+        }
+        // city
+        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
+        {
+            City castLocale = (City)currentLocale;
+            castLocale.Talk();
+        }
+        //town
+        else
+        {
+            Town castLocale = (Town)currentLocale;
+            castLocale.Talk();
+        }
     }
 
     public void Buy()
     {
-        // make merchant inventory available for selling
+        // shop
+        if (currentLocale.GetLocaleType() == LocaleTypes.Shop)
+        {
+            Shop castLocale = (Shop)currentLocale;
+            castLocale.Buy();
+        }
+        // city
+        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
+        {
+            City castLocale = (City)currentLocale;
+            castLocale.Buy();
+        }
     }
 
     public void Sell()
     {
-        // make player inventory available for selling
+        // shop
+        if (currentLocale.GetLocaleType() == LocaleTypes.Shop)
+        {
+            Shop castLocale = (Shop)currentLocale;
+            castLocale.Sell();
+        }
+        // city
+        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
+        {
+            City castLocale = (City)currentLocale;
+            castLocale.Sell();
+        }
     }
 
     public void Leave()

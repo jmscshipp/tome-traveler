@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class City : Locale
 {
+    private string defaultShopLocaleDescription = "You arrived at the city.";
+
     public override void Activate()
     {
         Debug.LogError("Locale not implemented: " + this.GetType());
@@ -13,15 +15,37 @@ public class City : Locale
         Debug.LogError("Locale not implemented: " + this.GetType());
     }
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        localeType = LocaleTypes.Shop;
+
+        if (localeDescription == "")
+            localeDescription = defaultShopLocaleDescription;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Talk()
     {
-        
+
+    }
+
+    public void Sleep()
+    {
+
+    }
+
+    public void Buy()
+    {
+
+    }
+
+    public void Sell()
+    {
+
+    }
+
+    public void Explore()
+    {
+
     }
 }
