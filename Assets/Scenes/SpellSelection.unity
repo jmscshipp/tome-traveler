@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 550037788}
   - component: {fileID: 550037787}
   - component: {fileID: 550037786}
+  - component: {fileID: 550037789}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -633,6 +634,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &550037789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550037785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ceb184e447b1e4b8d406fdfa6e081a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mindreading: {fileID: 11400000, guid: 204114b429da1bb48a3d56eca57d884f, type: 2}
+  Sleepless: {fileID: 11400000, guid: 345c6c0c2a570ac49b70600162a01e8c, type: 2}
+  Clairvoyance: {fileID: 11400000, guid: 7aa0ee9b2665fc542af80d1163e37ed8, type: 2}
+  Teleportation: {fileID: 11400000, guid: e903874514545b94ab5b39be2ebe1e2e, type: 2}
+  Waterwalking: {fileID: 11400000, guid: 36dbbf11e8f75d1499a0bc343a3e476e, type: 2}
+  Abundance: {fileID: 11400000, guid: 9f7eb974e9c163f4bafb65938c8763ad, type: 2}
+  GameState: {fileID: 11400000, guid: 54763d88fd4887c43bf07fed536f6c41, type: 2}
 --- !u!1 &661234375
 GameObject:
   m_ObjectHideFlags: 0
