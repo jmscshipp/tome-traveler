@@ -20,14 +20,12 @@ public class UIManager : MonoBehaviour
 
     List<Popup> popupQueue = new List<Popup>();
 
-    [SerializeField]
-    public abstract class Popup
+    abstract class Popup
     {
         public abstract void ActivateWindow();
     }
 
-    [SerializeField]
-    public class DialoguePopup : Popup {
+     class DialoguePopup : Popup {
         [SerializeField]
         public string dialogue;
 
@@ -44,7 +42,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public class LocalePopup : Popup
+    class LocalePopup : Popup
     {
         public Locale locale;
         public LocalePopup(Locale locale)
@@ -58,8 +56,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    public class SecretLocalePopup : Popup
+    class SecretLocalePopup : Popup
     {
         [SerializeField]
         SecretLocale secretLocale;

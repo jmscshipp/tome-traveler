@@ -17,9 +17,11 @@ public enum LocaleTypes : ushort
 public abstract class Locale : MonoBehaviour
 {
     protected Player player;
+    protected GameManager gm;
     private void Awake()
     {
         player = Player.Instance();
+        gm = GameManager.Instance();
     }
     [SerializeField]
     protected string localeDescription;
