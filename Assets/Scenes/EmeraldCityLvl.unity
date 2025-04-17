@@ -6660,7 +6660,7 @@ MonoBehaviour:
   exhaustionpips: {fileID: 1995117310}
   emptyPipGraphic: {fileID: 99310907, guid: e8007be125a5a6949a8af16fcb1785ba, type: 3}
   fullPipGraphic: {fileID: -1733892470, guid: e8007be125a5a6949a8af16fcb1785ba, type: 3}
-  coinsText: {fileID: 0}
+  coinsText: {fileID: 2049131508}
 --- !u!1001 &1238792747
 PrefabInstance:
   m_ObjectHideFlags: 0
