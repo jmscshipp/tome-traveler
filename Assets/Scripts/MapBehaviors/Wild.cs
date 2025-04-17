@@ -13,7 +13,6 @@ public class Wild : Locale
             new NothingHappens(likelihood: 20),
         });
 
-    [SerializeField]
     public float HuntSuccessChance = .35f;
 
     public override void Activate()
@@ -31,18 +30,18 @@ public class Wild : Locale
 
     public void Hunt()
     {
-        if (Random.Range(0, 1) < HuntSuccessChance)
+        if (Random.Range(0f, 1f) < HuntSuccessChance)
         {
-            if (player.PlayerInventory.HasSpace())
-            {
                 int num_food = Random.Range(1, gm.GameState.MaxFoodFromHunt);
                 for (int i =0; i<num_food; i++)
-                    player.PlayerInventory.AddItem(new Food());
+                {
+                    if (player.PlayerInventory.HasSpace())
+                        player.PlayerInventory.AddItem(new Food());
+                }
 
                 UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
                 UIManager.Instance().OpenLocalePopup(this);
                 UIManager.Instance().CloseLocalePopup();
-            }
         } else
         {
             UIManager.Instance().OpenDialoguePopup("You hunt but find no food.");
