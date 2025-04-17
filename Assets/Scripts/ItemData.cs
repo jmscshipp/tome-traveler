@@ -9,7 +9,21 @@ public class ItemData : ScriptableObject
     private Sprite sprite;
     [SerializeField]
     private Items itemType;
+    [SerializeField]
+    private int buyPrice;
+    [SerializeField]
+    private int sellPrice;
 
+
+    public int BuyPrice
+    {
+        get { return buyPrice; }
+    }
+
+    public int SellPrice
+    {
+        get { return sellPrice; }
+    }
     public Sprite Sprite
     {
         get { return sprite; }

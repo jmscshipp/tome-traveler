@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2717554534909998107}
   - component: {fileID: 2717554534909998100}
   - component: {fileID: 2717554534909998101}
-  - component: {fileID: 7887256556144271998}
+  - component: {fileID: 2897759146056286520}
   m_Layer: 5
-  m_Name: SellButton
+  m_Name: BuySellButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7887256556144271998}
+      - m_Target: {fileID: 2897759146056286520}
         m_TargetAssemblyTypeName: LocaleButton, Assembly-CSharp
-        m_MethodName: Sell
+        m_MethodName: BuyAndSell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7887256556144271998
+--- !u!114 &2897759146056286520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sell from inventory
+  m_text: Buy or sell in shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38722caaafef5634da4eced1268acabb, type: 2}
   m_sharedMaterial: {fileID: 3228495396036362361, guid: 38722caaafef5634da4eced1268acabb, type: 2}

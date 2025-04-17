@@ -2,9 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ShopItem
+{
+    public Items itemType;
+    public int quantity;
+
+}
+
 public class Shop : Locale
 {
     private string defaultShopLocaleDescription = "You arrived at the shop.";
+
+    [SerializeField]
+    private ShopItem[] shopItems;
+    [SerializeField]
+    GameObject insideShopPrefab;
+
     public override void Activate()
     {
         Debug.LogError("Unimplemented function!!");
@@ -21,16 +35,18 @@ public class Shop : Locale
 
         if (localeDescription == "")
             localeDescription = defaultShopLocaleDescription;
+
+        // create inside shop locale as child
+        Instantiate(insideShopPrefab, transform);
     }
 
-    public void Buy()
+    public ShopItem[] GetShopItems() => shopItems;
+
+    public void BuyAndSell()
     {
-
-    }
-
-    public void Sell()
-    {
-
+        UIManager.Instance().OpenShopUI(this);
+        UIManager.Instance().CloseLocalePopup();
+        UIManager.Instance().OpenLocalePopup(GetComponentInChildren<InsideShop>());
     }
 
     public void Explore()

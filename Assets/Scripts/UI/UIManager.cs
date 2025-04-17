@@ -7,6 +7,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField]
+    private ShopInventoryUI shopUI;
+
     // dialogue popup variables
     [SerializeField]
     protected GameObject dialoguePopup;
@@ -103,6 +106,26 @@ public class UIManager : MonoBehaviour
         return instance;
     }
 
+    // version for shops to use
+    public void OpenShopUI(Shop shopLocation)
+    {
+        shopUI.gameObject.SetActive(true);
+        shopUI.SetupShop(shopLocation);
+    }
+
+    // overriden version for cities to use
+    public void OpenShopUI(City cityLocation)
+    {
+        shopUI.gameObject.SetActive(true);
+        shopUI.SetupShop(cityLocation);
+    }
+
+    public void CloseShopUI()
+    {
+        shopUI.CloseShop();
+        shopUI.gameObject.SetActive(false);
+    }
+
     public void OpenLocalePopup(Locale locale)
     {
         popupQueue.Add(new LocalePopup(locale));
@@ -110,7 +133,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseLocalePopup()
     {
-        localePopup.gameObject.SetActive(false);
+        localePopup.ClosePopup();
         DialogueOpen = false;
         MapController.Instance().GetCurrentLocation().MakeConnectionsSelectable(true);
     }

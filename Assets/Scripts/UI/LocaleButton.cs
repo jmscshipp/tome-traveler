@@ -36,14 +36,14 @@ public class LocaleButton : MonoBehaviour
         ui.Talk();
     }
 
-    public void Buy()
+    public void BuyAndSell()
     {
-        ui.Buy();
+        ui.BuyAndSell();
     }
 
-    public void Sell()
+    public void LeaveShop()
     {
-        ui.Sell();
+        ui.LeaveShop();
     }
 
     public void Leave()

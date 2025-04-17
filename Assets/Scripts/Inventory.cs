@@ -18,6 +18,7 @@ public enum Items : ushort
 
 public class Item
 {
+    public int cost;
     // item ids are read-only
     public Items item_id { get; }
     public Item(Items id)

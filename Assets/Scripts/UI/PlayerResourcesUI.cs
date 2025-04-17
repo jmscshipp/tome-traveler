@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerResourcesUI : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class PlayerResourcesUI : MonoBehaviour
     private Sprite emptyPipGraphic;
     [SerializeField]
     private Sprite fullPipGraphic;
+
+    [SerializeField]
+    private TMP_Text coinsText;
+
     public void UpdateHungerUI(int hunger, int maxHunger)
     {
         Image[] pips = hungerPips.GetComponentsInChildren<Image>();
@@ -45,5 +50,10 @@ public class PlayerResourcesUI : MonoBehaviour
                 pips[i].sprite = emptyPipGraphic;
             }
         }
+    }
+
+    public void UpdateCoinsUI(int coins)
+    {
+        coinsText.text = "Coins: " + coins;
     }
 }

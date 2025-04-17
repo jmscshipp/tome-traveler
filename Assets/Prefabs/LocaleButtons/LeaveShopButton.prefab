@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2717554534909998101}
   - component: {fileID: 2897759146056286520}
   m_Layer: 5
-  m_Name: BuyButton
+  m_Name: LeaveShopButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2897759146056286520}
         m_TargetAssemblyTypeName: LocaleButton, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: LeaveShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy from merchant
+  m_text: Leave the shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38722caaafef5634da4eced1268acabb, type: 2}
   m_sharedMaterial: {fileID: 3228495396036362361, guid: 38722caaafef5634da4eced1268acabb, type: 2}

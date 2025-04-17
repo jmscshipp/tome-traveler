@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -314874621, guid: a5acd6daf0cc1d14ab65832804eb5149, type: 3}
   itemType: 1
+  buyPrice: 5
+  sellPrice: 3

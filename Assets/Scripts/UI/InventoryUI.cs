@@ -16,7 +16,7 @@ public class InventoryUI : MonoBehaviour
     List<ItemData> itemBlueprints = new List<ItemData>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // load in item scriptable objects
         itemBlueprints.AddRange(Resources.LoadAll<ItemData>(itemDataDirectory));
@@ -29,7 +29,8 @@ public class InventoryUI : MonoBehaviour
     public void Add(Item item)
     {
         GameObject newItemUI = Instantiate(inventoryItemUIPrefab, inventoryObjParent);
-        newItemUI.GetComponent<InventoryItemUI>().Setup(item, itemBlueprints.Find(x => x.ItemType == item.item_id).Sprite);
+        ItemData itemData = itemBlueprints.Find(x => x.ItemType == item.item_id);
+        newItemUI.GetComponent<InventoryItemUI>().Setup(item, itemData.Sprite, itemData.SellPrice);
         items.Add(newItemUI.GetComponent<InventoryItemUI>());
     }
 

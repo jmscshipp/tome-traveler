@@ -23,14 +23,15 @@ public class LocalePopupUI : MonoBehaviour
     [SerializeField]
     private GameObject talkButtonPrefab;
     [SerializeField]
-    private GameObject sellButtonPrefab;
+    private GameObject buySellButtonPrefab;
     [SerializeField]
-    private GameObject buyButtonPrefab;
+    private GameObject leaveShopButton;
 
     private Locale currentLocale;
 
     public void ActivatePopup(Locale locale)
     {
+        Debug.Log("activiating locale popup " + locale.GetLocaleType());
         currentLocale = locale;
 
         // turn on child objects
@@ -57,6 +58,14 @@ public class LocalePopupUI : MonoBehaviour
 
     public void AddButtons(LocaleTypes localeType)
     {
+        // if inside shop, only create this one button
+        if (localeType == LocaleTypes.InsideShop)
+        {
+            GameObject button = Instantiate(leaveShopButton, buttonParent);
+            button.GetComponent<LocaleButton>().AssignLocalePopupUI(this);
+            return;
+        }
+
         // explore button
         Instantiate(exploreButtonPrefab, buttonParent);
 
@@ -71,14 +80,12 @@ public class LocalePopupUI : MonoBehaviour
                 Instantiate(huntButtonPrefab, buttonParent);
                 break;
             case LocaleTypes.Shop:
-                Instantiate(buyButtonPrefab, buttonParent);
-                Instantiate(sellButtonPrefab, buttonParent);
+                Instantiate(buySellButtonPrefab, buttonParent);
                 break;
             case LocaleTypes.City:
                 Instantiate(sleepButtonPrefab, buttonParent);
                 Instantiate(talkButtonPrefab, buttonParent);
-                Instantiate(buyButtonPrefab, buttonParent);
-                Instantiate(sellButtonPrefab, buttonParent);
+                Instantiate(buySellButtonPrefab, buttonParent);
                 break;
             case LocaleTypes.Ruins:
                 Instantiate(sleepButtonPrefab, buttonParent);
@@ -186,36 +193,26 @@ public class LocalePopupUI : MonoBehaviour
         }
     }
 
-    public void Buy()
+    public void BuyAndSell()
     {
         // shop
         if (currentLocale.GetLocaleType() == LocaleTypes.Shop)
         {
             Shop castLocale = (Shop)currentLocale;
-            castLocale.Buy();
+            castLocale.BuyAndSell();
         }
         // city
         else if (currentLocale.GetLocaleType() == LocaleTypes.City)
         {
             City castLocale = (City)currentLocale;
-            castLocale.Buy();
+            castLocale.BuyAndSell();
         }
     }
 
-    public void Sell()
+    public void LeaveShop()
     {
-        // shop
-        if (currentLocale.GetLocaleType() == LocaleTypes.Shop)
-        {
-            Shop castLocale = (Shop)currentLocale;
-            castLocale.Sell();
-        }
-        // city
-        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
-        {
-            City castLocale = (City)currentLocale;
-            castLocale.Sell();
-        }
+        InsideShop castLocale = (InsideShop)currentLocale;
+        castLocale.LeaveShop ();
     }
 
     public void Leave()

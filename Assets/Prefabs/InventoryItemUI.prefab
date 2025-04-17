@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 685197071996475732}
   - component: {fileID: 685197071996475733}
   - component: {fileID: 4551610273620488801}
+  - component: {fileID: 2127878336806695457}
   m_Layer: 5
   m_Name: InventoryItemUI
   m_TagString: Untagged
@@ -89,3 +90,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1df65e984ccf444aa48be1f84a3ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2127878336806695457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685197071996475735}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 0

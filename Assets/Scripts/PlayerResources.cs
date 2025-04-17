@@ -9,6 +9,8 @@ public class PlayerResources : MonoBehaviour
     private int maxHunger = 5;
     [SerializeField]
     private int maxExhaustion = 5;
+    [SerializeField]
+    private int coins = 0;
 
     [SerializeField]
     private PlayerResourcesUI playerResourcesUI;
@@ -21,6 +23,9 @@ public class PlayerResources : MonoBehaviour
         // start the game with no hunger or exhaustion
         AddHunger(-10);
         AddExhaustion(-10);
+
+        // start the game with 10 coins
+        AddCoins(10);
     }
 
     public int GetMaxHunger() => maxHunger;
@@ -44,5 +49,13 @@ public class PlayerResources : MonoBehaviour
         if (hunger == 5)
             UIManager.Instance().OpenDialoguePopup("You died of exhaustion!");
             // here is where we'll tie in the actual player death event
+    }
+
+    public int GetCoins() => coins;
+    public void AddCoins(int modifier)
+    {
+        Debug.Log("adding coins");
+        coins = (int)Mathf.Clamp(coins + modifier, 0f, 1000f);
+        playerResourcesUI.UpdateCoinsUI(coins);
     }
 }

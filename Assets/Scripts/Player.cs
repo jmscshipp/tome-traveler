@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     public Inventory PlayerInventory = new Inventory();
 
+    public PlayerResources GetPlayerResources() => playerResources;
+
     [SerializeField]
     public bool KnowsTeleportation ()
     {

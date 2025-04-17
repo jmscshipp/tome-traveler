@@ -7,6 +7,7 @@ public enum LocaleTypes : ushort
     Town,
     Wilds,
     Shop,
+    InsideShop, // this exists for UI purposes!
     City,
     Cabin,
     Ruins
@@ -30,4 +31,10 @@ public abstract class Locale : MonoBehaviour
 
     public string GetLocaleDescription() => localeDescription;
     public LocaleTypes GetLocaleType() => localeType;
+
+    // this function only exists as a sneaky workaround to get inside the shop working, otherwise don't use!!
+    public void SetLocalType(LocaleTypes type)
+    {
+        localeType = type;
+    }
 }

@@ -6,6 +6,11 @@ public class City : Locale
 {
     private string defaultShopLocaleDescription = "You arrived at the city.";
 
+    [SerializeField]
+    private ShopItem[] shopItems;
+
+    [SerializeField]
+    GameObject insideShopPrefab;
     public override void Activate()
     {
         Debug.LogError("Locale not implemented: " + this.GetType());
@@ -22,7 +27,11 @@ public class City : Locale
 
         if (localeDescription == "")
             localeDescription = defaultShopLocaleDescription;
+
+        // create inside shop locale as child
+        Instantiate(insideShopPrefab, transform);
     }
+    public ShopItem[] GetShopItems() => shopItems;
 
     public void Talk()
     {
@@ -34,14 +43,11 @@ public class City : Locale
 
     }
 
-    public void Buy()
+    public void BuyAndSell()
     {
-
-    }
-
-    public void Sell()
-    {
-
+        UIManager.Instance().OpenShopUI(this);
+        UIManager.Instance().CloseLocalePopup();
+        UIManager.Instance().OpenLocalePopup(GetComponentInChildren<InsideShop>());
     }
 
     public void Explore()
