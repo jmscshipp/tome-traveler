@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,11 +47,24 @@ public class Player : MonoBehaviour
         return Spells.Exists(x => x is Sleepless);
     }
 
+    public List<Spell> GetSpells() {
+        return Spells;
+    }
+
+    public void LoseRandomSpell() {
+        List<Spell> spells = GetSpells();
+        int i = Random.Range(0, spells.Count);
+        DisableSpellById(spells[i].GetId());
+    }
+
+    public void DisableSpellById(Spells id) {
+        Spells.Remove(Spells.Find(x=>x.GetId() == id));
+    }
+
     public List<Spell> Spells = new List<Spell>();
 
     [SerializeField]
     public int InventorySizeLimit = 24;
-
 
     private static Player instance;
 
@@ -89,36 +102,20 @@ public class Player : MonoBehaviour
                 ArrivedAtLocation();
         }
 
-        if (HasSpell(0)) {
+        if (KnowsAbundance()) {
             Abundance abundance = (Abundance) Spells.Find(x => x is Abundance);
             if (Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
             {
                 abundance.Use();
             }
         }
-        if (HasSpell(1))
+        if (KnowsSleepless())
         {
             Sleepless sleepless = (Sleepless)Spells.Find(x => x is Sleepless);
             if (Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
             {
                 sleepless.Use();
             }
-        }
-        if (HasSpell(2))
-        {
-
-        }
-        if (HasSpell(3))
-        {
-
-        }
-        if (HasSpell(4))
-        {
-
-        }
-        if (HasSpell(5))
-        {
-
         }
     }
 

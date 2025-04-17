@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Spells {
+    Abundance = 0,
+    Sleepless,
+    Waterwalking,
+    Mindreading,
+    Clairvoyance,
+    Teleportation
+}
+
 public abstract class Spell
 {
     public SpellData sd;
@@ -15,6 +25,7 @@ public abstract class Spell
     }
 
     public abstract void Use();
+    public abstract Spells GetId();
 }
 public class Waterwalking : Spell
 {
@@ -22,6 +33,10 @@ public class Waterwalking : Spell
     {
         SetSpellData(GameManager.Instance().Waterwalking);
         this.cooldown = BaseCooldown;
+    }
+    
+    public override Spells GetId() {
+        return Spells.Waterwalking;
     }
 }
 
@@ -33,6 +48,10 @@ public class Abundance : Spell
         Player.Instance().GetComponent<PlayerResources>().AddHunger(-sd.Strength);
         this.cooldown = BaseCooldown;
     }
+    
+    public override Spells GetId() {
+        return Spells.Abundance;
+    }
 }
 
 public class Sleepless : Spell
@@ -43,6 +62,12 @@ public class Sleepless : Spell
         Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-sd.Strength);
         this.cooldown = BaseCooldown;
     }
+
+    public override Spells GetId()
+    {
+        return Spells.Sleepless;
+    }
+
 }
 
 public class Clairvoyance : Spell
@@ -52,6 +77,11 @@ public class Clairvoyance : Spell
         SetSpellData(GameManager.Instance().Clairvoyance);
         // Change Fog of War size (lerp it?) by Strength
         this.cooldown = BaseCooldown;
+    }
+
+    public override Spells GetId()
+    {
+        return Spells.Clairvoyance;
     }
 }
 
@@ -66,6 +96,11 @@ public class Teleportation : Spell
         // if you click, teleport and end state machine
         this.cooldown = BaseCooldown;
     }
+
+        public override Spells GetId()
+    {
+        return Spells.Teleportation;
+    }
 }
 
 public class Mindreading : Spell
@@ -75,5 +110,10 @@ public class Mindreading : Spell
         SetSpellData(GameManager.Instance().Mindreading);
         // highlight locations with secrets to discover. Automatically succeed on Talk in this location.
         this.cooldown = BaseCooldown;
+    }
+
+    public override Spells GetId()
+    {
+        return Spells.Mindreading;
     }
 }
