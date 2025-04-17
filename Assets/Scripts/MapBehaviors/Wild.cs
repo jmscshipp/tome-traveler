@@ -21,6 +21,14 @@ public class Wild : Locale
         Debug.Log("Activate Not Implemented");
     }
 
+    private void Awake()
+    {
+        localeType = LocaleTypes.Wilds;
+
+        if (localeDescription == "")
+            localeDescription = defaultWildLocaleDescription;
+    }
+
     public void Hunt()
     {
         if (Random.Range(0, 1) < HuntSuccessChance)
@@ -41,28 +49,13 @@ public class Wild : Locale
         WildsRandomTable.ChooseRandom().Activate();
     }
 
+    public void Explore()
+    {
+
+    }
+
     public override void Deactivate()
     {
         throw new System.NotImplementedException();
-    }
-
-    private void Awake()
-    {
-        localeType = LocaleTypes.Wilds;
-
-        if (localeDescription == "")
-            localeDescription = defaultWildLocaleDescription;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

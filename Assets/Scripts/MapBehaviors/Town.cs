@@ -24,15 +24,18 @@ public class Town : Locale
             localeDescription = defaultTownLocaleDescription;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Sleep()
     {
-        //localeDescription
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Talk()
     {
-        
+
+    }
+
+    public void Explore()
+    {
+
     }
 }

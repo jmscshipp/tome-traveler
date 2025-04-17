@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Ruins : Locale
 {
+    private string defaultShopLocaleDescription = "You arrived at the ruins.";
+
+
     public override void Activate()
     {
         Debug.LogError("Locale not implemented: " + this.GetType());
@@ -13,15 +16,16 @@ public class Ruins : Locale
         Debug.LogError("Locale not implemented: " + this.GetType());
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        localeType = LocaleTypes.Shop;
+
+        if (localeDescription == "")
+            localeDescription = defaultShopLocaleDescription;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Explore()
     {
-        
+
     }
 }

@@ -49,7 +49,11 @@ public class MapLocation : MonoBehaviour
         // the player has made it to the end of the game - the Emerald City
         if (finalLocation)
             UIManager.Instance().OpenDialoguePopup("You've made it! You've made it to the Emerald City!");
+    }
+
+    public void MakeConnectionsSelectable(bool selectable)
+    {
         foreach (MapLocation location in connectedLocations)
-            location.SetTraversable(true);
+            location.SetTraversable(selectable);
     }
 }
