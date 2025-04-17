@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
     public static Player Instance() => instance;
 
-    private void Awake()
+    void Awake()
     {
         // setting up singleton
         if (instance != null && instance != this)
@@ -105,12 +105,10 @@ public class Player : MonoBehaviour
         Tent tent = PlayerInventory.GetUsableTent();
         if (tent == null)
         {
-            // We failed to find a usable tent so return false
             return false;
         }
 
-        // This is where you'd update the exhaustion meter
-        return true;
+            return true;
     }
 
     public bool IsInWilderness()

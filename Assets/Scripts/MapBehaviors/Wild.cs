@@ -13,7 +13,6 @@ public class Wild : Locale
             new NothingHappens(likelihood: 20),
         });
 
-    [SerializeField]
     public float HuntSuccessChance = .35f;
 
     public override void Activate()
@@ -35,29 +34,47 @@ public class Wild : Locale
 
     public void Hunt()
     {
-        if (Random.Range(0, 1) < HuntSuccessChance)
+        if (Random.Range(0f, 1f) < gm.GameState.HuntExhaustionChance)
         {
-            if (player.PlayerInventory.HasSpace())
-            {
-                int num_food = Random.Range(1, gm.GameState.MaxFoodFromHunt);
-                for (int i =0; i<num_food; i++)
-                    player.PlayerInventory.AddItem(new Food());
+            Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.HuntExhaustionPenalty);
+        }
 
-                UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
+        if (Random.Range(0f, 1f) < HuntSuccessChance)
+        {
+            int num_food = Random.Range(1, gm.GameState.MaxFoodFromHunt);
+            for (int i =0; i<num_food; i++)
+            {
+                if (player.PlayerInventory.HasSpace())
+                    player.PlayerInventory.AddItem(new Food());
             }
+             UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
         } else
         {
             UIManager.Instance().OpenDialoguePopup("You hunt but find no food.");
         }
 
         WildsRandomTable.ChooseRandom().Activate();
+        UIManager.Instance().OpenLocalePopup(this);
+        UIManager.Instance().CloseLocalePopup();
     }
 
     public void Camp()
     {
-        player.SleepWilderness();
+        bool result = player.SleepWilderness();
+        if (result)
+        {
+            int exhaustionReduction = Random.Range(1, gm.GameState.MaxRestFromTent);
+            Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-gm.GameState.ExploreExhaustionPenalty);
+            UIManager.Instance().OpenDialoguePopup("You curl up in your sleeping bag and watch the stars. In the morning, you feel refreshed.");
+        }
+        else
+        {
+            UIManager.Instance().OpenDialoguePopup("You have nothing suitable to sleep with here. It isn't safe.");
+        }
         // Trigger a random event
         WildsRandomTable.ChooseRandom().Activate();
+        UIManager.Instance().OpenLocalePopup(this);
+        UIManager.Instance().CloseLocalePopup();
     }
 
     public void Explore()
@@ -66,7 +83,7 @@ public class Wild : Locale
         // if secret, give it 
         SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
         //add exhaustion as penalty
-        player.GetPlayerResources().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
+        Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
 
         if (secretLocale != null)
         {
@@ -76,6 +93,8 @@ public class Wild : Locale
         {
             UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
         }
+        UIManager.Instance().OpenLocalePopup(this);
+        UIManager.Instance().CloseLocalePopup();
     }
 
     public override void Deactivate()
