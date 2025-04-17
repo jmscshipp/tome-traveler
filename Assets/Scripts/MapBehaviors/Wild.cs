@@ -54,8 +54,6 @@ public class Wild : Locale
         }
 
         WildsRandomTable.ChooseRandom().Activate();
-        UIManager.Instance().OpenLocalePopup(this);
-        UIManager.Instance().CloseLocalePopup();
     }
 
     public void Camp()
@@ -73,8 +71,6 @@ public class Wild : Locale
         }
         // Trigger a random event
         WildsRandomTable.ChooseRandom().Activate();
-        UIManager.Instance().OpenLocalePopup(this);
-        UIManager.Instance().CloseLocalePopup();
     }
 
     public void Explore()
@@ -93,8 +89,6 @@ public class Wild : Locale
         {
             UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
         }
-        UIManager.Instance().OpenLocalePopup(this);
-        UIManager.Instance().CloseLocalePopup();
     }
 
     public override void Deactivate()
