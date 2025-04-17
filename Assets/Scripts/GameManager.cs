@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    [SerializeField]
+    public GameState GameState;
+
     // Start is called before the first frame update
     void Start()
     {

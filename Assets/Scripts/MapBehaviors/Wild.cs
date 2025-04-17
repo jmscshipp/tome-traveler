@@ -35,8 +35,15 @@ public class Wild : Locale
         {
             if (player.PlayerInventory.HasSpace())
             {
-                player.PlayerInventory.AddItem(new Food());
+                int num_food = Random.Range(1, gm.GameState.MaxFoodFromHunt);
+                for (int i =0; i<num_food; i++)
+                    player.PlayerInventory.AddItem(new Food());
+
+                UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
             }
+        } else
+        {
+            UIManager.Instance().OpenDialoguePopup("You hunt but find no food.");
         }
 
         WildsRandomTable.ChooseRandom().Activate();
@@ -51,7 +58,20 @@ public class Wild : Locale
 
     public void Explore()
     {
+        // if no secret, give nothing
+        // if secret, give it 
+        SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
+        //add exhaustion as penalty
+        player.GetPlayerResources().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
 
+        if (secretLocale != null)
+        {
+            UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
+            secretLocale.Activate();
+        } else
+        {
+            UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
+        }
     }
 
     public override void Deactivate()
