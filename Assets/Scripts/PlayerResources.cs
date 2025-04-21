@@ -25,7 +25,7 @@ public class PlayerResources : MonoBehaviour
         AddExhaustion(-10);
 
         // start the game with 10 coins
-        AddCoins(10);
+        AddCoins(55);
     }
 
     public int GetMaxHunger() => maxHunger;

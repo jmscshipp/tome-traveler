@@ -581,7 +581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2851515327310623408}
-  - component: {fileID: 2851515327310623415}
+  - component: {fileID: 249519974}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -612,7 +612,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -1920, y: -1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2851515327310623415
+--- !u!114 &249519974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2851515327310623409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c4d00ee9da04c4d94a2db86651a094, type: 3}
+  m_Script: {fileID: 11500000, guid: 94976f38d2b132240b76765485811da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemDataDirectory: Items
@@ -1924,7 +1924,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3432,7 +3432,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 65, y: 65}
+  m_CellSize: {x: 90, y: 65}
   m_Spacing: {x: 15, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2

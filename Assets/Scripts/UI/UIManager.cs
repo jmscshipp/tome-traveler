@@ -20,6 +20,19 @@ public class UIManager : MonoBehaviour
 
     List<Popup> popupQueue = new List<Popup>();
 
+    public static UIManager Instance()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        // setting up singleton
+        if (instance != null && instance != this)
+            Destroy(this);
+        instance = this;
+    }
+
     abstract class Popup
     {
         public abstract void ActivateWindow();
@@ -90,20 +103,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        // setting up singleton
-        if (instance != null && instance != this)
-            Destroy(this);
-        instance = this;
-    }
+    public ShopInventoryUI GetShopUI() => shopUI;
 
-    public static UIManager Instance()
-    {
-        return instance;
-    }
-
-    // version for shops to use
+    // called by shops when player selects 'buy / sell'
     public void OpenShopUI(Shop shopLocation)
     {
         shopUI.gameObject.SetActive(true);

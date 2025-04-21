@@ -7,7 +7,6 @@ public class ShopItem
 {
     public Items itemType;
     public int quantity;
-
 }
 
 public class Shop : Locale
@@ -29,6 +28,7 @@ public class Shop : Locale
         throw new System.NotImplementedException();
     }
 
+    // setting up representationn of locale on the map
     public override void SetupIconGraphics()
     {
         GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);

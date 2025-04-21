@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ShopActions
+{
+    None,
+    Buying,
+    Selling
+}
+
 public enum Items : ushort
 {
     None = 0,
@@ -82,9 +89,9 @@ public class Tent : Item
 public class Inventory
 {
     public List<Item> itemList = new List<Item>();
-    private InventoryUI ui;
+    private PlayerInventoryUI ui;
 
-    public void SetupUIRefs(InventoryUI uiRef)
+    public void SetupUIRefs(PlayerInventoryUI uiRef)
     {
         ui = uiRef;
     }
@@ -94,7 +101,7 @@ public class Inventory
     public void AddItem(Item item)
     {
         itemList.Add(item);
-        ui.Add(item);
+        ui.Add(item, ShopActions.Selling);
     }
 
     public bool HasItem(Items ItemID)
@@ -140,5 +147,7 @@ public class Inventory
         }
         return false;
     }
+
+    public PlayerInventoryUI GetInventoryUI() => ui;
     public Inventory() { }
 }

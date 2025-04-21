@@ -2,34 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopInventoryUI : MonoBehaviour
+public class ShopInventoryUI : InventoryUI
 {
-    [SerializeField]
-    private string itemDataDirectory = "Items"; // Assets/Resources/Cards
-    [SerializeField]
-    private GameObject inventoryItemUIPrefab;
-    [SerializeField]
-    private Transform inventoryObjParent;
+    // inherits from InventoryUI, where general inventory functionality comes from
 
-    List<InventoryItemUI> items;
-    List<ItemData> itemBlueprints = new List<ItemData>();
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        // load in item scriptable objects
-        itemBlueprints.AddRange(Resources.LoadAll<ItemData>(itemDataDirectory));
-        items = new List<InventoryItemUI>();
-    }
-
-    // version for shops to use
+    // called by shops when player selects 'buy / sell'
     public void SetupShop(Shop shopLocation)
     {
         foreach(ShopItem shopItem in shopLocation.GetShopItems())
         {
             for (int i = 0; i < shopItem.quantity; i++)
-                Add(new Item(shopItem.itemType));
+                Add(new Item(shopItem.itemType), ShopActions.Buying);
         }
+        Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true);
         RefreshShopAvailability();
     }
 
@@ -39,8 +24,9 @@ public class ShopInventoryUI : MonoBehaviour
         foreach (ShopItem shopItem in cityLocation.GetShopItems())
         {
             for (int i = 0; i < shopItem.quantity; i++)
-                Add(new Item(shopItem.itemType));
+                Add(new Item(shopItem.itemType), ShopActions.Buying);
         }
+        Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true);
         RefreshShopAvailability();
     }
 
@@ -48,6 +34,7 @@ public class ShopInventoryUI : MonoBehaviour
     {
         foreach (Transform obj in inventoryObjParent.transform)
             Destroy(obj.gameObject);
+        Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(false);
     }
 
     // set items player can buy outlined and clickable
@@ -56,28 +43,28 @@ public class ShopInventoryUI : MonoBehaviour
         foreach(InventoryItemUI itemUI in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
         {
             // player doesn't have enough money for item
-            if (itemUI.GetItem().cost > Player.Instance().GetPlayerResources().GetCoins())
-                itemUI.SetOutlineVisible(false);
+            if (itemUI.GetItemCost() > Player.Instance().GetPlayerResources().GetCoins())
+                itemUI.SetSellable(false);
             // player has enough money for item
             else
-                itemUI.SetOutlineVisible(true);
+                itemUI.SetSellable(true);
         }
     }
 
-    public void Add(Item item)
+    public override void SellItem(InventoryItemUI item)
     {
-        Debug.Log("ADDING ITEM IN SHOP");
-
-        GameObject newItemUI = Instantiate(inventoryItemUIPrefab, inventoryObjParent);
-        ItemData itemData = itemBlueprints.Find(x => x.ItemType == item.item_id);
-        newItemUI.GetComponent<InventoryItemUI>().Setup(item, itemData.Sprite, itemData.BuyPrice);
-        items.Add(newItemUI.GetComponent<InventoryItemUI>());
+        // remove coins from player inventory
+        Player.Instance().GetPlayerResources().AddCoins(-item.GetItemCost());
+        // add item to player inventory
+        Player.Instance().PlayerInventory.AddItem(item.GetItem());
+        Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true); // need to refresh clickable UI to set this new item
+        // remove item from shop menu
+        Remove(item.GetItem());
+        RefreshShopAvailability();
     }
 
-    public void SellItem(Item item)
+    public override void AssignInventoryUI(InventoryItemUI itemUI)
     {
-        InventoryItemUI itemToRemove = items.Find(x => x.GetItem() == item);
-        items.Remove(itemToRemove);
-        Destroy(itemToRemove.gameObject);
+        itemUI.AssignInventoryUI(this);
     }
 }
