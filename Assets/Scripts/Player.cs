@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,16 +47,33 @@ public class Player : MonoBehaviour
         return Spells.Exists(x => x is Sleepless);
     }
 
+    public List<Spell> GetSpells() {
+        return Spells;
+    }
+
+    public void LoseRandomSpell() {
+        List<Spell> spells = GetSpells();
+        int i = Random.Range(0, spells.Count);
+        DisableSpellById(spells[i].GetId());
+    }
+
+    public void DisableSpellById(Spells id) {
+        Spells.Remove(Spells.Find(x=>x.GetId() == id));
+    }
+
     public List<Spell> Spells = new List<Spell>();
 
     [SerializeField]
     public int InventorySizeLimit = 24;
 
-
     private static Player instance;
 
     public static Player Instance() => instance;
 
+    private void Start()
+    { 
+        Spells.Add(GetComponent<GameManager>().GameState.StarterSpell);
+    }
     void Awake()
     {
         // setting up singleton
@@ -66,6 +83,11 @@ public class Player : MonoBehaviour
 
         playerResources = GetComponent<PlayerResources>();
         PlayerInventory.SizeLimit = InventorySizeLimit;
+    }
+
+    public bool HasSpell(int i)
+    {
+       return Spells.Exists(x => x.sd.id == i);
     }
 
     // Update is called once per frame
@@ -78,6 +100,22 @@ public class Player : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, endPos, movementCurve.Evaluate(traverseTimer));
             if (traverseTimer > 1f)
                 ArrivedAtLocation();
+        }
+
+        if (KnowsAbundance()) {
+            Abundance abundance = (Abundance) Spells.Find(x => x is Abundance);
+            if (Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
+            {
+                abundance.Use();
+            }
+        }
+        if (KnowsSleepless())
+        {
+            Sleepless sleepless = (Sleepless)Spells.Find(x => x is Sleepless);
+            if (Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
+            {
+                sleepless.Use();
+            }
         }
     }
 

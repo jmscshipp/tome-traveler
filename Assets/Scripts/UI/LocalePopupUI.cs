@@ -27,7 +27,7 @@ public class LocalePopupUI : MonoBehaviour
     [SerializeField]
     private GameObject leaveShopButton;
 
-    private Locale currentLocale;
+    public Locale currentLocale;
 
     public void ActivatePopup(Locale locale)
     {
