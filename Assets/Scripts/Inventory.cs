@@ -44,23 +44,23 @@ public class Tome : Item
 
 public class TeleportationTome : Tome
 {
-    public TeleportationTome() : base(Items.TeleportationTome, new Teleportation()) { }
+    public TeleportationTome() : base(Items.TeleportationTome, Player.teleportation) { }
 }
 public class SleeplessTome : Tome
 {
-    public SleeplessTome() : base(Items.SleeplessTome, new Sleepless()) { }
+    public SleeplessTome() : base(Items.SleeplessTome, Player.sleepless) { }
 }
 public class AbundanceTome : Tome
 {
-    public AbundanceTome() : base(Items.AbundanceTome, new Abundance()) { }
+    public AbundanceTome() : base(Items.AbundanceTome, Player.abundance) { }
 }
 public class ClairvoyanceTome : Tome
 {
-    public ClairvoyanceTome() : base(Items.ClairvoyanceTome, new Clairvoyance()) { }
+    public ClairvoyanceTome() : base(Items.ClairvoyanceTome, Player.clairvoyance) { }
 }
 public class MindreadingTome : Tome
 {
-    public MindreadingTome() : base(Items.MindreadingTome, new Mindreading()) { }
+    public MindreadingTome() : base(Items.MindreadingTome, Player.mindreading) { }
 }
 
 public abstract class Usable : Item
@@ -102,10 +102,22 @@ public class Inventory
 
     public int SizeLimit = 0;
 
+    public void LogInventory(string prompt)
+    {
+        string itemstring = prompt + ": ";
+        foreach (Item i in itemList)
+            itemstring += i.ToString();
+        Debug.Log(itemstring);
+    }
+
     public void AddItem(Item item)
     {
+        LogInventory("Items Before");
+
         itemList.Add(item);
-        ui.Add(item, ShopActions.Selling);
+        ui.UpdateInventory();
+        
+        LogInventory("Items After");
     }
 
     public bool HasItem(Items ItemID)
@@ -162,10 +174,22 @@ public class Inventory
         {
             if (i.item_id == ItemID)
             {
-                ui.Remove(i);
                 itemList.Remove(i);
+                ui.UpdateInventory();
                 return true;
             }
+        }
+        return false;
+    }
+
+    public bool RemoveItem(Item item)
+    // Returns true if item successfully removed
+    {
+        if (itemList.Contains(item))
+        {
+            itemList.Remove(item);
+            ui.UpdateInventory();
+            return true;
         }
         return false;
     }

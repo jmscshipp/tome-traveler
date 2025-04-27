@@ -21,47 +21,70 @@ public class Player : MonoBehaviour
 
     public PlayerResources GetPlayerResources() => playerResources;
 
+    public bool godmode = false;
+
+    public bool StartWithTent = true;
+
+    // Spell Classes
+    public static Abundance abundance = new Abundance();
+    public static Waterwalking waterwalking = new Waterwalking();
+    public static Clairvoyance clairvoyance = new Clairvoyance();
+    public static Mindreading mindreading = new Mindreading();
+    public static Teleportation teleportation = new Teleportation();
+    public static Sleepless sleepless = new Sleepless();
+
+    static List<Spell> AllSpells = new List<Spell> () {
+        abundance,
+        mindreading,
+        waterwalking,
+        clairvoyance,
+        teleportation,
+        sleepless,
+    };
+
+
     [SerializeField]
     public bool KnowsTeleportation ()
     {
-        return Spells.Exists(x => x is Teleportation);
+        return godmode || teleportation.enabled;
     }
     public bool KnowsMindreading()
     {
-        return Spells.Exists(x => x is Mindreading);
+        return godmode || mindreading.enabled;
     }
     public bool KnowsClairvoyance()
     {
-        return Spells.Exists(x => x is Clairvoyance);
+        return godmode || clairvoyance.enabled;
     }
     public bool KnowsAbundance()
     {
-        return Spells.Exists(x => x is Abundance);
+        return godmode || abundance.enabled;
     }
     public bool KnowsWaterwalking()
     {
-        return Spells.Exists(x => x is Waterwalking);
+        return godmode || waterwalking.enabled;
     }
     public bool KnowsSleepless()
     {
-        return Spells.Exists(x => x is Sleepless);
+        return godmode || sleepless.enabled;
     }
 
     public List<Spell> GetSpells() {
-        return Spells;
+        List<Spell> ss = new List<Spell>();
+        foreach (Spell s in AllSpells)
+        {
+            if (s.enabled)
+                ss.Add(s);
+        }
+        return ss;
     }
 
-    public void LoseRandomSpell() {
+    public Spell LoseRandomSpell() {
         List<Spell> spells = GetSpells();
         int i = Random.Range(0, spells.Count);
-        DisableSpellById(spells[i].GetId());
+        spells[i].enabled = false;
+        return spells[i];
     }
-
-    public void DisableSpellById(Spells id) {
-        Spells.Remove(Spells.Find(x=>x.GetId() == id));
-    }
-
-    public List<Spell> Spells = new List<Spell>();
 
     [SerializeField]
     public int InventorySizeLimit = 24;
@@ -71,9 +94,14 @@ public class Player : MonoBehaviour
     public static Player Instance() => instance;
 
     private void Start()
-    { 
-        Spells.Add(GetComponent<GameManager>().GameState.StarterSpell);
+    {
+        GetComponent<GameManager>().GameState.StarterSpell.enabled = true;
+        if (StartWithTent)
+        {
+            PlayerInventory.AddItem(new Tent());
+        }
     }
+
     void Awake()
     {
         // setting up singleton
@@ -83,11 +111,6 @@ public class Player : MonoBehaviour
 
         playerResources = GetComponent<PlayerResources>();
         PlayerInventory.SizeLimit = InventorySizeLimit;
-    }
-
-    public bool HasSpell(int i)
-    {
-       return Spells.Exists(x => x.sd.id == i);
     }
 
     // Update is called once per frame
@@ -103,7 +126,6 @@ public class Player : MonoBehaviour
         }
 
         if (KnowsAbundance()) {
-            Abundance abundance = (Abundance) Spells.Find(x => x is Abundance);
             if (Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
             {
                 abundance.Use();
@@ -111,9 +133,9 @@ public class Player : MonoBehaviour
         }
         if (KnowsSleepless())
         {
-            Sleepless sleepless = (Sleepless)Spells.Find(x => x is Sleepless);
             if (Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
             {
+                Debug.Log("Player cast Sleepless");
                 sleepless.Use();
             }
         }
@@ -133,9 +155,16 @@ public class Player : MonoBehaviour
         traversing = true;
     }
 
+    public void ReduceCooldowns()
+    {
+        foreach (Spell s in AllSpells) {
+            s.ReduceCooldown();
+        }
+    }
+
     public void Learn(Tome tome)
     {
-        Spells.Add(tome.Spell);
+        tome.Spell.enabled = true;
     }
 
     public bool SleepWilderness()
@@ -145,8 +174,20 @@ public class Player : MonoBehaviour
         {
             return false;
         }
-        tent.Use();
-        playerResources.AddExhaustion(-2);
+        bool tentBroke = tent.Use();
+        playerResources.AddExhaustion(-GameManager.Instance().GameState.TentExhaustionReduction);
+        ReduceCooldowns();
+        if (tentBroke)
+        {
+            PlayerInventory.RemoveItem(tent);
+        }
+        return true;
+    }
+
+    public bool SleepBed()
+    {
+        playerResources.AddExhaustion(-GameManager.Instance().GameState.BedExhaustionReduction);
+        ReduceCooldowns();
         return true;
     }
 
@@ -155,11 +196,18 @@ public class Player : MonoBehaviour
         Food food = PlayerInventory.GetEdibleFood();
         if (food == null)
         {
-            return ;//false;
+            return;
         }
-        food.Use();
+
+        bool foodEaten = food.Use();
         playerResources.AddHunger(-2);
+        if (foodEaten)
+        {
+            PlayerInventory.RemoveItem(food);
+        }
+        
         UIManager.Instance().OpenDialoguePopup("You eat some food, filling your belly.");
+        UIManager.Instance().OpenLocalePopup(currentLocation.GetLocale());
         UIManager.Instance().CloseLocalePopup();
         //return true;
     }
@@ -167,7 +215,7 @@ public class Player : MonoBehaviour
 
     public bool IsInWilderness()
     {
-        return currentLocation.GetComponent(typeof(Wild)) as Wild != null;
+        return currentLocation.GetLocale() is Wild;
     }
 
     private void ArrivedAtLocation()
@@ -207,5 +255,7 @@ public class Player : MonoBehaviour
             // disable and enable any shop-specific actions
             UIManager.Instance().OpenLocalePopup(locale);
         }
+
+        ReduceCooldowns();
     }
 }

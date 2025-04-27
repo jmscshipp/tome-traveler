@@ -65,17 +65,15 @@ public class GetConcussed : RandomEvent
     public override void Activate()
     { 
 
-        List<Spell> pspells = Player.Instance().Spells;
+        List<Spell> pspells = Player.Instance().GetSpells();
         if (pspells.Count == 0)
         {
             UIManager.Instance().OpenDialoguePopup("Bandits fall upon you, but you fight back. In the ensuing chaos, you are struck and fall unconscious. When you awake, you can't remember something important.");
         }
         else
         {
-            Spell forgottenSpell = pspells[Random.Range(0, pspells.Count)];
-            pspells.Remove(forgottenSpell);
-            UIManager.Instance().OpenDialoguePopup("Bandits fall upon you, but you fight back. In the ensuing chaos, you are struck and fall unconscious. When you awake, you can't remember " + forgottenSpell.sd.Name);
-            //Debug.LogError("You got concussed but it wasn't implemented");
+            Spell forgottenSpell = Player.Instance().LoseRandomSpell();
+            UIManager.Instance().OpenDialoguePopup("Bandits fall upon you, but you fight back. In the ensuing chaos, you are struck and fall unconscious. When you awake, you can't remember " + forgottenSpell.Name);
         }
     }
 }

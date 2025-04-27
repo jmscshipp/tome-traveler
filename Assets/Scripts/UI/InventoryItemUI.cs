@@ -9,29 +9,27 @@ using UnityEngine.UI;
 public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private bool sellable;
-    private int itemCost;
+    private int itemCost = 0;
     private Item item;
     [SerializeField]
     private Image graphics;
     private Outline outline;
-    private InventoryUI inventoryUI;
+    public InventoryUI inventoryUI;
 
     private void Awake()
     {
         outline = GetComponentInChildren<Outline>();
     }
-    public void Setup(Item assignedItem, Sprite graphic, int cost)
+    public void Setup(Item assignedItem, Sprite graphic)
     {
-        itemCost = cost;
         item = assignedItem;
         graphics.sprite = graphic;
         GetComponentInChildren<TMP_Text>().text = itemCost.ToString();
     }
 
-    // setting up ref to inventory UI (will be either player inventory or shop)
-    public void AssignInventoryUI(InventoryUI assignedInventoryUI)
+    public void SetCost(int cost)
     {
-        inventoryUI = assignedInventoryUI;
+        this.itemCost = cost;
     }
 
     public int GetItemCost() => itemCost;

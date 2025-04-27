@@ -35,6 +35,7 @@ public class PlayerResources : MonoBehaviour
 
     public void AddHunger(int modifier)
     {
+        Debug.Log("Changing player hunger by " + modifier);
         hunger = (int)Mathf.Clamp(hunger + modifier, 0f, 5f);
         playerResourcesUI.UpdateHungerUI(hunger, maxHunger);
         if (hunger == 5)

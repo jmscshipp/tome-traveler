@@ -6,32 +6,34 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/GameState", order = 1)]
 public class GameState : ScriptableObject
 {
-    public Spell StarterSpell;
+    public Spell StarterSpell = Player.abundance;
     public int ExploreExhaustionPenalty;
     public int MaxFoodFromHunt;
     public int MaxRestFromTent;
     public float HuntExhaustionChance;
     public int HuntExhaustionPenalty;
+    public int TentExhaustionReduction = 2;
+    public int BedExhaustionReduction = 3;
 
     public void SetStarterSpellAbundance()
     {
-        StarterSpell = new Abundance();
+        StarterSpell = Player.abundance;
     }
     public void SetStarterSpellWaterwalking()
     {
-        StarterSpell = new Waterwalking();
+        StarterSpell = Player.waterwalking;
     }
     public void SetStarterSpellSleepless()
     {
-        StarterSpell = new Sleepless();
+        StarterSpell = Player.sleepless;
     }
     public void SetStarterSpellClairvoyance()
     {
-        StarterSpell = new Clairvoyance();
+        StarterSpell = Player.clairvoyance;
     }
     public void SetStarterSpellMindreading()
     {
-        StarterSpell = new Mindreading();
+        StarterSpell =  Player.mindreading;
     }
 
     public void LoadEmeraldCity()

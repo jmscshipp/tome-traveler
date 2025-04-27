@@ -2096,7 +2096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2851515328046813749, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2851515328374282700, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5136,7 +5136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDiscovered: 0
-  SecretDestination: {fileID: 1747622837}
+  SecretDestination: {fileID: 653261903}
   tooltip: Woah, a secret!
 --- !u!114 &1186226994
 MonoBehaviour:
@@ -5223,6 +5223,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  godmode: 0
+  StartWithTent: 1
   InventorySizeLimit: 24
 --- !u!114 &1197151027
 MonoBehaviour:
@@ -5238,7 +5240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHunger: 5
   maxExhaustion: 5
-  coins: 0
+  coins: 55
   playerResourcesUI: {fileID: 1732706334}
 --- !u!114 &1197151028
 MonoBehaviour:
@@ -7643,11 +7645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f608fa9de12fc0c4ebf90042ad1af7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1747622837
-  IsDiscovered: 0
-  Dialogue: 
-  SecretDestination: {fileID: 1054043836}
-  IsTwoWay: 1
 --- !u!114 &1747622840
 MonoBehaviour:
   m_ObjectHideFlags: 0

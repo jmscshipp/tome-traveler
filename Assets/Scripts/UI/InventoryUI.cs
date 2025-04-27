@@ -14,7 +14,7 @@ public abstract class InventoryUI : MonoBehaviour
     protected Transform inventoryObjParent;
 
     protected List<InventoryItemUI> items;
-    private List<ItemData> itemBlueprints = new List<ItemData>();
+    public static List<ItemData> itemBlueprints = new List<ItemData>();
 
     // Start is called before the first frame update
     void Awake()
@@ -24,21 +24,44 @@ public abstract class InventoryUI : MonoBehaviour
         items = new List<InventoryItemUI>();
     }
 
-    public void Add(Item item, ShopActions action)
-    {
-        GameObject newItemUI = Instantiate(inventoryItemUIPrefab, inventoryObjParent);
-        ItemData itemData = itemBlueprints.Find(x => x.ItemType == item.item_id);
-        // set price based on if item is being bought from store or sold by player
-        if (action == ShopActions.Buying)
-            newItemUI.GetComponent<InventoryItemUI>().Setup(item, itemData.Sprite, itemData.BuyPrice);
-        else
-            newItemUI.GetComponent<InventoryItemUI>().Setup(item, itemData.Sprite, itemData.SellPrice);
-
-        AssignInventoryUI(newItemUI.GetComponent<InventoryItemUI>());
-        items.Add(newItemUI.GetComponent<InventoryItemUI>());
+    public static ItemData GetData(Items id) {
+        return itemBlueprints.Find(x => x.ItemType == id);
     }
 
-    public void Remove(Item item)
+    public void SetPrices(ShopActions action)
+    {
+        foreach (InventoryItemUI ui in items)
+        {
+            SetPrice(action, ui);
+        }
+    }
+
+    void SetPrice(ShopActions action, InventoryItemUI ui)
+    {
+        ItemData itemData = GetData(ui.GetItem().item_id);
+        // set price based on if item is being bought from store or sold by player
+        switch (action)
+        {
+            case ShopActions.Selling:
+                ui.SetCost(itemData.BuyPrice);
+                break;
+            case ShopActions.Buying:
+                ui.SetCost(itemData.SellPrice);
+                break;
+            case ShopActions.None:
+                break;
+        }
+    }
+
+    protected void Add(Item item)
+    {
+        GameObject newItemUI = Instantiate(inventoryItemUIPrefab, inventoryObjParent);
+        InventoryItemUI itemui = newItemUI.GetComponent<InventoryItemUI>();
+        itemui.inventoryUI = this;
+        itemui.Setup(item, GetData(item.item_id).Sprite);
+    }
+
+    protected void Remove(Item item)
     {
         InventoryItemUI itemToRemove = items.Find(x => x.GetItem() == item);
         items.Remove(itemToRemove);
@@ -46,5 +69,4 @@ public abstract class InventoryUI : MonoBehaviour
     }
 
     public abstract void SellItem(InventoryItemUI itemUI);
-    public abstract void AssignInventoryUI(InventoryItemUI itemUI);
 }

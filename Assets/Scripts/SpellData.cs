@@ -5,9 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SpellData", order = 1)]
 public class SpellData : ScriptableObject
 {
-    [SerializeField]
-    public string Name;
-    public int id = 99;
-    public int Cooldown = 3;
-    public int Strength = 1;
+
 }

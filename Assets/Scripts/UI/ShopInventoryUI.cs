@@ -12,8 +12,9 @@ public class ShopInventoryUI : InventoryUI
         foreach(ShopItem shopItem in shopLocation.GetShopItems())
         {
             for (int i = 0; i < shopItem.quantity; i++)
-                Add(new Item(shopItem.itemType), ShopActions.Buying);
+                Add(new Item(shopItem.itemType));
         }
+        SetPrices(ShopActions.Buying);
         Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true);
         RefreshShopAvailability();
     }
@@ -24,8 +25,9 @@ public class ShopInventoryUI : InventoryUI
         foreach (ShopItem shopItem in cityLocation.GetShopItems())
         {
             for (int i = 0; i < shopItem.quantity; i++)
-                Add(new Item(shopItem.itemType), ShopActions.Buying);
+                Add(new Item(shopItem.itemType));
         }
+        SetPrices(ShopActions.Buying);
         Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true);
         RefreshShopAvailability();
     }
@@ -61,10 +63,5 @@ public class ShopInventoryUI : InventoryUI
         // remove item from shop menu
         Remove(item.GetItem());
         RefreshShopAvailability();
-    }
-
-    public override void AssignInventoryUI(InventoryItemUI itemUI)
-    {
-        itemUI.AssignInventoryUI(this);
     }
 }

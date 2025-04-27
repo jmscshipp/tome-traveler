@@ -24,6 +24,10 @@ public class Secret : MonoBehaviour
 
     public void Activate()
     {
+        if (null == SecretDestination) {
+            Debug.LogError("This secret doesn't point anywhere!", gameObject);
+        }
+
         Debug.Log("New Secret Discovered!");
         SecretDestination.IsDiscovered = true;
 

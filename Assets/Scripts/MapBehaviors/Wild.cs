@@ -73,24 +73,6 @@ public class Wild : Locale
         WildsRandomTable.ChooseRandom().Activate();
     }
 
-    public void Explore()
-    {
-        // if no secret, give nothing
-        // if secret, give it 
-        SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
-        //add exhaustion as penalty
-        Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
-
-        if (secretLocale != null)
-        {
-            UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
-            secretLocale.Activate();
-        } else
-        {
-            UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
-        }
-    }
-
     public override void Deactivate()
     {
         throw new System.NotImplementedException();

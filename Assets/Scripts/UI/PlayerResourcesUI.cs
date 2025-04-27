@@ -40,12 +40,12 @@ public class PlayerResourcesUI : MonoBehaviour
         {
             if (i <= exhaustion)
             {
-                Debug.Log("full exhaustion pip");
+                //Debug.Log("full exhaustion pip");
                 pips[i].sprite = fullPipGraphic;
             }
             else
             {
-                Debug.Log("empty exhaustion pip");
+                //Debug.Log("empty exhaustion pip");
             
                 pips[i].sprite = emptyPipGraphic;
             }

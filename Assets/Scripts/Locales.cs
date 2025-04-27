@@ -42,4 +42,39 @@ public abstract class Locale : MonoBehaviour
     {
         localeType = type;
     }
+
+    public void Explore()
+    {
+        // if no secret, give nothing
+        // if secret, give it 
+        SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
+        //add exhaustion as penalty
+        Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
+
+        if (secretLocale != null)
+        {
+            UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
+            secretLocale.Activate();
+        }
+        else
+        {
+            UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
+        }
+    }
+
+    public void BuyLodging(int cost, string dialogue)
+    {
+        if (Player.Instance().GetPlayerResources().GetCoins() < cost)
+        {
+            return;
+        }
+        Player.Instance().SleepBed();
+        Player.Instance().GetPlayerResources().AddCoins(-cost);
+        UIManager.Instance().OpenDialoguePopup(dialogue);
+    }
+    public void FreeLodging(string dialogue)
+    {
+        Player.Instance().SleepBed();
+        UIManager.Instance().OpenDialoguePopup(dialogue);
+    }
 }

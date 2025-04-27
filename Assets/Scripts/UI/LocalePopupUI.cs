@@ -31,7 +31,7 @@ public class LocalePopupUI : MonoBehaviour
 
     public void ActivatePopup(Locale locale)
     {
-        Debug.Log("activiating locale popup " + locale.GetLocaleType());
+        Debug.Log("activating locale popup " + locale.GetLocaleType());
         currentLocale = locale;
 
         // turn on child objects

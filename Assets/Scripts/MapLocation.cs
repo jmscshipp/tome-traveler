@@ -25,6 +25,10 @@ public class MapLocation : MonoBehaviour
         GetComponent<Locale>().SetupIconGraphics();
     }
 
+    public Locale GetLocale() {
+        return GetComponent<Locale>();
+    }
+
     private void OnMouseDown()
     {
         if (traversable)
