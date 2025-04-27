@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -145,9 +145,25 @@ public class Player : MonoBehaviour
         {
             return false;
         }
-
-            return true;
+        tent.Use();
+        playerResources.AddExhaustion(-2);
+        return true;
     }
+
+    public void EatFood()
+    {
+        Food food = PlayerInventory.GetEdibleFood();
+        if (food == null)
+        {
+            return ;//false;
+        }
+        food.Use();
+        playerResources.AddHunger(-2);
+        UIManager.Instance().OpenDialoguePopup("You eat some food, filling your belly.");
+        UIManager.Instance().CloseLocalePopup();
+        //return true;
+    }
+
 
     public bool IsInWilderness()
     {

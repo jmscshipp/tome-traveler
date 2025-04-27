@@ -768,7 +768,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1479,6 +1479,7 @@ MonoBehaviour:
   talkButtonPrefab: {fileID: 2717554534909998103, guid: d0f1897303d825846a7a8ae9febce0de, type: 3}
   buySellButtonPrefab: {fileID: 2717554534909998103, guid: 1d6fc07d1b409974281036c1ccc0dba2, type: 3}
   leaveShopButton: {fileID: 2717554534909998103, guid: b8f17a900f5ebdf46ba150e0bc19f5ff, type: 3}
+  currentLocale: {fileID: 0}
 --- !u!1 &2851515328034187340
 GameObject:
   m_ObjectHideFlags: 0
@@ -4191,3 +4192,4 @@ MonoBehaviour:
   talkButtonPrefab: {fileID: 2717554534909998103, guid: d0f1897303d825846a7a8ae9febce0de, type: 3}
   buySellButtonPrefab: {fileID: 0}
   leaveShopButton: {fileID: 0}
+  currentLocale: {fileID: 0}

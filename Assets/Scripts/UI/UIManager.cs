@@ -142,6 +142,7 @@ public class UIManager : MonoBehaviour
         popupQueue.Add(new DialoguePopup(dialogue));
     }
 
+
     public void CloseDialoguePopup()
     {
         dialoguePopup.SetActive(false);

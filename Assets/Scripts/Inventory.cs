@@ -63,27 +63,31 @@ public class MindreadingTome : Tome
     public MindreadingTome() : base(Items.MindreadingTome, new Mindreading()) { }
 }
 
-public class Food : Item
+public abstract class Usable : Item
+{
+    public int Uses { get; set; }
+
+    public Usable(Items itemid) : base(itemid) {}
+    
+    public bool Use()
+    {
+        Uses -= 1;
+        return Uses < 0;
+    }
+}
+
+public class Food : Usable
 {
     public Food() : base(Items.Food) { }
+}
+public class Tent : Usable
+{
+    public Tent() : base(Items.Tent) {}
 }
 
 public class Treasure : Item
 {
     public Treasure() : base(Items.Treasure) { }
-}
-
-public class Tent : Item
-{
-    public int Uses { get; set; }
-
-    public bool UseTent()
-    // returns true if tent breaks
-    {
-        Uses -= 1;
-        return Uses < 0;
-    }
-    public Tent() : base(Items.Tent) {}
 }
 
 public class Inventory
@@ -130,6 +134,24 @@ public class Inventory
             return t;
         }
         Debug.LogWarning("GetUsableTent failed: No tent with uses remaining");
+        return null;
+    }
+
+    public Food GetEdibleFood()
+    {
+        foreach (Item i in itemList)
+        {
+            if (i.item_id != Items.Food)
+            {
+                continue;
+            }
+            Food t = (Food)i;
+            if (t.Uses <0) {
+                continue;
+            }
+            return t;
+        }
+        Debug.LogWarning("GetEdibleFood failed: No tent with uses remaining");
         return null;
     }
 
