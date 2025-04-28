@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [SelectionBase]
@@ -15,11 +16,27 @@ public class MapLocation : MonoBehaviour
     private GameObject highlightGraphics;
     [SerializeField]
     private bool finalLocation;
+    private Material m_DefaultMaterial;
+    [SerializeField]
+    Material m_TeleportMaterial;
+
+    public bool ActiveForTeleport { get; private set; }
+
+    static internal List<MapLocation> activeTeleportLocations = new List<MapLocation>();
+
 
     private void Start()
     {
         iconGraphics.gameObject.SetActive(true);
         GetComponent<Locale>().SetupIconGraphics();
+        if (null != highlightGraphics)
+        {
+            m_DefaultMaterial = highlightGraphics.GetComponent<Renderer>().material;
+        }
+        else
+        {
+            Debug.LogError("No highlight graphics set", this);
+        }
     }
 
     public Locale GetLocale() {
@@ -30,6 +47,15 @@ public class MapLocation : MonoBehaviour
     {
         if (traversable)
             MapController.Instance().SendPlayerToNewLocation(this);
+
+        if (ActiveForTeleport)
+        {
+            foreach (MapLocation m in activeTeleportLocations)
+            {
+                m.DeactivateForTeleport(isTraversable: connectedLocations.Contains(m));
+                activeTeleportLocations.Remove(m);
+            }
+        }
     }
 
     public List<MapLocation> GetConnectedLocations() => connectedLocations;
@@ -59,6 +85,29 @@ public class MapLocation : MonoBehaviour
         highlightGraphics.SetActive(isTraversable);
     }
 
+    [ContextMenu(nameof(ActivateForTeleport))]
+    public void ActivateForTeleport()
+    {
+        ActiveForTeleport = true;
+        SetTraversable(true, m_TeleportMaterial);
+    }
+
+    
+    [ContextMenu(nameof(DeactivateForTeleport))]
+    public void DeactivateForTeleport(bool isTraversable)
+    {
+        ActiveForTeleport = false;
+        SetTraversable(isTraversable, m_DefaultMaterial);
+    }
+
+    private void SetTraversable(bool isTraversable, Material highlightMaterial)
+    {
+        traversable = isTraversable;
+        highlightGraphics.SetActive(isTraversable);
+
+        highlightGraphics.GetComponent<SpriteRenderer>().material = highlightMaterial;
+    }
+
     public void ActivateLocation()
     {
         // the player has made it to the end of the game - the Emerald City
@@ -70,6 +119,32 @@ public class MapLocation : MonoBehaviour
     {
         foreach (MapLocation location in connectedLocations)
             location.SetTraversable(selectable);
+    }
+
+    public void ActivateForTeleport(int repeats)
+    // repeats should be a function of teleport spell strength
+    {
+        if (repeats > 0)
+        {
+            foreach (MapLocation location in connectedLocations)
+            {
+                // potential later optimization, not working at the moment
+                if (true || !location.ActiveForTeleport)
+                {
+                    location.ActivateForTeleport();
+                    location.ActivateForTeleport(repeats - 1);
+                }
+            }
+        }
+        else if (repeats == 0)
+        {
+            foreach (MapLocation location in connectedLocations)
+                location.ActivateForTeleport();
+        }
+        else
+        {
+            Debug.LogError("ActivateForTeleport repeats cannot be negative", this);
+        }
     }
 
     private void OnDrawGizmos()

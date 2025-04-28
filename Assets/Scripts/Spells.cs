@@ -88,7 +88,7 @@ public class Clairvoyance : Spell
 
 public class Teleportation : Spell
 {
-    
+
     public override void Use()
     {
         // enter UI state machine
@@ -96,6 +96,10 @@ public class Teleportation : Spell
         // highlight locations you can travel to
         // if you click, teleport and end state machine
         this.cooldown = BaseCooldown;
+        Player.Instance().currentLocation.ActivateForTeleport(Strength);
+        UIManager.Instance().CloseLocalePopup();
+        UIManager.Instance().CloseDialoguePopup();
+        UIManager.Instance().CloseShopUI();
     }
 
         public override Spells GetId()

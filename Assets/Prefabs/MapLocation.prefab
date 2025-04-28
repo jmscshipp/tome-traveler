@@ -137,6 +137,7 @@ MonoBehaviour:
   iconGraphics: {fileID: 3173076270016505505}
   highlightGraphics: {fileID: 3965526928849247068}
   finalLocation: 0
+  m_TeleportMaterial: {fileID: 2100000, guid: fa7fe44b9c7d3b9408d46060c07bffe2, type: 2}
 --- !u!58 &6730931301507483703
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ SpriteRenderer:
   m_Size: {x: 0.83, y: 0.83}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8783460498030621683

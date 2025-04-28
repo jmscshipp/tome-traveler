@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class MapController : MonoBehaviour
 {
@@ -56,6 +51,7 @@ public class MapController : MonoBehaviour
 
         // position player at start
         player.transform.position = startingLocation.transform.position;
+        currentLocation = startingLocation;
         startingLocation.ActivateLocation();
         startingLocation.MakeConnectionsSelectable(true);
     }

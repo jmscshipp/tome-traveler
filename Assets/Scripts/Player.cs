@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private float traverseSpeed = 10f;
     private Vector2 startPos;
     private Vector2 endPos;
-    private MapLocation currentLocation;
+    public MapLocation currentLocation;
 
     public PlayerResources resources;
 
@@ -127,7 +127,8 @@ public class Player : MonoBehaviour
                 ArrivedAtLocation();
         }
 
-        if (KnowsAbundance()) {
+        if (KnowsAbundance())
+        {
             if (Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
             {
                 abundance.Use();
@@ -139,6 +140,14 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("Player cast Sleepless");
                 sleepless.Use();
+            }
+        }
+        if (KnowsTeleportation())
+        {
+            if (Input.GetKeyDown(KeyCode.T) && teleportation.cooldown == 0)
+            {
+                Debug.Log("Player cast Teleportation");
+                teleportation.Use();
             }
         }
     }

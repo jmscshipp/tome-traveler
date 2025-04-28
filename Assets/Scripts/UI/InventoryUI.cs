@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 // base class with general inventory functionality for shops and player inventory to inherit from
