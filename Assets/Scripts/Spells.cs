@@ -50,19 +50,6 @@ public abstract class Spell
     public abstract void Cast();
     public abstract Spells GetId();
 }
-public class Waterwalking : Spell
-{
-    public new string Name = "Waterwalking Spell";
-    public new int BaseCooldown = 3;
-    public override void Cast()
-    {
-        this.cooldown = BaseCooldown;
-    }
-    
-    public override Spells GetId() {
-        return Spells.Waterwalking;
-    }
-}
 
 public class Abundance : Spell
 {
@@ -184,6 +171,31 @@ public class Mindreading : TimedSpell
     public override Spells GetId()
     {
         return Spells.Mindreading;
+    }
+
+    public override void Cast()
+    {
+        base.Cast();
+    }
+
+    public override bool Use()
+    {
+        return base.Use();
+    }
+}
+
+public class Waterwalking : TimedSpell
+{
+    public new string Name = "Waterwalking Spell";
+    public new int BaseCooldown = 3;
+    public static void Cleanup()
+    {
+
+    }
+
+    public override Spells GetId()
+    {
+        return Spells.Waterwalking;
     }
 
     public override void Cast()
