@@ -129,27 +129,27 @@ public class Player : MonoBehaviour
 
         if (KnowsAbundance() && Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
         {
-            abundance.Use();
+            abundance.Cast();
         }
         if (KnowsSleepless() && Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
         {
-            sleepless.Use();
+            sleepless.Cast();
         }
         if (KnowsTeleportation() && Input.GetKeyDown(KeyCode.T) && teleportation.cooldown == 0)
         {
-            teleportation.Use();
+            teleportation.Cast();
         }
         if (KnowsMindreading() && Input.GetKeyDown(KeyCode.M) && mindreading.cooldown == 0)
         {
-            mindreading.Use();
+            mindreading.Cast();
         }
         if (KnowsClairvoyance() && Input.GetKeyDown(KeyCode.C) && clairvoyance.cooldown == 0)
         {
-            clairvoyance.Use();
+            clairvoyance.Cast();
         }
         if (KnowsWaterwalking() && Input.GetKeyDown(KeyCode.W) && waterwalking.cooldown == 0)
         {
-            waterwalking.Use();
+            waterwalking.Cast();
         }
     }
 
@@ -171,13 +171,6 @@ public class Player : MonoBehaviour
         traversing = true;
     }
 
-    public void ReduceCooldowns()
-    {
-        foreach (Spell s in AllSpells) {
-            s.ReduceCooldown();
-        }
-    }
-
     public void Learn(Tome tome)
     {
         tome.Spell.enabled = true;
@@ -192,7 +185,7 @@ public class Player : MonoBehaviour
         }
         bool tentBroke = tent.Use();
         resources.AddExhaustion(-GameManager.Instance().GameState.TentExhaustionReduction);
-        ReduceCooldowns();
+        Spell.PassTime();
 
         SleepWildernessResult successResult = new SleepWildernessResult(true);
         if (tentBroke)
@@ -207,7 +200,7 @@ public class Player : MonoBehaviour
     public bool SleepBed()
     {
         resources.AddExhaustion(-GameManager.Instance().GameState.BedExhaustionReduction);
-        ReduceCooldowns();
+        Spell.PassTime();
         return true;
     }
 
@@ -276,6 +269,12 @@ public class Player : MonoBehaviour
             UIManager.Instance().OpenLocalePopup(locale);
         }
 
-        ReduceCooldowns();
+        Spell.PassTime();
     }
+
+    internal bool NextTo(MapLocation mapLocation)
+    {
+        return currentLocation.GetConnectedLocations().Contains(mapLocation);
+    }
+
 }

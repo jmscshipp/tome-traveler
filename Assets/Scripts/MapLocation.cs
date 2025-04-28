@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class MapLocation : MonoBehaviour
     private List<MapLocation> connectedLocations = new List<MapLocation>();
     [SerializeField]
     bool connectionSetUp = false;
-    private bool traversable = false;
+    public bool Traversable { get; private set; }
     [SerializeField]
     private SpriteRenderer iconGraphics;
     [SerializeField]
@@ -21,10 +22,13 @@ public class MapLocation : MonoBehaviour
     Material m_DefaultMaterial;
     [SerializeField]
     Material m_TeleportMaterial;
+    [SerializeField]
+    Material m_MindreadingMaterial;
 
     public bool ActiveForTeleport { get; private set; }
 
     static internal List<MapLocation> activeTeleportLocations = new List<MapLocation>();
+    static internal List<MapLocation> activeMindreadingLocations = new List<MapLocation>();
 
 
     private void Start()
@@ -47,16 +51,12 @@ public class MapLocation : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (traversable)
+        if (Traversable)
             MapController.Instance().SendPlayerToNewLocation(this);
 
         if (ActiveForTeleport)
         {
-            foreach (MapLocation m in activeTeleportLocations)
-            {
-                m.DeactivateForTeleport(isTraversable: false);
-            }
-            activeTeleportLocations.Clear();
+            Teleportation.Cleanup();
         }
     }
 
@@ -83,7 +83,7 @@ public class MapLocation : MonoBehaviour
 
     public void SetTraversable(bool isTraversable)
     {
-        traversable = isTraversable;
+        Traversable = isTraversable;
         highlightGraphics.SetActive(isTraversable);
     }
 
@@ -92,22 +92,34 @@ public class MapLocation : MonoBehaviour
     {
         ActiveForTeleport = true;
         activeTeleportLocations.Add(this);
-        SetTraversable(true, m_TeleportMaterial);
+        SetTraversable(true);
+        SetHighlightMaterial(m_TeleportMaterial);
     }
 
-    
+    [ContextMenu(nameof(ActivateForMindreading))]
+    public void ActivateForMindreading()
+    {
+        activeMindreadingLocations.Add(this);
+        // For now mindreading detects secrets AND secret locales.
+        // TODO: Decide if we want to change this
+        if (null != GetComponent<SecretLocale>() || null != GetComponent<Secret>())
+            SetHighlightMaterial(m_MindreadingMaterial);
+    }
+
+    internal void DeactivateForMindreading()
+    {
+        SetHighlightMaterial(m_DefaultMaterial);
+    }
+
     [ContextMenu(nameof(DeactivateForTeleport))]
     public void DeactivateForTeleport(bool isTraversable)
     {
         ActiveForTeleport = false;
-        SetTraversable(isTraversable, m_DefaultMaterial);
+        SetTraversable(isTraversable);
+        SetHighlightMaterial(m_DefaultMaterial);
     }
 
-    private void SetTraversable(bool isTraversable, Material highlightMaterial)
-    {
-        traversable = isTraversable;
-        highlightGraphics.SetActive(isTraversable);
-
+    private void SetHighlightMaterial(Material highlightMaterial) {
         highlightGraphics.GetComponent<SpriteRenderer>().material = highlightMaterial;
     }
 

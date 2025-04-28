@@ -3052,6 +3052,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
   m_PrefabInstance: {fileID: 1271690968}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &627319142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200376779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a35d85a39bc0c34fb83d6f7488908b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDiscovered: 0
+  Dialogue: This points toward emerald city!
 --- !u!114 &635663959 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
@@ -5842,7 +5856,7 @@ PrefabInstance:
       objectReference: {fileID: 635663959}
     - target: {fileID: 8520794942663227159, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_Name
-      value: MapLocation (14)
+      value: Emerald City Hint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df3a3d348ed9886489b148835e26bd79, type: 3}

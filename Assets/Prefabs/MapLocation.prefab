@@ -137,7 +137,9 @@ MonoBehaviour:
   iconGraphics: {fileID: 3173076270016505505}
   highlightGraphics: {fileID: 3965526928849247068}
   finalLocation: 0
+  m_DefaultMaterial: {fileID: 0}
   m_TeleportMaterial: {fileID: 2100000, guid: fa7fe44b9c7d3b9408d46060c07bffe2, type: 2}
+  m_MindreadingMaterial: {fileID: 2100000, guid: 25d1385857c36024c97ae622bead189c, type: 2}
 --- !u!58 &6730931301507483703
 CircleCollider2D:
   m_ObjectHideFlags: 0
