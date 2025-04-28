@@ -16,7 +16,9 @@ public class MapLocation : MonoBehaviour
     private GameObject highlightGraphics;
     [SerializeField]
     private bool finalLocation;
-    private Material m_DefaultMaterial;
+
+    [SerializeField]
+    Material m_DefaultMaterial;
     [SerializeField]
     Material m_TeleportMaterial;
 
@@ -52,9 +54,9 @@ public class MapLocation : MonoBehaviour
         {
             foreach (MapLocation m in activeTeleportLocations)
             {
-                m.DeactivateForTeleport(isTraversable: connectedLocations.Contains(m));
-                activeTeleportLocations.Remove(m);
+                m.DeactivateForTeleport(isTraversable: false);
             }
+            activeTeleportLocations.Clear();
         }
     }
 
@@ -89,6 +91,7 @@ public class MapLocation : MonoBehaviour
     public void ActivateForTeleport()
     {
         ActiveForTeleport = true;
+        activeTeleportLocations.Add(this);
         SetTraversable(true, m_TeleportMaterial);
     }
 
@@ -128,6 +131,8 @@ public class MapLocation : MonoBehaviour
         {
             foreach (MapLocation location in connectedLocations)
             {
+                if (location == Player.Instance().currentLocation)
+                    continue;
                 // potential later optimization, not working at the moment
                 if (true || !location.ActiveForTeleport)
                 {
