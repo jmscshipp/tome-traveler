@@ -20,7 +20,7 @@ public class PlayerInventoryUI : InventoryUI
 
     public void SetShopUI(InventoryUI ui) {
         foreach (InventoryItemUI uItem in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>()) {
-            uItem.inventoryUI = ui;
+            uItem.inventoryUI = this;
         }
     }
 

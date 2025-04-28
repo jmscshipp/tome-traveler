@@ -54,6 +54,7 @@ public abstract class InventoryUI : MonoBehaviour
                 ui.SetCost(itemData.BuyPrice);
                 break;
             case ShopActions.None:
+                ui.ClearCost();
                 break;
         }
     }

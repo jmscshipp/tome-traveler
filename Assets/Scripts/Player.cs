@@ -96,11 +96,14 @@ public class Player : MonoBehaviour
         GetComponent<GameManager>().GameState.StarterSpell.enabled = true;
         if (StartWithTent)
         {
-            PlayerInventory.AddItem(new Tent());
+            Tent t = new Tent();
+            PlayerInventory.AddItem(t);
         }
 
         resources = GetComponent<PlayerResources>();
         PlayerInventory.SizeLimit = InventorySizeLimit;
+        // Clear prices from inventory display
+        PlayerInventory.GetInventoryUI().SetPrices(ShopActions.None);
     }
 
     void Awake()

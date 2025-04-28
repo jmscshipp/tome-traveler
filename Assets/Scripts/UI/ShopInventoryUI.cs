@@ -44,6 +44,7 @@ public class ShopInventoryUI : InventoryUI
         foreach (Transform obj in inventoryObjParent.transform)
             Destroy(obj.gameObject);
         Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(false);
+        Player.Instance().PlayerInventory.GetInventoryUI().SetPrices(ShopActions.None);
     }
 
     // set items player can buy outlined and clickable

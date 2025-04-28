@@ -40,8 +40,13 @@ public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
         item.cost = cost;
         GetComponentInChildren<TextMeshProUGUI>().SetText(cost.ToString());
     }
+    public void ClearCost()
+    {
+        GetComponentInChildren<TextMeshProUGUI>().SetText("");
+    }
 
-    public int GetItemCost() {
+    public int GetItemCost()
+    {
         return item.cost;
     }
 

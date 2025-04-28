@@ -1734,6 +1734,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2851515327127805420, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_fontSize
+      value: 39.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851515327127805420, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f2cea28d7b6f37748831423a676a1fe3, type: 2}
+    - target: {fileID: 2851515327127805420, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851515327127805420, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8905487021979709969, guid: f2cea28d7b6f37748831423a676a1fe3, type: 2}
+    - target: {fileID: 2851515327127805420, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851515327127805420, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2851515327154384261, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2096,7 +2120,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2851515328046813749, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851515328105848355, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11.553589
       objectReference: {fileID: 0}
     - target: {fileID: 2851515328374282700, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2145,6 +2173,10 @@ PrefabInstance:
     - target: {fileID: 2851515328442817488, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851515328507948176, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11.553589
       objectReference: {fileID: 0}
     - target: {fileID: 2851515328591547735, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5223,6 +5255,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  resources: {fileID: 0}
   godmode: 0
   StartWithTent: 1
   InventorySizeLimit: 24
