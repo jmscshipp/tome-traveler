@@ -127,28 +127,29 @@ public class Player : MonoBehaviour
                 ArrivedAtLocation();
         }
 
-        if (KnowsAbundance())
+        if (KnowsAbundance() && Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
         {
-            if (Input.GetKeyDown(KeyCode.A) && abundance.cooldown == 0)
-            {
-                abundance.Use();
-            }
+            abundance.Use();
         }
-        if (KnowsSleepless())
+        if (KnowsSleepless() && Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
         {
-            if (Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
-            {
-                Debug.Log("Player cast Sleepless");
-                sleepless.Use();
-            }
+            sleepless.Use();
         }
-        if (KnowsTeleportation())
+        if (KnowsTeleportation() && Input.GetKeyDown(KeyCode.T) && teleportation.cooldown == 0)
         {
-            if (Input.GetKeyDown(KeyCode.T) && teleportation.cooldown == 0)
-            {
-                Debug.Log("Player cast Teleportation");
-                teleportation.Use();
-            }
+            teleportation.Use();
+        }
+        if (KnowsMindreading() && Input.GetKeyDown(KeyCode.M) && mindreading.cooldown == 0)
+        {
+            mindreading.Use();
+        }
+        if (KnowsClairvoyance() && Input.GetKeyDown(KeyCode.C) && clairvoyance.cooldown == 0)
+        {
+            clairvoyance.Use();
+        }
+        if (KnowsWaterwalking() && Input.GetKeyDown(KeyCode.W) && waterwalking.cooldown == 0)
+        {
+            waterwalking.Use();
         }
     }
 
