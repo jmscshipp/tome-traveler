@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -52,10 +50,5 @@ public class Shop : Locale
         UIManager.Instance().OpenShopUI(this);
         UIManager.Instance().CloseLocalePopup();
         UIManager.Instance().OpenLocalePopup(GetComponentInChildren<InsideShop>());
-    }
-
-    public void Explore()
-    {
-
     }
 }

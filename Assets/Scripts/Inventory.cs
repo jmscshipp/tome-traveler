@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,15 +22,27 @@ public enum Items : ushort
     WaterwalkingTome,
 }
 
-public class Item
+public abstract class Item
 {
-    public int cost;
+    public int cost = 69;
+
+    int index = -1;
+
     // item ids are read-only
     public Items item_id { get; }
-    public Item(Items id)
+    protected Item(Items id)
     {
         item_id = id;
     }
+    internal void SetIndex(int i)
+    {
+        index = i;
+    }
+    internal int GetIndex()
+    {
+        return index;
+    }
+
 }
 
 public class Tome : Item
@@ -63,6 +74,11 @@ public class MindreadingTome : Tome
     public MindreadingTome() : base(Items.MindreadingTome, Player.mindreading) { }
 }
 
+public class WaterwalkingTome : Tome
+{
+    public WaterwalkingTome() : base(Items.WaterwalkingTome, Player.waterwalking) { }
+}
+
 public abstract class Usable : Item
 {
     public int Uses { get; set; }
@@ -82,7 +98,10 @@ public class Food : Usable
 }
 public class Tent : Usable
 {
-    public Tent() : base(Items.Tent) {}
+    public Tent() : base(Items.Tent)
+    {
+        Uses = Random.Range(2, 6);
+    }
 }
 
 public class Treasure : Item
@@ -110,14 +129,51 @@ public class Inventory
         Debug.Log(itemstring);
     }
 
+    public static Item NewItemById(Items id)
+    {
+        switch (id)
+        {
+            case Items.Food:
+                return new Food();
+            case Items.Tent:
+                return new Tent();
+            case Items.Treasure:
+                return new Treasure();
+            case Items.AbundanceTome:
+                return new AbundanceTome();
+            case Items.TeleportationTome:
+                return new TeleportationTome();
+            case Items.MindreadingTome:
+                return new MindreadingTome();
+            case Items.WaterwalkingTome:
+                return new WaterwalkingTome();
+            case Items.SleeplessTome:
+                return new SleeplessTome();
+            case Items.ClairvoyanceTome:
+                return new ClairvoyanceTome();
+            default:
+                Debug.LogError("Item id not implemented");
+                return null; 
+        }
+    }
+
+
+    public void UpdateItemIndices()
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            itemList[i].SetIndex(i);
+        }
+    }
+
     public void AddItem(Item item)
     {
-        LogInventory("Items Before");
+        //LogInventory("Items Before");
 
         itemList.Add(item);
+        UpdateItemIndices();
         ui.UpdateInventory();
-        
-        LogInventory("Items After");
+        //LogInventory("Items After");
     }
 
     public bool HasItem(Items ItemID)
@@ -175,6 +231,7 @@ public class Inventory
             if (i.item_id == ItemID)
             {
                 itemList.Remove(i);
+                UpdateItemIndices();
                 ui.UpdateInventory();
                 return true;
             }
@@ -188,6 +245,7 @@ public class Inventory
         if (itemList.Contains(item))
         {
             itemList.Remove(item);
+            UpdateItemIndices();
             ui.UpdateInventory();
             return true;
         }

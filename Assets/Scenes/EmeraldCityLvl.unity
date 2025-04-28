@@ -4547,7 +4547,7 @@ PrefabInstance:
       objectReference: {fileID: 1795455632}
     - target: {fileID: 8520794942663227159, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_Name
-      value: MapLocation (29)
+      value: Shop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
@@ -5240,8 +5240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHunger: 5
   maxExhaustion: 5
-  coins: 55
-  playerResourcesUI: {fileID: 1732706334}
+  coins: 0
+  ui: {fileID: 1732706334}
 --- !u!114 &1197151028
 MonoBehaviour:
   m_ObjectHideFlags: 0

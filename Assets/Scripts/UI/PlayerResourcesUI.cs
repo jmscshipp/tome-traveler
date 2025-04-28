@@ -19,7 +19,7 @@ public class PlayerResourcesUI : MonoBehaviour
     private Sprite fullPipGraphic;
 
     [SerializeField]
-    private TMP_Text coinsText;
+    TextMeshProUGUI coinsText;
 
     public void UpdateHungerUI(int hunger, int maxHunger)
     {
@@ -54,6 +54,6 @@ public class PlayerResourcesUI : MonoBehaviour
 
     public void UpdateCoinsUI(int coins)
     {
-        coinsText.text = "Coins: " + coins;
+        coinsText.SetText("Coins: {0}", coins);
     }
 }

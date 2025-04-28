@@ -1,20 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    private bool sellable;
-    private int itemCost = 0;
+    [SerializeField]
+    bool sellable;
+    [SerializeField]
     private Item item;
     [SerializeField]
     private Image graphics;
     private Outline outline;
     public InventoryUI inventoryUI;
+
+    [SerializeField]
+    public Items id = Items.None;
+
+    // This is a debug field
+    [SerializeField]
+    int InventoryIndex = -1;
 
     private void Awake()
     {
@@ -24,15 +31,20 @@ public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         item = assignedItem;
         graphics.sprite = graphic;
-        GetComponentInChildren<TMP_Text>().text = itemCost.ToString();
+        id = assignedItem.item_id;
+        InventoryIndex = item.GetIndex();
     }
 
     public void SetCost(int cost)
     {
-        this.itemCost = cost;
+        item.cost = cost;
+        GetComponentInChildren<TextMeshProUGUI>().SetText(cost.ToString());
     }
 
-    public int GetItemCost() => itemCost;
+    public int GetItemCost() {
+        return item.cost;
+    }
+
     public Item GetItem() => item;
 
     // the shop tells this ui element if the player has enough money to buy it
@@ -47,7 +59,7 @@ public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // when mouse is over this UI element, 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("hovering over inventory UI item");
+        //Debug.Log("hovering over inventory UI item index " + item.GetIndex());
         if (!sellable)
             return;
         outline.effectColor = Color.white;

@@ -64,12 +64,12 @@ public abstract class Locale : MonoBehaviour
 
     public void BuyLodging(int cost, string dialogue)
     {
-        if (Player.Instance().GetPlayerResources().GetCoins() < cost)
+        if (Player.Instance().resources.GetCoins() < cost)
         {
             return;
         }
         Player.Instance().SleepBed();
-        Player.Instance().GetPlayerResources().AddCoins(-cost);
+        Player.Instance().resources.AddCoins(-cost);
         UIManager.Instance().OpenDialoguePopup(dialogue);
     }
     public void FreeLodging(string dialogue)

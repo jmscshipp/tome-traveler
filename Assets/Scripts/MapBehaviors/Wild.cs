@@ -47,7 +47,7 @@ public class Wild : Locale
                 if (player.PlayerInventory.HasSpace())
                     player.PlayerInventory.AddItem(new Food());
             }
-             UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
+            UIManager.Instance().OpenDialoguePopup("You hunt and find " + num_food + " food.");
         } else
         {
             UIManager.Instance().OpenDialoguePopup("You hunt but find no food.");
@@ -58,12 +58,14 @@ public class Wild : Locale
 
     public void Camp()
     {
-        bool result = player.SleepWilderness();
-        if (result)
+        SleepWildernessResult result = player.SleepWilderness();
+        if (result.succeeded)
         {
             int exhaustionReduction = Random.Range(1, gm.GameState.MaxRestFromTent);
-            Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-gm.GameState.ExploreExhaustionPenalty);
+            Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-exhaustionReduction);
             UIManager.Instance().OpenDialoguePopup("You curl up in your sleeping bag and watch the stars. In the morning, you feel refreshed.");
+            if (result.tentBroke)
+                UIManager.Instance().OpenDialoguePopup("Your tent has broken in the night.");
         }
         else
         {
@@ -77,4 +79,16 @@ public class Wild : Locale
     {
         throw new System.NotImplementedException();
     }
+}
+
+public class SleepWildernessResult
+{
+    public bool succeeded;
+    public bool tentBroke = false;
+
+    public SleepWildernessResult(bool succeeded)
+    {
+        this.succeeded = succeeded;
+    }
+
 }

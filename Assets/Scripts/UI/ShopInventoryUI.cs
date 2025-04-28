@@ -12,11 +12,9 @@ public class ShopInventoryUI : InventoryUI
         foreach(ShopItem shopItem in shopLocation.GetShopItems())
         {
             for (int i = 0; i < shopItem.quantity; i++)
-                Add(new Item(shopItem.itemType));
+                Add(Inventory.NewItemById(shopItem.itemType));
         }
-        SetPrices(ShopActions.Buying);
-        Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true);
-        RefreshShopAvailability();
+        FinalizeSetup();
     }
 
     // overriden version for cities to use
@@ -25,9 +23,18 @@ public class ShopInventoryUI : InventoryUI
         foreach (ShopItem shopItem in cityLocation.GetShopItems())
         {
             for (int i = 0; i < shopItem.quantity; i++)
-                Add(new Item(shopItem.itemType));
+                Add(Inventory.NewItemById(shopItem.itemType));
         }
+        FinalizeSetup();
+    }
+
+    private void FinalizeSetup()
+    {
+        Player.Instance().PlayerInventory.GetInventoryUI().InShop = true;
+        Player.Instance().PlayerInventory.GetInventoryUI().ShopUI = this;
         SetPrices(ShopActions.Buying);
+        Player.Instance().PlayerInventory.GetInventoryUI().UpdateInventory();
+        Player.Instance().PlayerInventory.GetInventoryUI().SetShopUI(this);
         Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true);
         RefreshShopAvailability();
     }
@@ -44,24 +51,23 @@ public class ShopInventoryUI : InventoryUI
     {
         foreach(InventoryItemUI itemUI in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
         {
-            // player doesn't have enough money for item
-            if (itemUI.GetItemCost() > Player.Instance().GetPlayerResources().GetCoins())
-                itemUI.SetSellable(false);
-            // player has enough money for item
-            else
-                itemUI.SetSellable(true);
+            itemUI.SetSellable(Player.Instance().CanAfford(itemUI.GetItemCost()));
         }
     }
 
     public override void SellItem(InventoryItemUI item)
     {
         // remove coins from player inventory
-        Player.Instance().GetPlayerResources().AddCoins(-item.GetItemCost());
+        Player.Instance().resources.AddCoins(-item.GetItemCost());
+        PlayerInventoryUI playerUI = Player.Instance().PlayerInventory.GetInventoryUI();
+        item.inventoryUI = playerUI;
+
         // add item to player inventory
         Player.Instance().PlayerInventory.AddItem(item.GetItem());
-        Player.Instance().PlayerInventory.GetInventoryUI().MakeInventoryClickable(true); // need to refresh clickable UI to set this new item
+        // need to refresh clickable UI to set this new item
+        playerUI.MakeInventoryClickable(true);
         // remove item from shop menu
-        Remove(item.GetItem());
+        Remove(item);
         RefreshShopAvailability();
     }
 }

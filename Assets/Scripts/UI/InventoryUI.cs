@@ -1,6 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // base class with general inventory functionality for shops and player inventory to inherit from
@@ -13,7 +12,6 @@ public abstract class InventoryUI : MonoBehaviour
     [SerializeField]
     protected Transform inventoryObjParent;
 
-    protected List<InventoryItemUI> items;
     public static List<ItemData> itemBlueprints = new List<ItemData>();
 
     // Start is called before the first frame update
@@ -21,7 +19,6 @@ public abstract class InventoryUI : MonoBehaviour
     {
         // load in item scriptable objects
         itemBlueprints.AddRange(Resources.LoadAll<ItemData>(itemDataDirectory));
-        items = new List<InventoryItemUI>();
     }
 
     public static ItemData GetData(Items id) {
@@ -30,9 +27,17 @@ public abstract class InventoryUI : MonoBehaviour
 
     public void SetPrices(ShopActions action)
     {
-        foreach (InventoryItemUI ui in items)
+        foreach (InventoryItemUI ui in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
         {
             SetPrice(action, ui);
+        }
+    }
+
+    public void Clear()
+    {
+        foreach (InventoryItemUI i in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
+        {
+            Remove(i);
         }
     }
 
@@ -43,29 +48,52 @@ public abstract class InventoryUI : MonoBehaviour
         switch (action)
         {
             case ShopActions.Selling:
-                ui.SetCost(itemData.BuyPrice);
+                ui.SetCost(itemData.SellPrice);
                 break;
             case ShopActions.Buying:
-                ui.SetCost(itemData.SellPrice);
+                ui.SetCost(itemData.BuyPrice);
                 break;
             case ShopActions.None:
                 break;
         }
     }
 
-    protected void Add(Item item)
+    protected InventoryItemUI Add(Item item)
     {
         GameObject newItemUI = Instantiate(inventoryItemUIPrefab, inventoryObjParent);
         InventoryItemUI itemui = newItemUI.GetComponent<InventoryItemUI>();
         itemui.inventoryUI = this;
         itemui.Setup(item, GetData(item.item_id).Sprite);
+        return itemui;
     }
 
+    protected void Remove(int inventoryIndex)
+    {
+        foreach (InventoryItemUI uitem in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
+        {
+            if (uitem.GetItem().GetIndex() == inventoryIndex)
+            {
+                Destroy(uitem.gameObject);
+            }
+        }
+    }
     protected void Remove(Item item)
     {
-        InventoryItemUI itemToRemove = items.Find(x => x.GetItem() == item);
-        items.Remove(itemToRemove);
-        Destroy(itemToRemove.gameObject);
+        foreach (InventoryItemUI uitem in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
+        {
+            if (uitem.GetItem() == item)
+            {
+                Destroy(uitem.gameObject);
+                return;
+            }
+        }
+
+        Debug.LogError("Could not remove item; doesn't exist. " + item.item_id, gameObject);
+    }
+
+    protected void Remove(InventoryItemUI uitem)
+    {
+        Destroy(uitem.gameObject);
     }
 
     public abstract void SellItem(InventoryItemUI itemUI);

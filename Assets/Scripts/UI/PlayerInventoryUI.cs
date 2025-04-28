@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerInventoryUI : InventoryUI
 {
+    public bool InShop = false;
+    public ShopInventoryUI ShopUI;
+
     // inherits from InventoryUI, where general inventory functionality comes from
     private void Start()
     {
@@ -18,58 +18,39 @@ public class PlayerInventoryUI : InventoryUI
             itemUI.SetSellable(clickable);
     }
 
+    public void SetShopUI(InventoryUI ui) {
+        foreach (InventoryItemUI uItem in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>()) {
+            uItem.inventoryUI = ui;
+        }
+    }
+
     public override void SellItem(InventoryItemUI item)
     {
+        //Debug.Log("Player is selling item");
         // add coins to player inventory
-        Player.Instance().GetPlayerResources().AddCoins(item.GetItemCost());
+        Player.Instance().resources.AddCoins(item.GetItemCost());
         // remove Item from Player inventory
-        Player.Instance().PlayerInventory.RemoveItem(item.GetItem().item_id);
+        Player.Instance().PlayerInventory.RemoveItem(item.GetItem());
+        // remove item from inventory menu
+        Remove(item);
         UpdateInventory();
+        MakeInventoryClickable(true);
+        ShopUI.RefreshShopAvailability();
     }
 
     public void UpdateInventory()
     {
-        List<Item> itemsShownInUI = new List<Item>();
-        List<Item> itemsToRemove = new List<Item>();
-        // Remove items in UI but no longer in inventory
-        foreach (InventoryItemUI itemui in items)
-        {
-            Item i = itemui.GetItem();
-            if (Player.Instance().PlayerInventory.itemList.Contains(i))
-            {
-                // remove duplicate InventoryItemUI list entries
-                if (itemsShownInUI.Contains(i))
-                {
-                    itemsToRemove.Add(i);
-                }
-
-                itemsShownInUI.Add(i);
-            }
-            else
-            {
-                itemsToRemove.Add(i);
-            }
-            
-        }
-        
-        // We must do this outside of the previous for loop to prevent strange behavior
-        foreach (Item i in itemsToRemove)
-        {
-            Remove(i);
-        }
-
-        // Add items in inventory but not shown in UI
+        //Debug.Log("UPDATING INVENTORY");
+        Clear();
         foreach (Item i in Player.Instance().PlayerInventory.itemList)
         {
-            if (itemsShownInUI.Contains(i))
-            {
-                continue;
-            }
-            else
-            {
-                Debug.Log("Item not in UI");
-                Add(i);
-            }
+            Add(i);
+        }
+
+        if (InShop)
+        {
+            SetPrices(ShopActions.Selling);
+            MakeInventoryClickable(true);
         }
     }
 }

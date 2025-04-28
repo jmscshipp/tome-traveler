@@ -15,11 +15,9 @@ public class Player : MonoBehaviour
     private Vector2 endPos;
     private MapLocation currentLocation;
 
-    private PlayerResources playerResources;
+    public PlayerResources resources;
 
     public Inventory PlayerInventory = new Inventory();
-
-    public PlayerResources GetPlayerResources() => playerResources;
 
     public bool godmode = false;
 
@@ -100,6 +98,9 @@ public class Player : MonoBehaviour
         {
             PlayerInventory.AddItem(new Tent());
         }
+
+        resources = GetComponent<PlayerResources>();
+        PlayerInventory.SizeLimit = InventorySizeLimit;
     }
 
     void Awake()
@@ -108,14 +109,12 @@ public class Player : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
-
-        playerResources = GetComponent<PlayerResources>();
-        PlayerInventory.SizeLimit = InventorySizeLimit;
     }
 
     // Update is called once per frame
     void Update()
     {
+        PlayerInventory.UpdateItemIndices();
         // Advance player position while traversing
         if (traversing)
         {
@@ -141,6 +140,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool CanAfford(int cost)
+    {
+        return resources.GetCoins() >= cost;
+    }
     public void TraverseToNewLocation(MapLocation newLocation)
     {
         // don't go to new location if already on the way to one
@@ -167,26 +170,30 @@ public class Player : MonoBehaviour
         tome.Spell.enabled = true;
     }
 
-    public bool SleepWilderness()
+    public SleepWildernessResult SleepWilderness()
     {
         Tent tent = PlayerInventory.GetUsableTent();
         if (tent == null)
         {
-            return false;
+            return new SleepWildernessResult(false);
         }
         bool tentBroke = tent.Use();
-        playerResources.AddExhaustion(-GameManager.Instance().GameState.TentExhaustionReduction);
+        resources.AddExhaustion(-GameManager.Instance().GameState.TentExhaustionReduction);
         ReduceCooldowns();
+
+        SleepWildernessResult successResult = new SleepWildernessResult(true);
         if (tentBroke)
         {
             PlayerInventory.RemoveItem(tent);
+            successResult.tentBroke = true;
+            UIManager.Instance().OpenDialoguePopup("Your tent has broken in the night.");
         }
-        return true;
+        return successResult;
     }
 
     public bool SleepBed()
     {
-        playerResources.AddExhaustion(-GameManager.Instance().GameState.BedExhaustionReduction);
+        resources.AddExhaustion(-GameManager.Instance().GameState.BedExhaustionReduction);
         ReduceCooldowns();
         return true;
     }
@@ -200,7 +207,7 @@ public class Player : MonoBehaviour
         }
 
         bool foodEaten = food.Use();
-        playerResources.AddHunger(-2);
+        resources.AddHunger(-2);
         if (foodEaten)
         {
             PlayerInventory.RemoveItem(food);
@@ -221,8 +228,8 @@ public class Player : MonoBehaviour
     private void ArrivedAtLocation()
     {
         traversing = false;
-        playerResources.AddExhaustion(1);
-        playerResources.AddHunger(1);
+        resources.AddExhaustion(1);
+        resources.AddHunger(1);
 
         // After we have arrived, check to see if there are any secrets in our new location
         // We do this by checking the current location, which has just been updated

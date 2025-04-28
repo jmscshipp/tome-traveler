@@ -43,18 +43,18 @@ public class City : Locale
 
     public void Sleep()
     {
-
+        int cost = 5;
+        BuyLodging(cost, LodgingDialogue(cost));
     }
-
+    public string LodgingDialogue(int cost)
+    {
+        return "You spend " + cost + " coins to pay for an inn. The bed holds you, you fall asleep.";
+    }
+    
     public void BuyAndSell()
     {
         UIManager.Instance().OpenShopUI(this);
         UIManager.Instance().CloseLocalePopup();
         UIManager.Instance().OpenLocalePopup(GetComponentInChildren<InsideShop>());
-    }
-
-    public void Explore()
-    {
-
     }
 }

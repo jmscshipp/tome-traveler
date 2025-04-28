@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerResources : MonoBehaviour
@@ -13,7 +12,7 @@ public class PlayerResources : MonoBehaviour
     private int coins = 0;
 
     [SerializeField]
-    private PlayerResourcesUI playerResourcesUI;
+    public PlayerResourcesUI ui;
 
     private int hunger = 0;
     private int exhaustion = 0;
@@ -25,7 +24,7 @@ public class PlayerResources : MonoBehaviour
         AddExhaustion(-10);
 
         // start the game with 10 coins
-        AddCoins(55);
+        AddCoins(10);
     }
 
     public int GetMaxHunger() => maxHunger;
@@ -35,9 +34,9 @@ public class PlayerResources : MonoBehaviour
 
     public void AddHunger(int modifier)
     {
-        Debug.Log("Changing player hunger by " + modifier);
-        hunger = (int)Mathf.Clamp(hunger + modifier, 0f, 5f);
-        playerResourcesUI.UpdateHungerUI(hunger, maxHunger);
+        //Debug.Log("Changing player hunger by " + modifier);
+        hunger = Math.Clamp(hunger + modifier, 0, 5);
+        ui.UpdateHungerUI(hunger, maxHunger);
         if (hunger == 5)
             UIManager.Instance().OpenDialoguePopup("You died of hunger!");
             // here is where we'll tie in the actual player death event
@@ -45,8 +44,8 @@ public class PlayerResources : MonoBehaviour
     public int GetExhaustion() => exhaustion;
     public void AddExhaustion(int modifier)
     {
-        exhaustion = (int)Mathf.Clamp(exhaustion + modifier, 0f, 5f);
-        playerResourcesUI.UpdateExhaustionUI(exhaustion, maxExhaustion);
+        exhaustion = Math.Clamp(exhaustion + modifier, 0, 5);
+        ui.UpdateExhaustionUI(exhaustion, maxExhaustion);
         if (hunger == 5)
             UIManager.Instance().OpenDialoguePopup("You died of exhaustion!");
             // here is where we'll tie in the actual player death event
@@ -55,8 +54,8 @@ public class PlayerResources : MonoBehaviour
     public int GetCoins() => coins;
     public void AddCoins(int modifier)
     {
-        Debug.Log("adding coins");
-        coins = (int)Mathf.Clamp(coins + modifier, 0f, 1000f);
-        playerResourcesUI.UpdateCoinsUI(coins);
+        //Debug.Log("adding coins");
+        coins = Math.Clamp(coins + modifier, 0, 1000);
+        ui.UpdateCoinsUI(coins);
     }
 }
