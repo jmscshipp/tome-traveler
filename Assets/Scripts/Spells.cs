@@ -180,7 +180,12 @@ public class Mindreading : TimedSpell
 
     public override bool Use()
     {
-        return base.Use();
+        // This check is necessary because Use is called whenever time passes
+        // We have to use check result of .Use() to see if we have uses left
+        bool res = base.Use();
+        if (res)
+            Player.Instance().currentLocation.ActivateForMindreading(Strength);
+        return res;
     }
 }
 

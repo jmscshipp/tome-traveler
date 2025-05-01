@@ -2544,6 +2544,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965526928849247068, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.size
       value: 3
@@ -2562,7 +2566,11 @@ PrefabInstance:
       objectReference: {fileID: 1394303839}
     - target: {fileID: 8520794942663227159, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_Name
-      value: MapLocation (4)
+      value: Secret->ECH
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520794942663227159, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
@@ -3951,6 +3959,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965526928849247068, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
@@ -6626,6 +6638,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
   m_PrefabInstance: {fileID: 568455747}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1531935189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568455748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ea300979a374941870e7ecf118d4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDiscovered: 0
+  SecretDestination: {fileID: 627319142}
+  tooltip: You find an old book. It says there's a hint to Emerald City to the east.
+    You mark it on your map...
 --- !u!1001 &1541350864
 PrefabInstance:
   m_ObjectHideFlags: 0

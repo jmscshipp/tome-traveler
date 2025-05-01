@@ -88,7 +88,7 @@ public class MapLocation : MonoBehaviour
     }
 
     [ContextMenu(nameof(ActivateForTeleport))]
-    public void ActivateForTeleport()
+    internal void ActivateForTeleport()
     {
         ActiveForTeleport = true;
         activeTeleportLocations.Add(this);
@@ -97,7 +97,7 @@ public class MapLocation : MonoBehaviour
     }
 
     [ContextMenu(nameof(ActivateForMindreading))]
-    public void ActivateForMindreading()
+    internal void ActivateForMindreading()
     {
         activeMindreadingLocations.Add(this);
         // For now mindreading detects secrets AND secret locales.
@@ -135,11 +135,35 @@ public class MapLocation : MonoBehaviour
         foreach (MapLocation location in connectedLocations)
             location.SetTraversable(selectable);
     }
-
-    public void ActivateForTeleport(int repeats)
-    // repeats should be a function of teleport spell strength
+    public void ActivateForMindreading(int SpellStrength)
+    // repeats are a function of spell strength
     {
-        if (repeats > 0)
+        if (SpellStrength > 0)
+        {
+            foreach (MapLocation location in connectedLocations)
+            {
+                if (location == Player.Instance().currentLocation)
+                    continue;
+
+                location.ActivateForMindreading();
+                location.ActivateForMindreading(SpellStrength - 1);
+            }
+        }
+        else if (SpellStrength == 0)
+        {
+            foreach (MapLocation location in connectedLocations)
+                location.ActivateForMindreading();
+        }
+        else
+        {
+            Debug.LogError("ActivateForMindreading repeats cannot be negative", this);
+        }
+    }
+
+    public void ActivateForTeleport(int SpellStrength)
+    // repeats are a function of spell strength
+    {
+        if (SpellStrength > 0)
         {
             foreach (MapLocation location in connectedLocations)
             {
@@ -149,11 +173,11 @@ public class MapLocation : MonoBehaviour
                 if (true || !location.ActiveForTeleport)
                 {
                     location.ActivateForTeleport();
-                    location.ActivateForTeleport(repeats - 1);
+                    location.ActivateForTeleport(SpellStrength - 1);
                 }
             }
         }
-        else if (repeats == 0)
+        else if (SpellStrength == 0)
         {
             foreach (MapLocation location in connectedLocations)
                 location.ActivateForTeleport();
