@@ -11,14 +11,6 @@ public class City : Locale
 
     [SerializeField]
     GameObject insideShopPrefab;
-    public override void Activate()
-    {
-        Debug.LogError("Locale not implemented: " + this.GetType());
-    }
-    public override void Deactivate()
-    {
-        Debug.LogError("Locale not implemented: " + this.GetType());
-    }
 
     public override void SetupIconGraphics()
     {

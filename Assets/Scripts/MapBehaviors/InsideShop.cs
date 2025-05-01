@@ -6,15 +6,6 @@ public class InsideShop : Locale
 {
     private string defaultShopLocaleDescription = "You peruse the shopkeeper's wares, and try to pawn off your own findings.";
 
-    public override void Activate()
-    {
-        Debug.LogError("Locale not implemented: " + this.GetType());
-    }
-    public override void Deactivate()
-    {
-        Debug.LogError("Locale not implemented: " + this.GetType());
-    }
-
     public override void SetupIconGraphics()
     {
         // doesn't use this function

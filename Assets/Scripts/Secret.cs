@@ -24,15 +24,18 @@ public class Secret : MonoBehaviour
 
     public void Activate()
     {
-        if (null == SecretDestination) {
+        if (null == SecretDestination)
+        {
             Debug.LogError("This secret doesn't point anywhere!", gameObject);
         }
 
-        Debug.Log("New Secret Discovered!");
+        Debug.Log("New Secret Discovered!", SecretDestination);
         SecretDestination.IsDiscovered = true;
 
         UIManager.Instance().OpenDialoguePopup("You learn a secret. You note its location on your map.");
         IsDiscovered = true;
+
+        SecretDestination.GetComponent<MapLocation>().ActivateSecretLocale();
     }
 }
 

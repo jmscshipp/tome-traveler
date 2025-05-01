@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+// this list MUST match the AllSpells list
 public enum Spells {
     Abundance = 0,
     Sleepless,
@@ -15,6 +16,15 @@ public enum Spells {
 
 public abstract class Spell
 {
+    // this list MUST match the Spells enum
+    public static readonly List<Spell> AllSpells = new List<Spell>() {
+        new Abundance(),
+        new Sleepless(),
+        new Waterwalking(),
+        new Mindreading(),
+        new Clairvoyance(),
+        new Teleportation(),
+};
     public int cooldown = 0;
     public int BaseCooldown = 3;
     public string Name = "Default Spell Name";
@@ -31,22 +41,11 @@ public abstract class Spell
     }
 
     public bool enabled = false;
-
-    int MaxUses = 3;
-    int UsesLeft = 0;
-
-    protected static List<Spell> AllSpells = new List<Spell>();
-
-    protected Spell()
-    {
-        AllSpells.Add(this);
-    }
-
     public void ReduceCooldown()
     {
         cooldown = Math.Max(cooldown - 1, 0);
     }
-
+    public abstract Items ItemId { get; }
     public abstract void Cast();
     public abstract Spells GetId();
 }
@@ -58,10 +57,13 @@ public class Abundance : Spell
         Player.Instance().GetComponent<PlayerResources>().AddHunger(-Strength);
         this.cooldown = BaseCooldown;
     }
-    
-    public override Spells GetId() {
+
+    public override Spells GetId()
+    {
         return Spells.Abundance;
     }
+
+    public override Items ItemId { get => Items.AbundanceTome;  }
 }
 
 public class Sleepless : Spell
@@ -76,6 +78,7 @@ public class Sleepless : Spell
     {
         return Spells.Sleepless;
     }
+    public override Items ItemId { get => Items.SleeplessTome;  }
 
 }
 
@@ -91,6 +94,7 @@ public class Clairvoyance : Spell
     {
         return Spells.Clairvoyance;
     }
+    public override Items ItemId { get => Items.ClairvoyanceTome;  }
 }
 
 public class Teleportation : Spell
@@ -120,6 +124,7 @@ public class Teleportation : Spell
     {
         return Spells.Teleportation;
     }
+    public override Items ItemId { get => Items.TeleportationTome;  }
 }
 
 public abstract class UsableSpell : Spell
@@ -187,6 +192,7 @@ public class Mindreading : TimedSpell
             Player.Instance().currentLocation.ActivateForMindreading(Strength);
         return res;
     }
+    public override Items ItemId { get => Items.MindreadingTome;  }
 }
 
 public class Waterwalking : TimedSpell
@@ -212,4 +218,5 @@ public class Waterwalking : TimedSpell
     {
         return base.Use();
     }
+    public override Items ItemId { get => Items.WaterwalkingTome;  }
 }

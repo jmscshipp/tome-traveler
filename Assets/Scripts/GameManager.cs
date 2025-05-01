@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance() => instance;
 
-    public SpellData Mindreading;
-    public SpellData Sleepless;
-    public SpellData Clairvoyance;
-    public SpellData Teleportation;
-    public SpellData Waterwalking;
-    public SpellData Abundance;
-
     private void Awake()
     {
         // setting up singleton
@@ -23,20 +17,19 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         instance = this;
 
+        // load in item scriptable objects
+        itemBlueprints.AddRange(Resources.LoadAll<ItemData>(itemDataDirectory));
     }
 
     [SerializeField]
     public GameState GameState;
+    [SerializeField]
+    protected string itemDataDirectory = "Items"; // Assets/Resources/Cards
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static List<ItemData> itemBlueprints = new List<ItemData>();
 
-    // Update is called once per frame
-    void Update()
+    public static ItemData GetData(Items id)
     {
-        
+        return itemBlueprints.Find(x => x.ItemType == id);
     }
 }

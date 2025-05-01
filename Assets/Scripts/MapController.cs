@@ -91,8 +91,23 @@ public class MapController : MonoBehaviour
         Gizmos.color = Color.white;
         foreach(GameObject location in GameObject.FindGameObjectsWithTag("MapLocation"))
         {
+            MapLocation l = location.GetComponent<MapLocation>();
+            if (null == l) continue;
             foreach (MapLocation connectedLocation in location.GetComponent<MapLocation>().GetConnectedLocations())
-                Gizmos.DrawLine(location.transform.position, connectedLocation.transform.position);
+            {
+                if (connectedLocation == null) continue;
+                if (connectedLocation.GetConnectedLocations().Contains(l))
+                {
+                    Gizmos.DrawLine(location.transform.position, connectedLocation.transform.position);
+                }
+                else
+                {
+                    Color g = Gizmos.color;
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawLine(location.transform.position, connectedLocation.transform.position);
+                    Gizmos.color = g;
+                }
+            }
         }
     }
     

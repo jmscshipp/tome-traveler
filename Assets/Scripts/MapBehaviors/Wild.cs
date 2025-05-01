@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wild : Locale
 {
-    private string defaultWildLocaleDescription = "You arrive at the wildnerness.";
+    private string defaultDescription = "You arrive at the wildnerness.";
 
     RandomTable WildsRandomTable = new RandomTable(
         new List<RandomEvent>() {
@@ -15,10 +15,6 @@ public class Wild : Locale
 
     public float HuntSuccessChance = .35f;
 
-    public override void Activate()
-    {
-        Debug.Log("Activate Not Implemented");
-    }
     public override void SetupIconGraphics()
     {
         GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
@@ -29,7 +25,7 @@ public class Wild : Locale
         localeType = LocaleTypes.Wilds;
 
         if (localeDescription == "")
-            localeDescription = defaultWildLocaleDescription;
+            localeDescription = defaultDescription;
     }
 
     public void Hunt()
@@ -75,10 +71,6 @@ public class Wild : Locale
         WildsRandomTable.ChooseRandom().Activate();
     }
 
-    public override void Deactivate()
-    {
-        throw new System.NotImplementedException();
-    }
 }
 
 public class SleepWildernessResult

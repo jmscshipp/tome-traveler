@@ -63,7 +63,7 @@ public class GetConcussed : RandomEvent
     public GetConcussed(int likelihood) : base(likelihood) { }
 
     public override void Activate()
-    { 
+    {
 
         List<Spell> pspells = Player.Instance().GetSpells();
         if (pspells.Count == 0)
@@ -74,6 +74,32 @@ public class GetConcussed : RandomEvent
         {
             Spell forgottenSpell = Player.Instance().LoseRandomSpell();
             UIManager.Instance().OpenDialoguePopup("Bandits fall upon you, but you fight back. In the ensuing chaos, you are struck and fall unconscious. When you awake, you can't remember " + forgottenSpell.Name);
+        }
+    }
+}
+
+class FindItem : RandomEvent
+    {
+        Item item;
+
+        public FindItem(int likelihood, Item item) : base(likelihood) {
+            this.item = item;
+        }
+
+        public override void Activate()
+        {
+
+            UIManager.Instance().OpenDialoguePopup($"It's your lucky day-- you found {item.IndefiniteArticle()}!");
+
+        // Read spells immediately
+        // TODO: should we do this?
+        if (item is Tome t)
+        {
+            t.Spell.enabled = true;
+        }
+        else
+        {
+            Player.Instance().PlayerInventory.AddItem(item);
         }
     }
 }

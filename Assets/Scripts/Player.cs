@@ -1,5 +1,6 @@
-using System.Collections;
+
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -24,22 +25,21 @@ public class Player : MonoBehaviour
     public bool StartWithTent = true;
 
     // Spell Classes
-    public static Abundance abundance = new Abundance();
-    public static Waterwalking waterwalking = new Waterwalking();
-    public static Clairvoyance clairvoyance = new Clairvoyance();
-    public static Mindreading mindreading = new Mindreading();
-    public static Teleportation teleportation = new Teleportation();
-    public static Sleepless sleepless = new Sleepless();
+    public static Spell abundance = Spell.AllSpells[(int)Spells.Abundance];
+    public static Spell waterwalking = Spell.AllSpells[(int)Spells.Waterwalking];
+    public static Spell clairvoyance = Spell.AllSpells[(int)Spells.Clairvoyance];
+    public static Spell mindreading = Spell.AllSpells[(int)Spells.Mindreading];
+    public static Spell teleportation = Spell.AllSpells[(int)Spells.Abundance];
+    public static Spell sleepless = Spell.AllSpells[(int)Spells.Sleepless];
 
-    static List<Spell> AllSpells = new List<Spell> () {
-        abundance,
-        mindreading,
-        waterwalking,
-        clairvoyance,
-        teleportation,
-        sleepless,
-    };
+    static Spell[] SpellLearnOrder;
 
+
+    public void OnEnable()
+    {
+        if (SpellLearnOrder == null)
+            SpellLearnOrder = Spell.AllSpells.OrderBy(x => Random.value).ToArray();
+    }
 
     [SerializeField]
     public bool KnowsTeleportation ()
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
     public List<Spell> GetSpells() {
         List<Spell> ss = new List<Spell>();
-        foreach (Spell s in AllSpells)
+        foreach (Spell s in Spell.AllSpells)
         {
             if (s.enabled)
                 ss.Add(s);
@@ -153,6 +153,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    internal static Spell RandomUnusedSpell()
+    {
+        int i = 0;
+        while (SpellLearnOrder[i++].enabled);
+        return SpellLearnOrder[i];
+    }
     public bool CanAfford(int cost)
     {
         return resources.GetCoins() >= cost;

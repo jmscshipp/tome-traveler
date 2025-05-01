@@ -28,10 +28,6 @@ public abstract class Locale : MonoBehaviour
     protected string localeDescription;
     protected LocaleTypes localeType;
 
-    public abstract void Activate();
-
-    public abstract void Deactivate();
-
     public abstract void SetupIconGraphics();
 
     public string GetLocaleDescription() => localeDescription;
@@ -43,7 +39,7 @@ public abstract class Locale : MonoBehaviour
         localeType = type;
     }
 
-    public void Explore()
+    public virtual void Explore()
     {
         // if no secret, give nothing
         // if secret, give it 

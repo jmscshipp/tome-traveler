@@ -12,14 +12,6 @@ public class Cabin : Locale
 
     public Attitude attitude;
 
-    public override void Activate()
-    {
-        Debug.LogError("Locale not implemented: " + GetType());
-    }
-    public override void Deactivate()
-    {
-        Debug.LogError("Locale not implemented: " + GetType());
-    }
     public override void SetupIconGraphics()
     {
         GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);

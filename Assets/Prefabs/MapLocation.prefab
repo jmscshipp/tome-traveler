@@ -140,6 +140,7 @@ MonoBehaviour:
   m_DefaultMaterial: {fileID: 0}
   m_TeleportMaterial: {fileID: 2100000, guid: fa7fe44b9c7d3b9408d46060c07bffe2, type: 2}
   m_MindreadingMaterial: {fileID: 2100000, guid: 25d1385857c36024c97ae622bead189c, type: 2}
+  m_SecretLocaleMaterial: {fileID: 2100000, guid: c3255e25101be5e468fcc69ac7a3e4a4, type: 2}
 --- !u!58 &6730931301507483703
 CircleCollider2D:
   m_ObjectHideFlags: 0

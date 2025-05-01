@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum ShopActions
 {
@@ -43,40 +44,53 @@ public abstract class Item
         return index;
     }
 
+    bool an = false;
+    public abstract string Name { get; }
+
+    public string IndefiniteArticle()
+    {
+        if (an)
+            return "an " + Name;
+        return Name;
+    }
 }
 
 public class Tome : Item
 {
     public Spell Spell;
-    public Tome(Items item, Spell spell) : base(item) {
+
+    public override string Name => throw new System.NotImplementedException();
+
+    public Tome(Spell spell) : base(spell.ItemId)
+    {
         Spell = spell;
     }
 }
 
 public class TeleportationTome : Tome
 {
-    public TeleportationTome() : base(Items.TeleportationTome, Player.teleportation) { }
+    public TeleportationTome() : base(Player.teleportation) { }
 }
 public class SleeplessTome : Tome
 {
-    public SleeplessTome() : base(Items.SleeplessTome, Player.sleepless) { }
+    public SleeplessTome() : base(Player.sleepless) { }
 }
 public class AbundanceTome : Tome
 {
-    public AbundanceTome() : base(Items.AbundanceTome, Player.abundance) { }
+    public AbundanceTome() : base(Player.abundance) { }
 }
 public class ClairvoyanceTome : Tome
 {
-    public ClairvoyanceTome() : base(Items.ClairvoyanceTome, Player.clairvoyance) { }
+    public ClairvoyanceTome() : base(Player.clairvoyance) { }
 }
 public class MindreadingTome : Tome
 {
-    public MindreadingTome() : base(Items.MindreadingTome, Player.mindreading) { }
+    public MindreadingTome() : base(Player.mindreading) { }
 }
 
 public class WaterwalkingTome : Tome
 {
-    public WaterwalkingTome() : base(Items.WaterwalkingTome, Player.waterwalking) { }
+    public WaterwalkingTome() : base(Player.waterwalking) { }
 }
 
 public abstract class Usable : Item
@@ -95,6 +109,9 @@ public abstract class Usable : Item
 public class Food : Usable
 {
     public Food() : base(Items.Food) { }
+
+    public override string Name => "food";
+
 }
 public class Tent : Usable
 {
@@ -102,11 +119,17 @@ public class Tent : Usable
     {
         Uses = Random.Range(2, 6);
     }
+
+    public override string Name => "tent";
+
 }
 
 public class Treasure : Item
 {
     public Treasure() : base(Items.Treasure) { }
+
+    public override string Name => "treasure";
+
 }
 
 public class Inventory

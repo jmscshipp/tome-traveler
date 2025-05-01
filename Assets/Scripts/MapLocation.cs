@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class MapLocation : MonoBehaviour
     private List<MapLocation> connectedLocations = new List<MapLocation>();
     [SerializeField]
     bool connectionSetUp = false;
+    private bool Hidable = true;
     public bool Traversable { get; private set; }
     [SerializeField]
     private SpriteRenderer iconGraphics;
@@ -24,6 +26,9 @@ public class MapLocation : MonoBehaviour
     Material m_TeleportMaterial;
     [SerializeField]
     Material m_MindreadingMaterial;
+    [SerializeField]
+    Material m_SecretLocaleMaterial;
+
 
     public bool ActiveForTeleport { get; private set; }
 
@@ -84,7 +89,7 @@ public class MapLocation : MonoBehaviour
     public void SetTraversable(bool isTraversable)
     {
         Traversable = isTraversable;
-        highlightGraphics.SetActive(isTraversable);
+        SetHighlight(Traversable);
     }
 
     [ContextMenu(nameof(ActivateForTeleport))]
@@ -119,7 +124,16 @@ public class MapLocation : MonoBehaviour
         SetHighlightMaterial(m_DefaultMaterial);
     }
 
-    private void SetHighlightMaterial(Material highlightMaterial) {
+    public void SetHighlight(bool active)
+    {
+        if (!active && Hidable)
+            highlightGraphics.SetActive(false);
+        if (active)
+            highlightGraphics.SetActive(true);
+    }
+
+    private void SetHighlightMaterial(Material highlightMaterial)
+    {
         highlightGraphics.GetComponent<SpriteRenderer>().material = highlightMaterial;
     }
 
@@ -128,6 +142,13 @@ public class MapLocation : MonoBehaviour
         // the player has made it to the end of the game - the Emerald City
         if (finalLocation)
             UIManager.Instance().OpenDialoguePopup("You've made it! You've made it to the Emerald City!");
+    }
+    public void ActivateSecretLocale()
+    {
+        m_DefaultMaterial = m_SecretLocaleMaterial;
+        SetHighlightMaterial(m_SecretLocaleMaterial);
+        SetHighlight(true);
+        Hidable = false;
     }
 
     public void MakeConnectionsSelectable(bool selectable)

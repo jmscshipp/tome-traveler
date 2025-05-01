@@ -16,16 +16,6 @@ public class Shop : Locale
     [SerializeField]
     GameObject insideShopPrefab;
 
-    public override void Activate()
-    {
-        Debug.LogError("Unimplemented function!!");
-    }
-
-    public override void Deactivate()
-    {
-        throw new System.NotImplementedException();
-    }
-
     // setting up representationn of locale on the map
     public override void SetupIconGraphics()
     {
