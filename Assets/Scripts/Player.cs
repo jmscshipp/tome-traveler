@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public static Spell waterwalking = Spell.AllSpells[(int)Spells.Waterwalking];
     public static Spell clairvoyance = Spell.AllSpells[(int)Spells.Clairvoyance];
     public static Spell mindreading = Spell.AllSpells[(int)Spells.Mindreading];
-    public static Spell teleportation = Spell.AllSpells[(int)Spells.Abundance];
+    public static Spell teleportation = Spell.AllSpells[(int)Spells.Teleportation];
     public static Spell sleepless = Spell.AllSpells[(int)Spells.Sleepless];
 
     static Spell[] SpellLearnOrder;

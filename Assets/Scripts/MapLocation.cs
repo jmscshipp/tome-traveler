@@ -38,6 +38,7 @@ public class MapLocation : MonoBehaviour
 
     private void Start()
     {
+        CheckNullConnections();
         iconGraphics.gameObject.SetActive(true);
         GetComponent<Locale>().SetupIconGraphics();
         if (null != highlightGraphics)
@@ -50,7 +51,23 @@ public class MapLocation : MonoBehaviour
         }
     }
 
-    public Locale GetLocale() {
+    public void CheckNullConnections()
+    {
+        foreach (MapLocation l in connectedLocations)
+        {
+            if (l == null)
+            {
+                Debug.LogWarning("This maplocation has a null connection!", this);
+            }
+        }
+        while (connectedLocations.Contains(null))
+        {
+            connectedLocations.Remove(null);
+        }
+    }
+
+    public Locale GetLocale()
+    {
         return GetComponent<Locale>();
     }
 

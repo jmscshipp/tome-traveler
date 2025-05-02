@@ -45,7 +45,10 @@ public class MapController : MonoBehaviour
         GameObject[] locationObjects = GameObject.FindGameObjectsWithTag("MapLocation");
         allLocations = new MapLocation[locationObjects.Length];
         for (int i = 0; i < locationObjects.Length; i++)
+        {
             allLocations[i] = locationObjects[i].GetComponent<MapLocation>();
+            allLocations[i].CheckNullConnections();
+        }
 
         ConnectionSetup(startingLocation);
 
@@ -68,6 +71,11 @@ public class MapController : MonoBehaviour
 
     public void RevealSecretConnection(MapLocation location, MapLocation secretConnection)
     {
+        if (secretConnection == null)
+        {
+            Debug.LogError("Null secret connection!");
+            return;
+        }
         CreateConnectionGraphic(location, secretConnection);
     }
 
