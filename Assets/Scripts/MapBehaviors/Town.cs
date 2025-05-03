@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Town : Locale
 {
-    private string defaultTownLocaleDescription = "You arrived at the town.";
+    
+    public override string DefaultDescription => "You arrived at the town.";
 
     public override void SetupIconGraphics()
     {
@@ -15,7 +16,7 @@ public class Town : Locale
         localeType = LocaleTypes.Town;
 
         if (localeDescription == "")
-            localeDescription = defaultTownLocaleDescription;
+            localeDescription = DefaultDescription;
     }
 
     public void Sleep()

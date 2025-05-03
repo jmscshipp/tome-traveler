@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class City : Locale
 {
-    private string defaultShopLocaleDescription = "You arrived at the city.";
+    public override string DefaultDescription => "You arrived at the city.";
 
     [SerializeField]
     private ShopItem[] shopItems;
@@ -21,7 +21,7 @@ public class City : Locale
         localeType = LocaleTypes.Shop;
 
         if (localeDescription == "")
-            localeDescription = defaultShopLocaleDescription;
+            localeDescription = DefaultDescription;
 
         // create inside shop locale as child
         Instantiate(insideShopPrefab, transform);

@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
         if (StartWithTent)
         {
             Tent t = new Tent();
+            t.RandomizeUses();
             PlayerInventory.AddItem(t);
         }
 
@@ -158,7 +159,9 @@ public class Player : MonoBehaviour
     internal static Spell RandomUnusedSpell()
     {
         int i = 0;
-        while (SpellLearnOrder[i++].enabled);
+        if (SpellLearnOrder == null)
+            return Spell.AllSpells[0];
+        while (SpellLearnOrder[i++].enabled) ;
         return SpellLearnOrder[i];
     }
     public bool CanAfford(int cost)

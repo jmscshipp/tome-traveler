@@ -181,7 +181,7 @@ public class UIManager : MonoBehaviour
     public void CloseDialoguePopup()
     {
         // Go ahead and do all the queued slow actions now
-        while (popupQueue[0] is PopupAction)
+        while (popupQueue.Count > 0 && popupQueue[0] is PopupAction)
         {
             ActivateNextInQueue();
         }

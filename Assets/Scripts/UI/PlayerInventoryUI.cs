@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class PlayerInventoryUI : InventoryUI
 {
     public bool InShop = false;
@@ -6,9 +8,14 @@ public class PlayerInventoryUI : InventoryUI
     // inherits from InventoryUI, where general inventory functionality comes from
     private void Start()
     {
+        SetupUIRefs();
+        UpdateInventory();
+    }
+
+    protected virtual void SetupUIRefs()
+    {
         // set up reference to inventory
         Player.Instance().PlayerInventory.SetupUIRefs(this);
-        UpdateInventory();
     }
 
     // called when a shop is opened to allow player to sell out of their inventory
@@ -38,11 +45,14 @@ public class PlayerInventoryUI : InventoryUI
         ShopUI.RefreshShopAvailability();
     }
 
+    protected override List<Item> GetItems()
+    {
+        return Player.Instance().PlayerInventory.itemList;
+    }
     public void UpdateInventory()
     {
-        //Debug.Log("UPDATING INVENTORY");
         Clear();
-        foreach (Item i in Player.Instance().PlayerInventory.itemList)
+        foreach (Item i in GetItems())
         {
             Add(i);
         }

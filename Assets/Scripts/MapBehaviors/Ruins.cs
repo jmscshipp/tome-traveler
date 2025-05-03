@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ruins : Wild
 {
-    private string defaultDescription = "You arrived at the ruins.";
+    public override string DefaultDescription => "You arrived at the ruins.";
 
     public override void SetupIconGraphics()
     {
@@ -13,10 +13,10 @@ public class Ruins : Wild
 
     private void Awake()
     {
-        localeType = LocaleTypes.Shop;
+        localeType = LocaleTypes.Ruins;
 
         if (localeDescription == "")
-            localeDescription = defaultDescription;
+            localeDescription = DefaultDescription;
     }
 
     //Exploring a ruin is harder but more rewarding
@@ -36,6 +36,16 @@ public class Ruins : Wild
 
     public override void Explore()
     {
-        RuinsRandomTable.ChooseRandom().Activate();
+        
+        SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
+        if (secretLocale != null)
+        {
+            UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
+            secretLocale.Activate();
+        }
+        else
+        {
+            RuinsRandomTable.ChooseRandom().Activate();
+        }
     }
 }

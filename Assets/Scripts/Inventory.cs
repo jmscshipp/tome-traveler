@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public enum ShopActions
 {
@@ -59,7 +58,7 @@ public class Tome : Item
 {
     public Spell Spell;
 
-    public override string Name => throw new System.NotImplementedException();
+    public override string Name => "Tome of " + Spell.Name;
 
     public Tome(Spell spell) : base(spell.ItemId)
     {
@@ -117,6 +116,10 @@ public class Tent : Usable
 {
     public Tent() : base(Items.Tent)
     {
+    }
+
+    public void RandomizeUses()
+    {
         Uses = Random.Range(2, 6);
     }
 
@@ -135,6 +138,7 @@ public class Treasure : Item
 public class Inventory
 {
     public List<Item> itemList = new List<Item>();
+    public readonly List<Item> Tomes = new List<Item>();
     private PlayerInventoryUI ui;
 
     public void SetupUIRefs(PlayerInventoryUI uiRef)
@@ -143,6 +147,8 @@ public class Inventory
     }
 
     public int SizeLimit = 0;
+    public TomeLibraryUI tomeUI;
+
 
     public void LogInventory(string prompt)
     {
@@ -192,8 +198,15 @@ public class Inventory
     public void AddItem(Item item)
     {
         //LogInventory("Items Before");
-
-        itemList.Add(item);
+        if (item is Tome)
+        {
+            tomeUI.Add(item);
+            Tomes.Add(item);
+        }
+        else
+        {
+            itemList.Add(item);
+        }
         UpdateItemIndices();
         ui.UpdateInventory();
         //LogInventory("Items After");
@@ -253,9 +266,7 @@ public class Inventory
         {
             if (i.item_id == ItemID)
             {
-                itemList.Remove(i);
-                UpdateItemIndices();
-                ui.UpdateInventory();
+                __RemoveItem(i);
                 return true;
             }
         }
@@ -265,14 +276,34 @@ public class Inventory
     public bool RemoveItem(Item item)
     // Returns true if item successfully removed
     {
+        if (item is Tome t)
+        {
+            return RemoveItem(t);
+        }
+
         if (itemList.Contains(item))
         {
-            itemList.Remove(item);
-            UpdateItemIndices();
-            ui.UpdateInventory();
+            __RemoveItem(item);
             return true;
         }
         return false;
+    }
+
+    public bool RemoveItem(Tome t)
+    {
+        if (Tomes.Remove(t))
+        {
+            tomeUI.Remove(t);
+            return true;
+        }
+        return false;
+    }
+
+    private void __RemoveItem(Item item)
+    {
+        itemList.Remove(item);
+        UpdateItemIndices();
+        ui.UpdateInventory();
     }
 
     public PlayerInventoryUI GetInventoryUI() => ui;

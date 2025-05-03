@@ -108,104 +108,72 @@ public class LocalePopupUI : MonoBehaviour
 
     public void Explore()
     {
-        switch (currentLocale.GetLocaleType())
-        {
-            case LocaleTypes.Town:
-                Town castTown = (Town)currentLocale;
-                castTown.Explore();
-                break;
-            case LocaleTypes.Wilds:
-                Wild castWild = (Wild)currentLocale;
-                castWild.Explore();
-                break;
-            case LocaleTypes.Shop:
-                Shop castShop = (Shop)currentLocale;
-                castShop.Explore();
-                break;
-            case LocaleTypes.City:
-                City castCity = (City)currentLocale;
-                castCity.Explore();
-                break;
-            case LocaleTypes.Ruins:
-                Ruins castRuins = (Ruins)currentLocale;
-                castRuins.Explore();
-                break;
-            case LocaleTypes.Cabin:
-                Cabin castCabin = (Cabin)currentLocale;
-                castCabin.Explore();
-                break;
-        }
+        currentLocale.Explore();
     }
 
     public void Camp()
     {
-        Wild castLocale = (Wild)currentLocale;
-        castLocale.Camp();
+        if (currentLocale is Wild wild)
+        {
+            wild.Camp();
+        }
     }
 
     public void Hunt()
     {
-        Wild castLocale = (Wild)currentLocale;
-        castLocale.Hunt();
+        if (currentLocale is Wild wild)
+        {
+            wild.Hunt();
+        }
     }
 
     public void Sleep()
     {
         // cabin
-        if (currentLocale.GetLocaleType() == LocaleTypes.Cabin)
+        if (currentLocale is Cabin cabin)
         {
-            Cabin castLocale = (Cabin)currentLocale;
-            castLocale.Sleep();
+            cabin.Sleep();
         }
-        // city
-        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
+        else if (currentLocale is City city)
         {
-            City castLocale = (City)currentLocale;
-            castLocale.Sleep();
+            city.Sleep();
         }
-        //town
-        else
+        else if (currentLocale is Town town)
         {
-            Town castLocale = (Town)currentLocale;
-            castLocale.Sleep();
+            town.Sleep();
         }
     }
 
     public void Talk()
     {
         // cabin
-        if (currentLocale.GetLocaleType() == LocaleTypes.Cabin)
+        if (currentLocale is Cabin cabin)
         {
-            Cabin castLocale = (Cabin)currentLocale;
-            castLocale.Talk();
+            cabin.Talk();
         }
         // city
-        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
+        else if (currentLocale is City city)
         {
-            City castLocale = (City)currentLocale;
-            castLocale.Talk();
+            city.Talk();
         }
         //town
-        else
+        else if (currentLocale is Town town)
         {
-            Town castLocale = (Town)currentLocale;
-            castLocale.Talk();
+            town.Talk();
         }
     }
 
     public void BuyAndSell()
     {
         // shop
-        if (currentLocale.GetLocaleType() == LocaleTypes.Shop)
+        if (currentLocale is Shop shop)
         {
-            Shop castLocale = (Shop)currentLocale;
-            castLocale.BuyAndSell();
+            shop.BuyAndSell();
         }
         // city
-        else if (currentLocale.GetLocaleType() == LocaleTypes.City)
+        else if (currentLocale is City city)
         {
-            City castLocale = (City)currentLocale;
-            castLocale.BuyAndSell();
+            city.BuyAndSell();
         }
     }
 

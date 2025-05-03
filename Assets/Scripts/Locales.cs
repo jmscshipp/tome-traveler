@@ -24,6 +24,11 @@ public abstract class Locale : MonoBehaviour
         gm = GameManager.Instance();
     }
 
+    public virtual string DefaultDescription
+    {
+        get => "Default Locale description";
+    }
+
     [SerializeField]
     protected string localeDescription;
     protected LocaleTypes localeType;

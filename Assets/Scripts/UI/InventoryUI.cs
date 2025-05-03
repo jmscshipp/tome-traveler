@@ -57,7 +57,8 @@ public abstract class InventoryUI : MonoBehaviour
                 break;
         }
     }
-
+    protected abstract List<Item> GetItems();
+    
     protected InventoryItemUI Add(Item item)
     {
         GameObject newItemUI = Instantiate(inventoryItemUIPrefab, inventoryObjParent);

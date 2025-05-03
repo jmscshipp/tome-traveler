@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wild : Locale
 {
-    private string defaultDescription = "You arrive at the wildnerness.";
+    public override string DefaultDescription => "You arrive at the wildnerness.";
 
     RandomTable WildsRandomTable = new RandomTable(
         new List<RandomEvent>() {
@@ -25,7 +25,7 @@ public class Wild : Locale
         localeType = LocaleTypes.Wilds;
 
         if (localeDescription == "")
-            localeDescription = defaultDescription;
+            localeDescription = DefaultDescription;
     }
 
     public void Hunt()

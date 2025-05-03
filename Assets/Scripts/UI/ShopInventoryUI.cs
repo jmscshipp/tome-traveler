@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShopInventoryUI : InventoryUI
@@ -55,7 +56,10 @@ public class ShopInventoryUI : InventoryUI
             itemUI.SetSellable(Player.Instance().CanAfford(itemUI.GetItemCost()));
         }
     }
-
+    protected override List<Item> GetItems()
+    {
+        return inventoryObjParent.GetComponentsInChildren<InventoryItemUI>().Select(x => x.GetItem()).ToList();
+    }
     public override void SellItem(InventoryItemUI item)
     {
         // remove coins from player inventory

@@ -68,6 +68,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8520794942663227159, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 8520794942663227159, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_Name
       value: Shop
       objectReference: {fileID: 0}

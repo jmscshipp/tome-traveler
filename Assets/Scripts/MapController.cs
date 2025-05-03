@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapController : MonoBehaviour
@@ -43,12 +44,16 @@ public class MapController : MonoBehaviour
     {
         // set up list of all locations on the map
         GameObject[] locationObjects = GameObject.FindGameObjectsWithTag("MapLocation");
-        allLocations = new MapLocation[locationObjects.Length];
-        for (int i = 0; i < locationObjects.Length; i++)
+        List<MapLocation> locs = new List<MapLocation>();
+        foreach (GameObject g in locationObjects)
         {
-            allLocations[i] = locationObjects[i].GetComponent<MapLocation>();
-            allLocations[i].CheckNullConnections();
+            MapLocation m = g.GetComponent<MapLocation>();
+            if (null == m)
+                continue;
+            locs.Add(m);
+            m.CheckNullConnections();
         }
+        allLocations = locs.ToArray();
 
         ConnectionSetup(startingLocation);
 

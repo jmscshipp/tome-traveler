@@ -42,7 +42,7 @@ public class NothingHappens : RandomEvent
 
     public override void Activate()
     {
-        // Nothing Happens
+        UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
     }
 }
 public class GetRobbed : RandomEvent
@@ -91,15 +91,6 @@ class FindItem : RandomEvent
 
             UIManager.Instance().OpenDialoguePopup($"It's your lucky day-- you found {item.IndefiniteArticle()}!");
 
-        // Read spells immediately
-        // TODO: should we do this?
-        if (item is Tome t)
-        {
-            t.Spell.enabled = true;
-        }
-        else
-        {
             Player.Instance().PlayerInventory.AddItem(item);
         }
-    }
 }
