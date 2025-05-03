@@ -32,4 +32,12 @@ public class GameManager : MonoBehaviour
     {
         return itemBlueprints.Find(x => x.ItemType == id);
     }
+
+    internal static void WipeProgress()
+    {
+        // for now do nothing
+        // when we have serialization, this will delete unsaved progress
+        // re-randomize the world, etc
+    }
+
 }

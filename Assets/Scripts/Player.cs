@@ -1,7 +1,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -283,4 +285,9 @@ public class Player : MonoBehaviour
         return currentLocation.GetConnectedLocations().Contains(mapLocation);
     }
 
+    internal static void Die()
+    {
+        SceneManager.LoadScene(0);
+        GameManager.WipeProgress();
+    }
 }

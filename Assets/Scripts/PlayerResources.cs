@@ -38,17 +38,22 @@ public class PlayerResources : MonoBehaviour
         hunger = Math.Clamp(hunger + modifier, 0, 5);
         ui.UpdateHungerUI(hunger, maxHunger);
         if (hunger == 5)
+        {
             UIManager.Instance().OpenDialoguePopup("You died of hunger!");
-            // here is where we'll tie in the actual player death event
+            UIManager.Instance().QueueActionAfterPopup(() => Player.Die());
+        }
+            
     }
     public int GetExhaustion() => exhaustion;
     public void AddExhaustion(int modifier)
     {
         exhaustion = Math.Clamp(exhaustion + modifier, 0, 5);
         ui.UpdateExhaustionUI(exhaustion, maxExhaustion);
-        if (hunger == 5)
+        if (exhaustion == 5)
+        {
             UIManager.Instance().OpenDialoguePopup("You died of exhaustion!");
-            // here is where we'll tie in the actual player death event
+            UIManager.Instance().QueueActionAfterPopup(() => Player.Die());
+        }
     }
 
     public int GetCoins() => coins;

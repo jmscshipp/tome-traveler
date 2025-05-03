@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -38,7 +39,8 @@ public class UIManager : MonoBehaviour
         public abstract void ActivateWindow();
     }
 
-     class DialoguePopup : Popup {
+    class DialoguePopup : Popup
+    {
         [SerializeField]
         public string dialogue;
 
@@ -69,6 +71,35 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    class PopupAction : Popup
+    // Performs an Action when it appears in the queue
+    {
+        public Action callback;
+        public PopupAction(Action callback)
+        {
+            this.callback = callback;
+        }
+        public override void ActivateWindow()
+        {
+            callback();
+        }
+    }
+
+    class SlowAction : PopupAction
+    {
+        public SlowAction(Action a) : base(a)
+        {
+            
+        }
+    }
+    class FastAction : PopupAction
+    {
+        public FastAction(Action a) : base(a)
+        {
+            
+        }
+    }
+
     class SecretLocalePopup : Popup
     {
         [SerializeField]
@@ -82,7 +113,6 @@ public class UIManager : MonoBehaviour
             Instance().dialoguePopup.SetActive(true);
             Instance().dialoguePopupText.text = secretLocale.Dialogue;
         }
-
     }
 
     // location popup variables
@@ -97,10 +127,15 @@ public class UIManager : MonoBehaviour
         {
             MapController.Instance().GetCurrentLocation().MakeConnectionsSelectable(false);
             DialogueOpen = true;
-            Popup ActivePopup = popupQueue[0];
-            popupQueue.RemoveAt(0);
-            ActivePopup.ActivateWindow();
+            ActivateNextInQueue();
         }
+    }
+
+    private void ActivateNextInQueue()
+    {
+        Popup ActivePopup = popupQueue[0];
+        popupQueue.RemoveAt(0);
+        ActivePopup.ActivateWindow();
     }
 
     public ShopInventoryUI GetShopUI() => shopUI;
@@ -145,8 +180,34 @@ public class UIManager : MonoBehaviour
 
     public void CloseDialoguePopup()
     {
+        // Go ahead and do all the queued slow actions now
+        while (popupQueue[0] is PopupAction)
+        {
+            ActivateNextInQueue();
+        }
         dialoguePopup.SetActive(false);
         DialogueOpen = false;
         MapController.Instance().GetCurrentLocation().MakeConnectionsSelectable(true);
     }
+
+    public enum ActionSpeed {
+        Slow,
+        Normal,
+        Fast,
+    }
+    internal void QueueActionAfterPopup(Action value)
+    {
+        popupQueue.Add(new PopupAction(value));
+    }
+
+    internal void QueueActionAfterPopup(Action value, ActionSpeed speed)
+    {
+        if (speed is ActionSpeed.Slow)
+                popupQueue.Add(new SlowAction(value));
+        if (speed is ActionSpeed.Normal)
+                popupQueue.Add(new PopupAction(value));
+        if (speed is ActionSpeed.Fast)
+                popupQueue.Add(new FastAction(value));
+    }
+
 }
