@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &63867123 stripped
 Transform:
@@ -525,11 +526,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.6
+      value: 2.45
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.73
+      value: 3.59
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.z
@@ -607,6 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &71568885 stripped
 MonoBehaviour:
@@ -699,6 +701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &148880902 stripped
 Transform:
@@ -734,6 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &168536900 stripped
 Transform:
@@ -834,6 +838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &195212816 stripped
 Transform:
@@ -1009,6 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &216417717 stripped
 Transform:
@@ -1168,6 +1174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &235610994 stripped
 Transform:
@@ -1265,6 +1272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &249377086 stripped
 MonoBehaviour:
@@ -1316,6 +1324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &284969439 stripped
 Transform:
@@ -1340,6 +1349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &292767928 stripped
 Transform:
@@ -1364,6 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &298250267 stripped
 Transform:
@@ -1480,12 +1491,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[0]
       value: 
-      objectReference: {fileID: 405834146}
+      objectReference: {fileID: 1054043836}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[1]
       value: 
@@ -1518,7 +1529,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
+--- !u!114 &340232638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
+  m_PrefabInstance: {fileID: 340232635}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340232636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f608fa9de12fc0c4ebf90042ad1af7ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &340232640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
@@ -1599,6 +1622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &367087315 stripped
 Transform:
@@ -1764,6 +1788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!114 &409972265 stripped
 MonoBehaviour:
@@ -1880,6 +1905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   shopItems: []
   insideShopPrefab: {fileID: 8539016195896963099, guid: eff781796dad64846a5d1bd559db1894, type: 3}
 --- !u!4 &426147112 stripped
@@ -1905,6 +1931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &446509752 stripped
 Transform:
@@ -1940,6 +1967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &463960593 stripped
 Transform:
@@ -2110,6 +2138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &528570315 stripped
 Transform:
@@ -3084,6 +3113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: Buy something goddamnit
+  NPCAttitude: 1
   shopItems: []
   insideShopPrefab: {fileID: 8539016195896963099, guid: eff781796dad64846a5d1bd559db1894, type: 3}
 --- !u!114 &599896723 stripped
@@ -3120,6 +3150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &600699162 stripped
 Transform:
@@ -3144,6 +3175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &602804488 stripped
 Transform:
@@ -3168,6 +3200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &604594434 stripped
 Transform:
@@ -3276,6 +3309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &617630542 stripped
 Transform:
@@ -3306,6 +3340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &627319140 stripped
 Transform:
@@ -3428,6 +3463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!4 &646936230 stripped
 Transform:
@@ -3525,6 +3561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &653261905 stripped
 MonoBehaviour:
@@ -3653,6 +3690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!114 &682311431 stripped
 MonoBehaviour:
@@ -3829,6 +3867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &713551246 stripped
 Transform:
@@ -3967,6 +4006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &784261335 stripped
 Transform:
@@ -4064,6 +4104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &799808872 stripped
 MonoBehaviour:
@@ -4156,6 +4197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &817776762 stripped
 Transform:
@@ -4262,6 +4304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &822129336 stripped
 Transform:
@@ -4367,6 +4410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &822582143 stripped
 MonoBehaviour:
@@ -4542,11 +4586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.64
+      value: 3.26
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.48
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4620,6 +4664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!114 &907333449 stripped
 MonoBehaviour:
@@ -4712,6 +4757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &931319246 stripped
 Transform:
@@ -5012,6 +5058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1007097920 stripped
 Transform:
@@ -5166,6 +5213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: Buy something goddamnit
+  NPCAttitude: 1
   shopItems:
   - itemType: 2
     quantity: 1
@@ -5406,11 +5454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.97
+      value: 6.37
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.61
+      value: -7.55
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5484,6 +5532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: Buy something goddamnit
+  NPCAttitude: 1
   shopItems: []
   insideShopPrefab: {fileID: 8539016195896963099, guid: eff781796dad64846a5d1bd559db1894, type: 3}
 --- !u!114 &1061722287 stripped
@@ -5536,6 +5585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1075916619 stripped
 Transform:
@@ -5571,6 +5621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1076373743 stripped
 Transform:
@@ -5753,6 +5804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
 --- !u!4 &1186226995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
@@ -5940,6 +5992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1267310322 stripped
 Transform:
@@ -6087,6 +6140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &1270587385 stripped
 MonoBehaviour:
@@ -6208,6 +6262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1394303841 stripped
 Transform:
@@ -6232,6 +6287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1420094150 stripped
 Transform:
@@ -6291,7 +6347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[0]
@@ -6329,7 +6385,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
+--- !u!114 &1431125435 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
+  m_PrefabInstance: {fileID: 1431125432}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431125433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f608fa9de12fc0c4ebf90042ad1af7ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1431125437 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
@@ -6555,6 +6623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1467415533 stripped
 Transform:
@@ -6652,6 +6721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1470507982 stripped
 Transform:
@@ -6728,11 +6798,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.93
+      value: 3.66
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.44
+      value: -3.25
       objectReference: {fileID: 0}
     - target: {fileID: 2475613604308250593, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6768,7 +6838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[0]
@@ -6777,7 +6847,7 @@ PrefabInstance:
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[1]
       value: 
-      objectReference: {fileID: 451682324}
+      objectReference: {fileID: 340232638}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[2]
       value: 
@@ -6806,6 +6876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1481502222 stripped
 Transform:
@@ -6903,6 +6974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!4 &1531250493 stripped
 Transform:
@@ -6944,6 +7016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!4 &1531935187 stripped
 Transform:
@@ -7057,6 +7130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: Buy something goddamnit
+  NPCAttitude: 1
   shopItems: []
   insideShopPrefab: {fileID: 8539016195896963099, guid: eff781796dad64846a5d1bd559db1894, type: 3}
 --- !u!114 &1541350867 stripped
@@ -7132,7 +7206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[0]
@@ -7141,7 +7215,7 @@ PrefabInstance:
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[1]
       value: 
-      objectReference: {fileID: 1054043836}
+      objectReference: {fileID: 1431125435}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[2]
       value: 
@@ -7170,6 +7244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1547014185 stripped
 Transform:
@@ -7257,6 +7332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1581881186 stripped
 Transform:
@@ -7287,6 +7363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1582200533 stripped
 Transform:
@@ -7317,6 +7394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!4 &1582896926 stripped
 Transform:
@@ -7418,6 +7496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1607613329 stripped
 Transform:
@@ -7515,6 +7594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &1613363106 stripped
 MonoBehaviour:
@@ -7680,6 +7760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1662638212 stripped
 Transform:
@@ -7788,6 +7869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1663294250 stripped
 Transform:
@@ -7877,6 +7959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1679144463 stripped
 Transform:
@@ -8031,6 +8114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0
 --- !u!4 &1695454880 stripped
 Transform:
@@ -8066,6 +8150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1699036400 stripped
 Transform:
@@ -8090,6 +8175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1701444849 stripped
 Transform:
@@ -8187,6 +8273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1704725588 stripped
 Transform:
@@ -8348,6 +8435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1737362425 stripped
 Transform:
@@ -8456,6 +8544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1738311183 stripped
 Transform:
@@ -8491,6 +8580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   shopItems:
   - itemType: 1
     quantity: 3
@@ -8652,6 +8742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: Buy something goddamnit
+  NPCAttitude: 1
   shopItems: []
   insideShopPrefab: {fileID: 8539016195896963099, guid: eff781796dad64846a5d1bd559db1894, type: 3}
 --- !u!114 &1779352450 stripped
@@ -8694,6 +8785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1795455634 stripped
 Transform:
@@ -8848,6 +8940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1834222285 stripped
 Transform:
@@ -9000,6 +9093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1841561764 stripped
 Transform:
@@ -9024,6 +9118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1858618002 stripped
 Transform:
@@ -9048,6 +9143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1868116700 stripped
 Transform:
@@ -9129,6 +9225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1882531045 stripped
 Transform:
@@ -9153,6 +9250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1882784371 stripped
 Transform:
@@ -9310,6 +9408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1913952663 stripped
 Transform:
@@ -9334,6 +9433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1917288775 stripped
 Transform:
@@ -9393,7 +9493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7228948821322951541, guid: df3a3d348ed9886489b148835e26bd79, type: 3}
       propertyPath: connectedLocations.Array.data[0]
@@ -9431,6 +9531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1919422988 stripped
 Transform:
@@ -9455,6 +9556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1929138162 stripped
 Transform:
@@ -9485,6 +9587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1944381162 stripped
 Transform:
@@ -9635,6 +9738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &1976159084 stripped
 Transform:
@@ -9884,6 +9988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &2023738725 stripped
 Transform:
@@ -9919,6 +10024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &2080394237 stripped
 Transform:
@@ -10011,6 +10117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &2114173730 stripped
 Transform:
@@ -10112,6 +10219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!114 &2123800117 stripped
 MonoBehaviour:
@@ -10220,6 +10328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: Buy something goddamnit
+  NPCAttitude: 1
   shopItems: []
   insideShopPrefab: {fileID: 8539016195896963099, guid: eff781796dad64846a5d1bd559db1894, type: 3}
 --- !u!4 &2144926959 stripped
@@ -10379,6 +10488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localeDescription: 
+  NPCAttitude: 1
   HuntSuccessChance: 0.35
 --- !u!4 &715773992437250085 stripped
 Transform:

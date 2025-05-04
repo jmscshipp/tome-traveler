@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,11 +15,23 @@ public enum SecretType
 [RequireComponent(typeof(MapLocation))]
 public class Secret : MonoBehaviour
 {
+    internal static List<SecretLocale> UndiscoveredSecretLocales = new List<SecretLocale>();
+    internal static List<SecretLocale> DiscoveredSecretLocales = new List<SecretLocale>();
     public bool IsDiscovered = false;
     [SerializeField]
     public SecretLocale SecretDestination;
     [SerializeField]
     public string tooltip;
+
+    internal static void ActivateRandomSecretLocale()
+    {
+        int i = Random.Range(0, UndiscoveredSecretLocales.Count);
+        SecretLocale l = UndiscoveredSecretLocales[i];
+        UndiscoveredSecretLocales.RemoveAt(i);
+        l.IsDiscovered = true;
+        l.Activate();
+    }
+
 
     public void Activate()
     {
@@ -31,6 +42,7 @@ public class Secret : MonoBehaviour
 
         Debug.Log("New Secret Discovered!", SecretDestination);
         SecretDestination.IsDiscovered = true;
+        UndiscoveredSecretLocales.Remove(SecretDestination);
 
         UIManager.Instance().OpenDialoguePopup("You learn a secret. You note its location on your map.");
         IsDiscovered = true;
@@ -48,6 +60,11 @@ public abstract class SecretLocale : MonoBehaviour
 
     [SerializeField]
     public string Dialogue;
+
+    public void Start()
+    {
+        Secret.UndiscoveredSecretLocales.Add(this);
+    }
 
     public abstract void Activate();
 }

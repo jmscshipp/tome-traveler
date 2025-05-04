@@ -1025,11 +1025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f608fa9de12fc0c4ebf90042ad1af7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &857293706 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2851515328409618648, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
-  m_PrefabInstance: {fileID: 562807313}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &913861288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1424,7 +1419,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   currentLocation: {fileID: 662181075}
-  resources: {fileID: 0}
+  resources: {fileID: 1197151027}
   godmode: 1
   StartWithTent: 1
   InventorySizeLimit: 24
@@ -1508,28 +1503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c2e7e59ce5a9b43845e0c889f1ead3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1304962418 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2851515327405036040, guid: 84a01d9aea790e0418393a1984df4584, type: 3}
-  m_PrefabInstance: {fileID: 562807313}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1304962420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304962418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51291c0f1dc23b54c9d24d2e1fb6b413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemDataDirectory: Items
-  inventoryItemUIPrefab: {fileID: 0}
-  inventoryObjParent: {fileID: 857293706}
-  InShop: 0
-  ShopUI: {fileID: 0}
 --- !u!1 &1467346243
 GameObject:
   m_ObjectHideFlags: 0

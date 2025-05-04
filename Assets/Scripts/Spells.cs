@@ -151,6 +151,10 @@ public abstract class UsableSpell : Spell
         }
     }
     
+    public bool HasCharges()
+    {
+        return UsesLeft > 0;
+    }
 }
 
 public abstract class TimedSpell : UsableSpell

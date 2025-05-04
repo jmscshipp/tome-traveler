@@ -88,7 +88,7 @@ public class LocalePopupUI : MonoBehaviour
                 Instantiate(buySellButtonPrefab, buttonParent);
                 break;
             case LocaleTypes.Ruins:
-                Instantiate(sleepButtonPrefab, buttonParent);
+                Instantiate(campButtonPrefab, buttonParent);
                 break;
             case LocaleTypes.Cabin:
                 Instantiate(sleepButtonPrefab, buttonParent);
@@ -146,21 +146,7 @@ public class LocalePopupUI : MonoBehaviour
 
     public void Talk()
     {
-        // cabin
-        if (currentLocale is Cabin cabin)
-        {
-            cabin.Talk();
-        }
-        // city
-        else if (currentLocale is City city)
-        {
-            city.Talk();
-        }
-        //town
-        else if (currentLocale is Town town)
-        {
-            town.Talk();
-        }
+        currentLocale.Talk();
     }
 
     public void BuyAndSell()

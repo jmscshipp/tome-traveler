@@ -21,17 +21,12 @@ public class Town : Locale
 
     public void Sleep()
     {
-        int cost = 5;
-        BuyLodging(cost, LodgingDialogue(cost));
+        Lodge();
     }
 
-    public string LodgingDialogue(int cost)
+    public override string LodgingDialogue(int cost)
     {
         return "You spend " + cost + " coins to pay for an inn. The bed holds you, you fall asleep.";
     }
 
-    public void Talk()
-    {
-
-    }
 }

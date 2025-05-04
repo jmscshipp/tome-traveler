@@ -78,19 +78,74 @@ public class GetConcussed : RandomEvent
     }
 }
 
-class FindItem : RandomEvent
+public class FindItem : RandomEvent
+{
+    Item item;
+
+    public FindItem(int likelihood, Item item) : base(likelihood)
     {
-        Item item;
+        this.item = item;
+    }
 
-        public FindItem(int likelihood, Item item) : base(likelihood) {
-            this.item = item;
-        }
+    public override void Activate()
+    {
 
-        public override void Activate()
+        UIManager.Instance().OpenDialoguePopup($"It's your lucky day-- you found {item.IndefiniteArticle()}!");
+
+        Player.Instance().PlayerInventory.AddItem(item);
+    }
+}
+
+public class GiveSupplies : RandomEvent
+{
+    public GiveSupplies(int likelihood) : base(likelihood)
+    {
+    }
+
+    public override void Activate()
+    {
+        int num_tents;
+        int num_food;
+        do
         {
-
-            UIManager.Instance().OpenDialoguePopup($"It's your lucky day-- you found {item.IndefiniteArticle()}!");
-
-            Player.Instance().PlayerInventory.AddItem(item);
+            num_tents = Random.Range(0, 2);
+            num_food = Random.Range(0, 3);
+        } while (num_food + num_tents == 0);
+        string tents_plural = (num_tents > 1) ? "s" : "";
+        string dialogue = "You shouldn't ever see this dialogue option!";
+        if (num_food > 0 && num_tents > 0)
+        {
+            dialogue = $"It's your lucky day-- you got {num_food} food and {num_tents} tent{tents_plural}!"; ;
         }
+        else if (num_food > 0)
+        {
+            dialogue = $"It's your lucky day-- you got {num_tents} tent{tents_plural}!"; ;
+        }
+        else if (num_tents > 0)
+        {
+            dialogue = $"It's your lucky day-- you got {num_food} food!";
+        }
+        for (int i = 0; i < num_tents; i++)
+        {
+            Player.Instance().PlayerInventory.AddItem(new Tent());
+        }
+        for (int i = 0; i < num_food; i++)
+        {
+            Player.Instance().PlayerInventory.AddItem(new Food());
+        }
+        UIManager.Instance().OpenDialoguePopup(dialogue);
+    }
+}
+public class GiveRandomSecret : RandomEvent
+{
+    public GiveRandomSecret(int likelihood) : base(likelihood)
+    {
+    }
+
+    public override void Activate()
+    {
+        UIManager.Instance().OpenDialoguePopup("The NPC teaches you a random secret!");
+        UIManager.Instance().QueueActionAfterPopup(() => Secret.ActivateRandomSecretLocale());
+    }
+
 }
