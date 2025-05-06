@@ -7,6 +7,8 @@ using UnityEngine;
 [SelectionBase]
 public class MapLocation : MonoBehaviour
 {
+    public static int EmeraldCityHints = 0;
+    public readonly static int EmeraldCityHintsNeeded = 4;
     [SerializeField]
     private List<MapLocation> connectedLocations = new List<MapLocation>();
     [SerializeField]
@@ -157,7 +159,7 @@ public class MapLocation : MonoBehaviour
     public void ActivateLocation()
     {
         // the player has made it to the end of the game - the Emerald City
-        if (finalLocation)
+        if (finalLocation && EmeraldCityHints >= EmeraldCityHintsNeeded)
             UIManager.Instance().OpenDialoguePopup("You've made it! You've made it to the Emerald City!");
     }
     public void ActivateSecretLocale()

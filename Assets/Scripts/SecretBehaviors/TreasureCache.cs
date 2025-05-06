@@ -7,18 +7,13 @@ public class TreasureCache : SecretLocale
 
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        new FindItem(likelihood: 0, new Treasure()).Activate();
+        UIManager.Instance().OpenDialoguePopup("You follow the secret instructions to the letter, and find a treasure chest half-buried in the ground. Eureka!");
     }
 
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
