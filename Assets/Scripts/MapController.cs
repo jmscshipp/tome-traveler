@@ -4,7 +4,7 @@ using UnityEngine;
 public class MapController : MonoBehaviour
 {
     [SerializeField]
-    private MapLocation startingLocation;
+    public MapLocation startingLocation;
     private MapLocation[] allLocations;
     [SerializeField]
     private GameObject connectionPrefab;
@@ -130,11 +130,13 @@ public class MapController : MonoBehaviour
             }
         }
     }
-    
+
     public void SendPlayerToNewLocation(MapLocation location)
     {
         ResetLocationsTraversability();
         player.TraverseToNewLocation(location);
+        Mindreading.Cleanup();
+        Teleportation.Cleanup();
     }
 
     // disables highlight and makes locations unclickable while player travels to current location

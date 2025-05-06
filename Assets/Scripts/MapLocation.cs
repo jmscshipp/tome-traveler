@@ -43,11 +43,7 @@ public class MapLocation : MonoBehaviour
         CheckNullConnections();
         iconGraphics.gameObject.SetActive(true);
         GetComponent<Locale>().SetupIconGraphics();
-        if (null != highlightGraphics)
-        {
-            m_DefaultMaterial = highlightGraphics.GetComponent<Renderer>().material;
-        }
-        else
+        if (null == highlightGraphics)
         {
             Debug.LogError("No highlight graphics set", this);
         }
@@ -166,8 +162,8 @@ public class MapLocation : MonoBehaviour
     {
         m_DefaultMaterial = m_SecretLocaleMaterial;
         SetHighlightMaterial(m_SecretLocaleMaterial);
-        SetHighlight(true);
         Hidable = false;
+        SetHighlight(true);
     }
 
     public void MakeConnectionsSelectable(bool selectable)

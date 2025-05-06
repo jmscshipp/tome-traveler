@@ -25,13 +25,14 @@ public class Cabin : Locale
     
     public override string LodgingDialogue(int cost)
     {
-        Player.Instance().resources.AddHunger(-1);
+        Player.Instance().resources.AddHunger(-2);
+        Player.Instance().resources.AddExhaustion(-2);
         return "You spend " + cost + " coins to sleep in this cabin. The fireplace crackles, you fall asleep comfortably.";
     }
     public override string FriendlyLodgingDialogue()
     {
-        Player.Instance().resources.AddHunger(-2);
-        Player.Instance().resources.AddExhaustion(-1);
+        Player.Instance().resources.AddHunger(-3);
+        Player.Instance().resources.AddExhaustion(-3);
         return "You are a welcomed guest and talk with your host over dinner. The fireplace crackles, you fall asleep.";
     }
     public override string HostileLodgingDialogue()

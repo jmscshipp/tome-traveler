@@ -37,7 +37,7 @@ public class PlayerResources : MonoBehaviour
         //Debug.Log("Changing player hunger by " + modifier);
         hunger = Math.Clamp(hunger + modifier, 0, 5);
         ui.UpdateHungerUI(hunger, maxHunger);
-        if (hunger == 5)
+        if (hunger == 5  && !Player.Instance().IsDead)
         {
             UIManager.Instance().OpenDialoguePopup("You died of hunger!");
             UIManager.Instance().QueueActionAfterPopup(() => Player.Die());
@@ -47,9 +47,10 @@ public class PlayerResources : MonoBehaviour
     public int GetExhaustion() => exhaustion;
     public void AddExhaustion(int modifier)
     {
+        //Debug.Log($"Changed exhaustion by {modifier}");
         exhaustion = Math.Clamp(exhaustion + modifier, 0, 5);
         ui.UpdateExhaustionUI(exhaustion, maxExhaustion);
-        if (exhaustion == 5)
+        if (exhaustion == 5 && !Player.Instance().IsDead)
         {
             UIManager.Instance().OpenDialoguePopup("You died of exhaustion!");
             UIManager.Instance().QueueActionAfterPopup(() => Player.Die());

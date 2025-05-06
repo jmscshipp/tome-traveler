@@ -12,6 +12,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AnimationCurve movementCurve;
     private bool traversing = false;
+    public bool IsDead
+    {
+        get; private set;
+    }
+    
     private float traverseTimer = 0f;
     private float traverseSpeed = 10f;
     private Vector2 startPos;
@@ -95,6 +100,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        currentLocation = MapController.Instance().startingLocation;
+        IsDead = false;
         GetComponent<GameManager>().GameState.StarterSpell.enabled = true;
         if (StartWithTent)
         {
@@ -134,7 +141,7 @@ public class Player : MonoBehaviour
         {
             abundance.Cast();
         }
-        if (KnowsSleepless() && Input.GetKeyDown(KeyCode.A) && sleepless.cooldown == 0)
+        if (KnowsSleepless() && Input.GetKeyDown(KeyCode.S) && sleepless.cooldown == 0)
         {
             sleepless.Cast();
         }
@@ -290,6 +297,7 @@ public class Player : MonoBehaviour
 
     internal static void Die()
     {
+        Instance().IsDead = true;
         SceneManager.LoadScene(0);
         GameManager.WipeProgress();
     }

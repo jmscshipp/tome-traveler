@@ -72,7 +72,7 @@ public class Sleepless : Spell
     public override string Name => "Sleepless Spell";
     public override void Cast()
     {
-        Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-Strength);
+        Player.Instance().resources.AddExhaustion(-Strength);
         this.cooldown = BaseCooldown;
     }
 
@@ -118,11 +118,8 @@ public class Teleportation : Spell
     }
     public static void Cleanup()
     {
-        foreach (MapLocation m in MapLocation.activeMindreadingLocations)
-        {
-            m.DeactivateForTeleport(isTraversable: false);
-        }
-        MapLocation.activeMindreadingLocations.Clear();
+        MapLocation.activeTeleportLocations.ForEach(x => x.DeactivateForTeleport(isTraversable: false));
+        MapLocation.activeTeleportLocations.Clear();
     }
 
     public override Spells GetId()

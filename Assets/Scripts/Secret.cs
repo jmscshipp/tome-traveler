@@ -43,8 +43,8 @@ public class Secret : MonoBehaviour
         Debug.Log("New Secret Discovered!", SecretDestination);
         SecretDestination.IsDiscovered = true;
         UndiscoveredSecretLocales.Remove(SecretDestination);
-
-        UIManager.Instance().OpenDialoguePopup("You learn a secret. You note its location on your map.");
+        string dialogue = (tooltip == "") ? "You learn a secret. You note its location on your map." : tooltip;
+        UIManager.Instance().OpenDialoguePopup(dialogue);
         IsDiscovered = true;
 
         SecretDestination.GetComponent<MapLocation>().ActivateSecretLocale();
