@@ -2,21 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodCache : SecretLocale
+public class SupplyCache : SecretLocale
 {
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        // this is a hack. likelihood isn't used here
+        new GiveSupplies(likelihood:0).Activate();
     }
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Start();
     }
 }

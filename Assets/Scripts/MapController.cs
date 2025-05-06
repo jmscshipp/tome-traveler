@@ -106,8 +106,16 @@ public class MapController : MonoBehaviour
         {
             MapLocation l = location.GetComponent<MapLocation>();
             if (null == l) continue;
+            // show shortcut connections as a blue line
+            if (l.GetComponent<HiddenShortcut>() is HiddenShortcut hs && hs != null)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawLine(location.transform.position, hs.SecretDestination.transform.position);
+                Gizmos.color = Color.white;
+            }
             foreach (MapLocation connectedLocation in location.GetComponent<MapLocation>().GetConnectedLocations())
             {
+                Gizmos.color = Color.white;
                 if (connectedLocation == null) continue;
                 if (connectedLocation.GetConnectedLocations().Contains(l))
                 {
@@ -115,10 +123,9 @@ public class MapController : MonoBehaviour
                 }
                 else
                 {
-                    Color g = Gizmos.color;
                     Gizmos.color = Color.red;
                     Gizmos.DrawLine(location.transform.position, connectedLocation.transform.position);
-                    Gizmos.color = g;
+
                 }
             }
         }

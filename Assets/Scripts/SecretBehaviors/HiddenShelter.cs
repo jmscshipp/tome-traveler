@@ -6,12 +6,13 @@ public class HiddenShelter : SecretLocale
 {
     public override void Activate()
     {
-        Debug.Log("Activate Not Implemented");
+        GetComponent<Locale>().ActivateHiddenShelter();
+        UIManager.Instance().OpenDialoguePopup("You discover a hidden shelter in this location. You can always sleep here for free.");
     }
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame

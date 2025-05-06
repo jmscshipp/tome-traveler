@@ -38,7 +38,7 @@ public class RandomTable
 
 public class NothingHappens : RandomEvent
 {
-    public NothingHappens(int likelihood) : base(likelihood) { }
+    public NothingHappens(int likelihood, bool ShowDialogue = false) : base(likelihood) { }
 
     public override void Activate()
     {
