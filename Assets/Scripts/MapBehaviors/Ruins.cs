@@ -31,7 +31,7 @@ public class Ruins : Wild
             new FindItem(likelihood: 4, new Treasure()),
             new FindItem(likelihood: 8, new Tent()),
             new FindItem(likelihood: 8, new Food()),
-            new NothingHappens(likelihood: 20),
+            new NothingHappens(likelihood: 20, ShowDialogue: true),
         });
 
     public override void Explore()
