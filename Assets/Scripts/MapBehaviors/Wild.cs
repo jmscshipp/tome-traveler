@@ -54,6 +54,10 @@ public class Wild : Locale
 
     public void Camp()
     {
+        if (CheckHiddenShelter())
+        {
+            return;
+        }
         SleepWildernessResult result = player.SleepWilderness();
         if (result.succeeded)
         {

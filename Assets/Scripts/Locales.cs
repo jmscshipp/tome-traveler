@@ -21,6 +21,7 @@ public enum Attitude {
 [RequireComponent(typeof(MapLocation))]
 public abstract class Locale : MonoBehaviour
 {
+    protected bool IsHiddenShelterDiscovered = false;
     protected Player player;
     protected GameManager gm;
     private void Start()
@@ -70,6 +71,7 @@ public abstract class Locale : MonoBehaviour
 
     public void Lodge()
     {
+        if (CheckHiddenShelter()) return;
         switch (NPCAttitude)
         {
             case Attitude.Neutral:
@@ -85,6 +87,15 @@ public abstract class Locale : MonoBehaviour
         }
     }
 
+    public bool CheckHiddenShelter()
+    {
+        if (IsHiddenShelterDiscovered)
+        {
+            FreeLodging("You retreat to your shelter, alone but quite safe.");
+            return true;
+        }
+        return false;
+    }
 
     public virtual int LodgingCost()
     {
@@ -177,5 +188,10 @@ public abstract class Locale : MonoBehaviour
     {
         UIManager.Instance().OpenDialoguePopup("You do something to make the NPC frustrated. They won't let you stay here anymore, even if you pay.");
         NPCAttitude = Attitude.Hostile;
+    }
+
+    internal void ActivateHiddenShelter()
+    {
+        throw new System.NotImplementedException();
     }
 }

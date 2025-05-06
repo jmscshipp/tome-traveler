@@ -24,8 +24,9 @@ public class HiddenShortcut : SecretLocale
         Debug.Log("Revealed Secret Connection");
     }
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
+        base.Start();
         loc = GetComponent<MapLocation>();
     }
 
