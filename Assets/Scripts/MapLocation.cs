@@ -231,14 +231,14 @@ public class MapLocation : MonoBehaviour
         string sprite = "";
         if (GetComponent<Town>())
             sprite = "town.png";
+        else if (GetComponent<Ruins>())
+            sprite = "ruins.png";
         else if (GetComponent<Wild>())
             sprite = "wilds.png";
         else if (GetComponent<Shop>())
             sprite = "shop.png";
         else if (GetComponent<City>())
             sprite = "city.png";
-        else if (GetComponent<Ruins>())
-            sprite = "ruins.png";
         else if (GetComponent<Cabin>())
             sprite = "cabin.png";
 

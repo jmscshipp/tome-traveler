@@ -16,6 +16,6 @@ MonoBehaviour:
   MaxFoodFromHunt: 3
   MaxRestFromTent: 3
   HuntExhaustionChance: 0.5
-  HuntExhaustionPenalty: 5
+  HuntExhaustionPenalty: 1
   TentExhaustionReduction: 2
   BedExhaustionReduction: 3

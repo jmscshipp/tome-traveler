@@ -12,7 +12,7 @@ public class Cabin : Locale
 
     private void Awake()
     {
-        localeType = LocaleTypes.Shop;
+        localeType = LocaleTypes.Cabin;
 
         if (localeDescription == "")
             localeDescription = defaultShopLocaleDescription;
