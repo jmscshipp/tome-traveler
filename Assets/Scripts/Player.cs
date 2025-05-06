@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
     public static Spell mindreading = Spell.AllSpells[(int)Spells.Mindreading];
     public static Spell teleportation = Spell.AllSpells[(int)Spells.Teleportation];
     public static Spell sleepless = Spell.AllSpells[(int)Spells.Sleepless];
-
+    public int StartingFood = 3;
     static Spell[] SpellLearnOrder;
 
 
@@ -74,7 +75,27 @@ public class Player : MonoBehaviour
         return godmode || sleepless.enabled;
     }
 
-    public List<Spell> GetSpells() {
+    [ContextMenu("Give random spell tome")]
+    public void GiveTome()
+    {
+        PlayerInventory.AddItem(new Tome(RandomUnusedSpell()));
+    }
+
+    [ContextMenu("Give food")]
+    public void GiveFood()
+    {
+        PlayerInventory.AddItem(new Food());
+    }
+
+    [ContextMenu("Give tent")]
+    public void GiveTent()
+    {
+        PlayerInventory.AddItem(new Tent());
+    }
+
+
+    public List<Spell> GetSpells()
+    {
         List<Spell> ss = new List<Spell>();
         foreach (Spell s in Spell.AllSpells)
         {
@@ -103,11 +124,18 @@ public class Player : MonoBehaviour
         currentLocation = MapController.Instance().startingLocation;
         IsDead = false;
         GetComponent<GameManager>().GameState.StarterSpell.enabled = true;
+        PlayerInventory.tomeUI.Add(Item.ItemFromId(GetComponent<GameManager>().GameState.StarterSpell.ItemId));
+
         if (StartWithTent)
         {
             Tent t = new Tent();
             t.RandomizeUses();
             PlayerInventory.AddItem(t);
+        }
+        if (StartingFood > 0)
+        {
+            for (int i = 0; i< StartingFood; i++)
+                PlayerInventory.AddItem(new Food());
         }
 
         resources = GetComponent<PlayerResources>();
@@ -189,8 +217,18 @@ public class Player : MonoBehaviour
         traversing = true;
     }
 
+    public void EnableTomesForLearning()
+    {
+        PlayerInventory.ui.MakeTomesClickable(true);
+    }
+
     public void Learn(Tome tome)
     {
+        if (PlayerInventory.itemList.Contains(tome))
+        {
+            PlayerInventory.RemoveItem(tome);
+        }
+        PlayerInventory.tomeUI.Add(tome);
         tome.Spell.enabled = true;
     }
 
@@ -203,6 +241,7 @@ public class Player : MonoBehaviour
         }
         bool tentBroke = tent.Use();
         resources.AddExhaustion(-GameManager.Instance().GameState.TentExhaustionReduction);
+        PlayerInventory.ui.UpdateInventory();
         Spell.PassTime();
 
         SleepWildernessResult successResult = new SleepWildernessResult(true);

@@ -9,7 +9,7 @@ public class TomeLocation : SecretLocale
 
     public override void Activate()
     {
-        Spell s = (SpellTome == Items.None) ? Player.RandomUnusedSpell() : Spell.AllSpells.Find(x => x.ItemId == SpellTome);
+        Spell s = (SpellTome == Items.None || Spell.AllSpells[(int)SpellTome].enabled) ? Player.RandomUnusedSpell() : Spell.AllSpells.Find(x => x.ItemId == SpellTome);
         // this is a hack. likelihood isn't used here
         new FindItem(likelihood: 0, new Tome(s)).Activate();
     }

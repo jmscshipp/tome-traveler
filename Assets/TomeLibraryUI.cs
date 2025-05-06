@@ -6,15 +6,7 @@ public class TomeLibraryUI : PlayerInventoryUI
 {
     public override void SellItem(InventoryItemUI item)
     {
-        // add coins to player inventory
-        Player.Instance().resources.AddCoins(item.GetItemCost());
-        // remove Item from Player inventory
-        Player.Instance().PlayerInventory.RemoveItem(item.GetItem());
-        // remove item from inventory menu
-        Remove(item);
-        UpdateInventory();
-        MakeInventoryClickable(true);
-        ShopUI.RefreshShopAvailability();
+        // You can't sell learned tomes
     }
 
     protected override void SetupUIRefs()

@@ -26,8 +26,7 @@ public class Ruins : Wild
     RandomTable RuinsRandomTable = new RandomTable(
         new List<RandomEvent>() {
             new GetRobbed(likelihood:1),
-            new GetConcussed(likelihood: 1),
-            new FindItem(likelihood: 4, new Tome(Player.RandomUnusedSpell())),
+            // new GetConcussed(likelihood: 1),
             new FindItem(likelihood: 4, new Treasure()),
             new FindItem(likelihood: 8, new Tent()),
             new FindItem(likelihood: 8, new Food()),

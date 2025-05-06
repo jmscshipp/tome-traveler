@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
 
 public class PlayerInventoryUI : InventoryUI
 {
     public bool InShop = false;
+    public bool Learning = false;
     public ShopInventoryUI ShopUI;
 
     // inherits from InventoryUI, where general inventory functionality comes from
@@ -24,9 +27,39 @@ public class PlayerInventoryUI : InventoryUI
         foreach (InventoryItemUI itemUI in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
             itemUI.SetSellable(clickable);
     }
+    
+    public void MakeTomesClickable(bool clickable)
+    {
+        InventoryItemUI[] items = inventoryObjParent.GetComponentsInChildren<InventoryItemUI>();
+        foreach (InventoryItemUI itemUI in items)
+        {
+            if (itemUI.GetItem() is Tome tome)
+            {
+                Learning |= clickable;
+                itemUI.SetLearnable(clickable);
+            }
+        }
+    }
 
-    public void SetShopUI(InventoryUI ui) {
-        foreach (InventoryItemUI uItem in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>()) {
+    internal override void LearnItem(InventoryItemUI inventoryItemUI)
+    {
+        if (inventoryItemUI.GetItem() is Tome tome)
+        {
+            Remove(inventoryItemUI);
+            Player.Instance().Learn(tome);
+            UpdateInventory();
+            Learning = false;
+        }
+        else
+        {
+            Debug.LogWarning("Can't read item, it's not a tome!", inventoryItemUI);
+        }
+    }
+
+    public void SetShopUI(InventoryUI ui)
+    {
+        foreach (InventoryItemUI uItem in inventoryObjParent.GetComponentsInChildren<InventoryItemUI>())
+        {
             uItem.inventoryUI = this;
         }
     }
@@ -41,7 +74,6 @@ public class PlayerInventoryUI : InventoryUI
         // remove item from inventory menu
         Remove(item);
         UpdateInventory();
-        MakeInventoryClickable(true);
         ShopUI.RefreshShopAvailability();
     }
 
@@ -56,11 +88,15 @@ public class PlayerInventoryUI : InventoryUI
         {
             Add(i);
         }
-
         if (InShop)
         {
             SetPrices(ShopActions.Selling);
             MakeInventoryClickable(true);
+        }
+        else
+        {
+            SetPrices(ShopActions.None);
+            MakeInventoryClickable(false);
         }
     }
 }

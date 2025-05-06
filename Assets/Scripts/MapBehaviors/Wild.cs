@@ -9,7 +9,7 @@ public class Wild : Locale
     RandomTable WildsRandomTable = new RandomTable(
         new List<RandomEvent>() {
             new GetRobbed(likelihood:1),
-            new GetConcussed(likelihood: 1),
+            // new GetConcussed(likelihood: 1),
             new NothingHappens(likelihood: 20),
         });
 
@@ -64,8 +64,6 @@ public class Wild : Locale
             int exhaustionReduction = Random.Range(1, gm.GameState.MaxRestFromTent);
             Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-exhaustionReduction);
             UIManager.Instance().OpenDialoguePopup("You curl up in your sleeping bag and watch the stars. In the morning, you feel refreshed.");
-            if (result.tentBroke)
-                UIManager.Instance().OpenDialoguePopup("Your tent has broken in the night.");
         }
         else
         {

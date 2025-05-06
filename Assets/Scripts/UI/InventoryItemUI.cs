@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,8 @@ public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // This is a debug field
     [SerializeField]
     int InventoryIndex = -1;
+    private bool learnable = false;
+
 
     private void Awake()
     {
@@ -61,18 +64,24 @@ public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
         outline.enabled = sellable;
     }
 
+    public void SetLearnable(bool value)
+    {
+        learnable = value;
+        outline.enabled = value;
+    }
+
     // when mouse is over this UI element, 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
         //Debug.Log("hovering over inventory UI item index " + item.GetIndex());
-        if (!sellable)
+        if (!sellable && !learnable)
             return;
         outline.effectColor = Color.white;
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
-        if (!sellable)
+        if (!sellable && !learnable)
             return;
         outline.effectColor = Color.black;
     }
@@ -80,8 +89,13 @@ public class InventoryItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // when this UI element is clicked
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        if (!sellable)
+        if (!sellable && !learnable)
             return;
-        inventoryUI.SellItem(this);
+
+        if (sellable)
+            inventoryUI.SellItem(this);
+
+        if (learnable)
+            inventoryUI.LearnItem(this);
     }
 }

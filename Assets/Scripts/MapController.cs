@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -125,7 +126,8 @@ public class MapController : MonoBehaviour
                 Gizmos.color = Color.magenta;
                 Gizmos.DrawSphere(location.transform.position, SecretGizmoDrawSize);
                 Gizmos.color = Color.magenta;
-                Gizmos.DrawLine(location.transform.position, st.SecretDestination.transform.position);
+                if (st.SecretDestination)
+                    Gizmos.DrawLine(location.transform.position, st.SecretDestination.transform.position);
             }
             foreach (MapLocation connectedLocation in location.GetComponent<MapLocation>().GetConnectedLocations())
             {

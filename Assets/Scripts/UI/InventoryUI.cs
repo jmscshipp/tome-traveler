@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +54,15 @@ public abstract class InventoryUI : MonoBehaviour
                 ui.SetCost(itemData.BuyPrice);
                 break;
             case ShopActions.None:
-                ui.ClearCost();
+                Item item = ui.GetItem();
+                if (item is Usable usable && usable.Uses > 0)
+                {
+                    ui.SetCost(usable.Uses);
+                }
+                else
+                {
+                    ui.ClearCost();
+                }
                 break;
         }
     }
@@ -98,4 +107,10 @@ public abstract class InventoryUI : MonoBehaviour
     }
 
     public abstract void SellItem(InventoryItemUI itemUI);
+
+    internal virtual void LearnItem(InventoryItemUI inventoryItemUI)
+    {
+        throw new NotImplementedException();
+    }
+
 }

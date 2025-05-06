@@ -35,7 +35,6 @@ RectTransform:
   - {fileID: 8805968489612084358}
   - {fileID: 2947251217812520774}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -92,7 +91,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1df65e984ccf444aa48be1f84a3ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sellable: 0
   graphics: {fileID: 7386293700159304222}
+  inventoryUI: {fileID: 0}
+  id: 0
+  InventoryIndex: -1
 --- !u!114 &3786211229427782620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +154,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 685197071996475734}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -242,7 +244,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 685197071996475734}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

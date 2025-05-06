@@ -165,6 +165,12 @@ public class UIManager : MonoBehaviour
         popupQueue.Add(new LocalePopup(locale));
     }
 
+    public void OpenCurrentLocale()
+    {
+        if (!DialogueOpen)
+            popupQueue.Add(new LocalePopup(Player.Instance().currentLocation.GetComponent<Locale>()));
+    }
+
     public void CloseLocalePopup()
     {
         localePopup.ClosePopup();

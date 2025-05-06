@@ -52,6 +52,21 @@ public abstract class Item
             return "an " + Name;
         return Name;
     }
+
+    public static Item ItemFromId(Items id) => id switch
+    {
+        Items.None => null,
+        Items.Food => new Food(),
+        Items.Tent => new Tent(),
+        Items.AbundanceTome => new AbundanceTome(),
+        Items.Treasure => new Treasure(),
+        Items.ClairvoyanceTome => new ClairvoyanceTome(),
+        Items.WaterwalkingTome => new WaterwalkingTome(),
+        Items.TeleportationTome => new TeleportationTome(),
+        Items.MindreadingTome => new MindreadingTome(),
+        Items.SleeplessTome => new SleeplessTome(),
+        _ => throw new System.ArgumentException("Unknown item id", nameof(id))
+    };
 }
 
 public class Tome : Item
@@ -139,7 +154,7 @@ public class Inventory
 {
     public List<Item> itemList = new List<Item>();
     public readonly List<Item> Tomes = new List<Item>();
-    private PlayerInventoryUI ui;
+    public PlayerInventoryUI ui;
 
     public void SetupUIRefs(PlayerInventoryUI uiRef)
     {
@@ -198,15 +213,7 @@ public class Inventory
     public void AddItem(Item item)
     {
         //LogInventory("Items Before");
-        if (item is Tome)
-        {
-            tomeUI.Add(item);
-            Tomes.Add(item);
-        }
-        else
-        {
-            itemList.Add(item);
-        }
+        itemList.Add(item);
         UpdateItemIndices();
         ui.UpdateInventory();
         //LogInventory("Items After");
@@ -255,7 +262,7 @@ public class Inventory
             }
             return t;
         }
-        Debug.LogWarning("GetEdibleFood failed: No tent with uses remaining");
+        Debug.LogWarning("GetEdibleFood failed: No food with uses remaining");
         return null;
     }
 
@@ -276,24 +283,9 @@ public class Inventory
     public bool RemoveItem(Item item)
     // Returns true if item successfully removed
     {
-        if (item is Tome t)
-        {
-            return RemoveItem(t);
-        }
-
         if (itemList.Contains(item))
         {
             __RemoveItem(item);
-            return true;
-        }
-        return false;
-    }
-
-    public bool RemoveItem(Tome t)
-    {
-        if (Tomes.Remove(t))
-        {
-            tomeUI.Remove(t);
             return true;
         }
         return false;
