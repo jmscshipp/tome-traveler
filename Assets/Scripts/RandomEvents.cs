@@ -38,11 +38,15 @@ public class RandomTable
 
 public class NothingHappens : RandomEvent
 {
-    public NothingHappens(int likelihood, bool ShowDialogue = false) : base(likelihood) { }
+    private bool ShowDialogue = false;
+    public NothingHappens(int likelihood, bool ShowDialogue = false) : base(likelihood) {
+        this.ShowDialogue = ShowDialogue;
+    }
 
     public override void Activate()
     {
-        UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
+        if (ShowDialogue)
+            UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
     }
 }
 public class GetRobbed : RandomEvent
