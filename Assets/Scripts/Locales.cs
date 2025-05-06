@@ -21,6 +21,7 @@ public enum Attitude {
 [RequireComponent(typeof(MapLocation))]
 public abstract class Locale : MonoBehaviour
 {
+    protected bool Searched = false;
     protected bool IsHiddenShelterDiscovered = false;
     protected Player player;
     protected GameManager gm;
@@ -52,6 +53,12 @@ public abstract class Locale : MonoBehaviour
 
     public virtual void Explore()
     {
+        if (Searched)
+        {
+            UIManager.Instance().OpenDialoguePopup("You've already searched here.");
+            return;
+        }
+
         // if no secret, give nothing
         // if secret, give it 
         SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
@@ -67,6 +74,7 @@ public abstract class Locale : MonoBehaviour
         {
             UIManager.Instance().OpenDialoguePopup("You search to the point of exhaustion, but there is nothing to find.");
         }
+        Searched = true;
     }
 
     public void Lodge()

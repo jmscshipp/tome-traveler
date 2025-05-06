@@ -35,19 +35,21 @@ public class Ruins : Wild
 
     public override void Explore()
     {
+        if (Searched)
+        {
+            UIManager.Instance().OpenDialoguePopup("You've already searched these ruins.");
+            return;
+        }
+
         SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
         if (secretLocale != null)
         {
             UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
-
-            //add exhaustion as penalty
-            System.Action penalty = () => Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
-            UIManager.Instance().QueueActionAfterPopup(penalty);
             secretLocale.Activate();
         }
-        else
-        {
-            RuinsRandomTable.ChooseRandom().Activate();
-        }
+        System.Action penalty = () => Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
+        UIManager.Instance().QueueActionAfterPopup(penalty);
+        RuinsRandomTable.ChooseRandom().Activate();
+        Searched = true;
     }
 }
