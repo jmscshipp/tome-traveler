@@ -30,6 +30,10 @@ public class MapController : MonoBehaviour
     [SerializeField]
     private Sprite ruinsMapIcon;
 
+    [SerializeField]
+    public float SecretGizmoDrawSize = 3f;
+
+
     public static MapController Instance() => instance;
     private void Awake()
     {
@@ -101,7 +105,6 @@ public class MapController : MonoBehaviour
     // debug lines to be able to see connections in editor
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
         foreach(GameObject location in GameObject.FindGameObjectsWithTag("MapLocation"))
         {
             MapLocation l = location.GetComponent<MapLocation>();
@@ -111,7 +114,18 @@ public class MapController : MonoBehaviour
             {
                 Gizmos.color = Color.cyan;
                 Gizmos.DrawLine(location.transform.position, hs.SecretDestination.transform.position);
-                Gizmos.color = Color.white;
+            }
+            if (l.GetComponent<SecretLocale>() is SecretLocale sl && sl != null)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawSphere(location.transform.position, SecretGizmoDrawSize);
+            }
+            if (l.GetComponent<Secret>() is Secret st && st != null)
+            {
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawSphere(location.transform.position, SecretGizmoDrawSize);
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawLine(location.transform.position, st.SecretDestination.transform.position);
             }
             foreach (MapLocation connectedLocation in location.GetComponent<MapLocation>().GetConnectedLocations())
             {

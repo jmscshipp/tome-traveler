@@ -5738,6 +5738,7 @@ MonoBehaviour:
   cityMapIcon: {fileID: 1342224003, guid: 25e2ca1a1b75594449d1aad3f030bacb, type: 3}
   cabinMapIcon: {fileID: 990522732, guid: 25e2ca1a1b75594449d1aad3f030bacb, type: 3}
   ruinsMapIcon: {fileID: 926961012, guid: 25e2ca1a1b75594449d1aad3f030bacb, type: 3}
+  SecretGizmoDrawSize: 1
 --- !u!4 &2004927539
 Transform:
   m_ObjectHideFlags: 0

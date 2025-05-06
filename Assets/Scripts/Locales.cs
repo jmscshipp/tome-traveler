@@ -58,7 +58,7 @@ public abstract class Locale : MonoBehaviour
         //add exhaustion as penalty
         Player.Instance().resources.AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
 
-        if (secretLocale != null)
+        if (secretLocale != null && !secretLocale.IsDiscovered)
         {
             UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
             secretLocale.Activate();
