@@ -31,16 +31,19 @@ public class Ruins : Wild
             new FindItem(likelihood: 4, new Treasure()),
             new FindItem(likelihood: 8, new Tent()),
             new FindItem(likelihood: 8, new Food()),
-            new NothingHappens(likelihood: 20, ShowDialogue: true),
+            new NothingHappens(likelihood: 10, ShowDialogue: true),
         });
 
     public override void Explore()
     {
-        
         SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
         if (secretLocale != null)
         {
             UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
+
+            //add exhaustion as penalty
+            System.Action penalty = () => Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
+            UIManager.Instance().QueueActionAfterPopup(penalty);
             secretLocale.Activate();
         }
         else

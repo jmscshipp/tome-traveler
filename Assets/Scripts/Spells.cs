@@ -27,7 +27,7 @@ public abstract class Spell
 };
     public int cooldown = 0;
     public int BaseCooldown = 3;
-    public string Name = "Default Spell Name";
+    public virtual string Name => "Default Spell Name";
     public int Strength = 2;
 
     public static void PassTime()
@@ -52,6 +52,7 @@ public abstract class Spell
 
 public class Abundance : Spell
 {
+    public override string Name => "Abundance Spell";
     public override void Cast()
     {
         Player.Instance().GetComponent<PlayerResources>().AddHunger(-Strength);
@@ -68,6 +69,7 @@ public class Abundance : Spell
 
 public class Sleepless : Spell
 {
+    public override string Name => "Sleepless Spell";
     public override void Cast()
     {
         Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-Strength);
@@ -84,6 +86,7 @@ public class Sleepless : Spell
 
 public class Clairvoyance : Spell
 {
+    public override string Name => "Clairvoyance Spell";
     public override void Cast()
     {
         // Change Fog of War size (lerp it?) by Strength
@@ -99,6 +102,8 @@ public class Clairvoyance : Spell
 
 public class Teleportation : Spell
 {
+
+    public override string Name => "Teleportation Spell";
     public override void Cast()
     {
         // enter UI state machine
@@ -168,6 +173,9 @@ public abstract class TimedSpell : UsableSpell
 public class Mindreading : TimedSpell
 {
     // highlight locations with secrets to discover. Automatically succeed on Talk while spell lasts
+
+
+    public override string Name => "Mindreading Spell";
     public static void Cleanup()
     {
         foreach (MapLocation m in MapLocation.activeMindreadingLocations)
@@ -201,7 +209,7 @@ public class Mindreading : TimedSpell
 
 public class Waterwalking : TimedSpell
 {
-    public new string Name = "Waterwalking Spell";
+    public override string Name => "Waterwalking Spell";
     public new int BaseCooldown = 3;
     public static void Cleanup()
     {
