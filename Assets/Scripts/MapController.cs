@@ -80,6 +80,7 @@ public class MapController : MonoBehaviour
         connection.transform.localRotation = Quaternion.FromToRotation(Vector3.up, dir);
         //connection.transform.rotation = Quaternion.Euler(90f, connection.transform.rotation.y, connection.transform.rotation.z);
         connection.transform.localRotation = Quaternion.Euler(90f, connection.transform.eulerAngles.y, connection.transform.eulerAngles.z);
+        location.AddConnectionObject(connection.GetComponent<ConnectionObject>());
     }
 
     public void RevealSecretConnection(MapLocation location, MapLocation secretConnection)

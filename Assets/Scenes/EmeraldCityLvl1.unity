@@ -122,6 +122,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &200772192
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071079
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371119886170702848, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7328479713923279581, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
+      propertyPath: m_Name
+      value: FOWProjector
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 92d4027d7f6b44d4f85403492dc1644f, type: 3}
 --- !u!1 &407460633
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +379,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &839085244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3041753076339331060, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_Name
+      value: FOWCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875747561709323645, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875747561709323645, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875747561709323645, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071079
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116923277271662605, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 41625cb73ebb41940990c131d9f9ec56, type: 3}
 --- !u!1001 &70010515205623683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1432,7 +1558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d203f1766603965459a7b1fdc9a513e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDiscovered: 0
+  PlayerVisited: 0
+  AlreadyRevealed: 0
   Dialogue: discovered, woo!
   SecretDestination: {fileID: 6729279218295209290}
   IsTwoWay: 1
@@ -2340,6 +2467,7 @@ MonoBehaviour:
   IsDiscovered: 0
   SecretDestination: {fileID: 8488246749404258820}
   tooltip: You learn of a buried treasure on a forest path to the Southwest.
+  ActivateOnStart: 0
 --- !u!114 &2049677639653036106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,6 +2484,7 @@ MonoBehaviour:
   SecretDestination: {fileID: 3914570605030971259}
   tooltip: Passing through town, you overhear two scholars discussing a legendary
     spell tome. Legend says it's in the ruins to the west.
+  ActivateOnStart: 0
 --- !u!114 &2236548966967853816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3050,6 +3179,7 @@ MonoBehaviour:
   IsDiscovered: 0
   SecretDestination: {fileID: 857816019525768563}
   tooltip: secret found
+  ActivateOnStart: 0
 --- !u!114 &2894505980284588053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3065,6 +3195,7 @@ MonoBehaviour:
   IsDiscovered: 0
   SecretDestination: {fileID: 6528550949713018561}
   tooltip: The old woman living here mentions the ruins hold a powerful spell.
+  ActivateOnStart: 0
 --- !u!1001 &3117242800130721487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3355,6 +3486,7 @@ MonoBehaviour:
   cityMapIcon: {fileID: 1342224003, guid: 25e2ca1a1b75594449d1aad3f030bacb, type: 3}
   cabinMapIcon: {fileID: 990522732, guid: 25e2ca1a1b75594449d1aad3f030bacb, type: 3}
   ruinsMapIcon: {fileID: 926961012, guid: 25e2ca1a1b75594449d1aad3f030bacb, type: 3}
+  waterMapIcon: {fileID: 0}
   SecretGizmoDrawSize: 1
 --- !u!114 &3914570605030971259
 MonoBehaviour:
@@ -3368,7 +3500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8ff2030052f5b4f832b6f0d725aa65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDiscovered: 0
+  PlayerVisited: 0
+  AlreadyRevealed: 0
   Dialogue: 
   SpellTome: 4
 --- !u!114 &3957948207435777296
@@ -3383,7 +3516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d203f1766603965459a7b1fdc9a513e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDiscovered: 0
+  PlayerVisited: 0
+  AlreadyRevealed: 0
   Dialogue: you found a shortcut!
   SecretDestination: {fileID: 6000476766745067138}
   IsTwoWay: 1
@@ -3399,7 +3533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8ff2030052f5b4f832b6f0d725aa65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDiscovered: 0
+  PlayerVisited: 0
+  AlreadyRevealed: 0
   Dialogue: 
   SpellTome: 5
 --- !u!1001 &4152475183386399770
@@ -3511,6 +3646,7 @@ MonoBehaviour:
   SecretDestination: {fileID: 857816019525768563}
   tooltip: You find a traveler's bag. A weathered journal inside describes a winding
     shortcut to ancient ruins in the Northeast.
+  ActivateOnStart: 0
 --- !u!1001 &4208108232871448433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4891,7 +5027,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8ff2030052f5b4f832b6f0d725aa65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDiscovered: 0
+  PlayerVisited: 0
+  AlreadyRevealed: 0
   Dialogue: 
   SpellTome: 6
 --- !u!4 &6541375823632488541
@@ -6423,7 +6560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9c22630c482064eb31a6effd3f661b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDiscovered: 0
+  PlayerVisited: 0
+  AlreadyRevealed: 0
   Dialogue: You unearth a mighty treasure chest. This should fetch a hefty price
     in any shop.
 --- !u!1 &8588044125200021119
@@ -6770,6 +6908,7 @@ MonoBehaviour:
   IsDiscovered: 0
   SecretDestination: {fileID: 3957948207435777296}
   tooltip: Discovered secret...
+  ActivateOnStart: 0
 --- !u!1001 &9188217632637067700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6874,3 +7013,5 @@ SceneRoots:
   - {fileID: 2640774605942876979}
   - {fileID: 407460637}
   - {fileID: 705507995}
+  - {fileID: 839085244}
+  - {fileID: 200772192}
