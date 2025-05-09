@@ -9,7 +9,9 @@ public enum LocaleTypes : ushort
     InsideShop, // this exists for UI purposes!
     City,
     Cabin,
-    Ruins
+    Ruins,
+    Water
+
 }
 
 public enum Attitude {
@@ -65,7 +67,7 @@ public abstract class Locale : MonoBehaviour
         //add exhaustion as penalty
         Player.Instance().resources.AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
 
-        if (secretLocale != null && !secretLocale.IsDiscovered)
+        if (secretLocale != null && !secretLocale.PlayerVisited)
         {
             UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
             secretLocale.Activate();
@@ -165,7 +167,7 @@ public abstract class Locale : MonoBehaviour
             return;
         }
 
-        if (GetComponent<SecretLocale>() is SecretLocale s && s != null && s.IsDiscovered)
+        if (GetComponent<SecretLocale>() is SecretLocale s && s != null && s.PlayerVisited)
         {
             // trigger secret dialogue box
             TalkSuccess();

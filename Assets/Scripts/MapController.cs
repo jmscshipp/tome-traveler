@@ -32,8 +32,9 @@ public class MapController : MonoBehaviour
     private Sprite ruinsMapIcon;
 
     [SerializeField]
+    private Sprite waterMapIcon;
+    [SerializeField]
     public float SecretGizmoDrawSize = 3f;
-
 
     public static MapController Instance() => instance;
     private void Awake()
@@ -114,7 +115,7 @@ public class MapController : MonoBehaviour
             if (l.GetComponent<HiddenShortcut>() is HiddenShortcut hs && hs != null)
             {
                 Gizmos.color = Color.cyan;
-                Gizmos.DrawLine(location.transform.position, hs.SecretDestination.transform.position);
+                if (hs != null) Gizmos.DrawLine(location.transform.position, hs.SecretDestination.transform.position);
             }
             if (l.GetComponent<SecretLocale>() is SecretLocale sl && sl != null)
             {
@@ -191,6 +192,9 @@ public class MapController : MonoBehaviour
                 break;
             case LocaleTypes.Cabin:
                 sprite = cabinMapIcon;
+                break;
+            case LocaleTypes.Water:
+                sprite = waterMapIcon;
                 break;
         }
         return sprite;

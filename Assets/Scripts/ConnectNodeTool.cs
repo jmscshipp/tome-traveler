@@ -84,7 +84,7 @@ public class LocationToolOverlay : Overlay
                     continue;
                 MapLocation m1 = (MapLocation)obj;
                 MapLocation m2 = (MapLocation)obj2;
-                Debug.Log("Connecting nodes " + obj.name + " " + obj2.name);
+                // Debug.Log("Connecting nodes " + obj.name + " " + obj2.name);
                 if (!m1.GetConnectedLocations().Contains(m2))
                 {
                     m1.GetConnectedLocations().Add(m2);

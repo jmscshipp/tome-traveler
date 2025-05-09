@@ -23,15 +23,27 @@ public class Secret : MonoBehaviour
     [SerializeField]
     public string tooltip;
 
+    public bool ActivateOnStart = false;
+
     internal static void ActivateRandomSecretLocale()
     {
         int i = Random.Range(0, UndiscoveredSecretLocales.Count);
         SecretLocale l = UndiscoveredSecretLocales[i];
         UndiscoveredSecretLocales.RemoveAt(i);
-        l.IsDiscovered = true;
+        l.PlayerVisited = true;
         l.Activate();
     }
 
+    public void Start()
+    {
+        if (ActivateOnStart)
+            Activate();
+    }
+
+    public bool IsTargetUndiscovered()
+    {
+        return SecretDestination.AlreadyRevealed;
+    }
 
     public void Activate()
     {
@@ -41,7 +53,7 @@ public class Secret : MonoBehaviour
         }
 
         Debug.Log("New Secret Discovered!", SecretDestination);
-        SecretDestination.IsDiscovered = true;
+        SecretDestination.PlayerVisited = true;
         UndiscoveredSecretLocales.Remove(SecretDestination);
         string dialogue = (tooltip == "") ? "You learn a secret. You note its location on your map." : tooltip;
         UIManager.Instance().OpenDialoguePopup(dialogue);
@@ -56,7 +68,10 @@ public abstract class SecretLocale : MonoBehaviour
     // Abstract class for places a secret can point to
 {
     [SerializeField]
-    public bool IsDiscovered = false;
+    public bool PlayerVisited = false;
+
+    [SerializeField]
+    public bool AlreadyRevealed = false;
 
     [SerializeField]
     public string Dialogue;

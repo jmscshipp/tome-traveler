@@ -306,7 +306,7 @@ public class Player : MonoBehaviour
         // After checking for secrets, check to see if we're inside of a secret that we've already discovered
         // If we haven't found a secret revealing this Locale yet, we don't get the secret locale!
         SecretLocale secretLocale = currentLocation.GetComponent(typeof(SecretLocale)) as SecretLocale;
-        if (secretLocale != null && secretLocale.IsDiscovered)
+        if (secretLocale != null && secretLocale.PlayerVisited)
         {
             // reveal the secret to the player, update UI, etc
             secretLocale.Activate();
