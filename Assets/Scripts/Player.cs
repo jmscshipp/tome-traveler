@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     
     private float traverseTimer = 0f;
     private float traverseSpeed = 10f;
-    private Vector2 startPos;
-    private Vector2 endPos;
+    private Vector3 startPos;
+    private Vector3 endPos;
     public MapLocation currentLocation;
 
     public PlayerResources resources;

@@ -74,10 +74,12 @@ public class MapController : MonoBehaviour
     {
         // create connection graphic
         Vector3 dir = location.transform.position - connectedLocation.transform.position;
-        Vector2 connectionLocation = (location.transform.position + connectedLocation.transform.position) / 2f;
+        Vector3 connectionLocation = (location.transform.position + connectedLocation.transform.position) / 2f;
         GameObject connection = Instantiate(connectionPrefab, connectionLocation, Quaternion.identity, connectionParent);
         connection.transform.localScale = new Vector3(0.25f, dir.magnitude, 1f);
-        connection.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        connection.transform.localRotation = Quaternion.FromToRotation(Vector3.up, dir);
+        //connection.transform.rotation = Quaternion.Euler(90f, connection.transform.rotation.y, connection.transform.rotation.z);
+        connection.transform.localRotation = Quaternion.Euler(90f, connection.transform.eulerAngles.y, connection.transform.eulerAngles.z);
     }
 
     public void RevealSecretConnection(MapLocation location, MapLocation secretConnection)
