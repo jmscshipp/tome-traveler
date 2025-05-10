@@ -17,8 +17,6 @@ public class MapLocation : MonoBehaviour
     private bool Hidable = true;
     public bool Traversable { get; private set; }
     [SerializeField]
-    private SpriteRenderer iconGraphics;
-    [SerializeField]
     private GameObject highlightGraphics;
     [SerializeField]
     private bool finalLocation;
@@ -51,8 +49,6 @@ public class MapLocation : MonoBehaviour
     private void Start()
     {
         CheckNullConnections();
-        iconGraphics.gameObject.SetActive(true);
-        GetComponent<Locale>().SetupIconGraphics();
         if (null == highlightGraphics)
         {
             Debug.LogError("No highlight graphics set", this);
@@ -100,7 +96,6 @@ public class MapLocation : MonoBehaviour
 
     public List<MapLocation> GetConnectedLocations() => connectedLocations;
     public bool GetConnectionSetUp() => connectionSetUp;
-    public SpriteRenderer GetIconGraphics() => iconGraphics;
 
     public void ConnectTwoWays(MapLocation other)
     {

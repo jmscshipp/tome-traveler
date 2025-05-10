@@ -7,10 +7,6 @@ public class Town : Locale
     
     public override string DefaultDescription => "You arrived at the town.";
 
-    public override void SetupIconGraphics()
-    {
-        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
-    }
     private void Awake()
     {
         localeType = LocaleTypes.Town;

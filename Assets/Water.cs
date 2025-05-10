@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Water : Locale
 {
-    public override void SetupIconGraphics()
-    {
-        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
-    }
 
     // Start is called before the first frame update
     void Start()

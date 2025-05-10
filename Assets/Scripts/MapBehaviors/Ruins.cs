@@ -6,11 +6,6 @@ public class Ruins : Wild
 {
     public override string DefaultDescription => "You arrived at the ruins.";
 
-    public override void SetupIconGraphics()
-    {
-        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
-    }
-
     private void Awake()
     {
         localeType = LocaleTypes.Ruins;

@@ -4,12 +4,6 @@ public class Cabin : Locale
 {
     static string defaultShopLocaleDescription = "You arrived at the cabin.";
 
-    public override void SetupIconGraphics()
-    {
-        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
-    }
-
-
     private void Awake()
     {
         localeType = LocaleTypes.Cabin;

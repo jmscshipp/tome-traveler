@@ -42,8 +42,6 @@ public abstract class Locale : MonoBehaviour
     protected string localeDescription;
     protected LocaleTypes localeType;
 
-    public abstract void SetupIconGraphics();
-
     public string GetLocaleDescription() => localeDescription;
     public LocaleTypes GetLocaleType() => localeType;
 

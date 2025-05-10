@@ -23,12 +23,6 @@ public class Shop : Locale
     [SerializeField]
     GameObject insideShopPrefab;
 
-    // setting up representationn of locale on the map
-    public override void SetupIconGraphics()
-    {
-        GetComponent<MapLocation>().GetIconGraphics().sprite = MapController.Instance().GetLocaleSprite(this);
-    }
-
     private void Awake()
     {
         localeType = LocaleTypes.Shop;

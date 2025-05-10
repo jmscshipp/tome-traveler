@@ -35,5 +35,5 @@ Material:
     m_Floats:
     - _Blend: 33
     m_Colors:
-    - _Color: {r: 0.44654083, g: 0.124975234, b: 0.124975234, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
