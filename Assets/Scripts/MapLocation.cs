@@ -11,12 +11,11 @@ public class MapLocation : MonoBehaviour
     public readonly static int EmeraldCityHintsNeeded = 4;
     [SerializeField]
     private List<MapLocation> connectedLocations = new List<MapLocation>();
+    private List<ConnectionObject> connectionObjects = new List<ConnectionObject>();
     [SerializeField]
     bool connectionSetUp = false;
     private bool Hidable = true;
     public bool Traversable { get; private set; }
-    [SerializeField]
-    private SpriteRenderer iconGraphics;
     [SerializeField]
     private GameObject highlightGraphics;
     [SerializeField]
@@ -31,18 +30,25 @@ public class MapLocation : MonoBehaviour
     [SerializeField]
     Material m_SecretLocaleMaterial;
 
+    private bool locationRevealed = false;
+    public Transform FOWRevealer;
 
     public bool ActiveForTeleport { get; private set; }
 
     static internal List<MapLocation> activeTeleportLocations = new List<MapLocation>();
     static internal List<MapLocation> activeMindreadingLocations = new List<MapLocation>();
 
+    private void Awake()
+    {
+        FOWRevealer = transform.Find("FOWRevealer");
+        // inside shop has an empty map location that makes it hard to set this up w/out null check
+        if (FOWRevealer != null )
+            FOWRevealer.gameObject.SetActive(false);
+    }
 
     private void Start()
     {
         CheckNullConnections();
-        iconGraphics.gameObject.SetActive(true);
-        GetComponent<Locale>().SetupIconGraphics();
         if (null == highlightGraphics)
         {
             Debug.LogError("No highlight graphics set", this);
@@ -69,6 +75,14 @@ public class MapLocation : MonoBehaviour
         return GetComponent<Locale>();
     }
 
+    public bool IsLocationRevealed() => locationRevealed;
+
+    public void RevealLocation()
+    {
+        locationRevealed = true;
+        FOWRevealer.gameObject.SetActive(true);
+    }
+    
     private void OnMouseDown()
     {
         if (Traversable)
@@ -82,7 +96,6 @@ public class MapLocation : MonoBehaviour
 
     public List<MapLocation> GetConnectedLocations() => connectedLocations;
     public bool GetConnectionSetUp() => connectionSetUp;
-    public SpriteRenderer GetIconGraphics() => iconGraphics;
 
     public void ConnectTwoWays(MapLocation other)
     {
@@ -152,8 +165,20 @@ public class MapLocation : MonoBehaviour
         highlightGraphics.GetComponent<SpriteRenderer>().material = highlightMaterial;
     }
 
+    // called by map controller during setup to keep a list of the graphical representations of connections between map locations
+    public void AddConnectionObject(ConnectionObject connectionObject)
+    {
+        connectionObjects.Add(connectionObject);
+    }
+
     public void ActivateLocation()
     {
+        // advance fog of war to connected locations
+        foreach (MapLocation cl in connectedLocations)
+            cl.RevealLocation();
+        foreach (ConnectionObject co in connectionObjects)
+            co.RevealConnection(true);
+
         // the player has made it to the end of the game - the Emerald City
         if (finalLocation && EmeraldCityHints >= EmeraldCityHintsNeeded)
             UIManager.Instance().OpenDialoguePopup("You've made it! You've made it to the Emerald City!");
