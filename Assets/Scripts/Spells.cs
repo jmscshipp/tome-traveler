@@ -28,7 +28,7 @@ public abstract class Spell
     public int cooldown = 0;
     public int BaseCooldown = 3;
     public virtual string Name => "Default Spell Name";
-    public int Strength = 2;
+    protected virtual int Strength => 2;
 
     public static void PassTime()
     {
@@ -84,15 +84,41 @@ public class Sleepless : Spell
 
 }
 
-public class Clairvoyance : Spell
+public class Clairvoyance : TimedSpell
 {
     public override string Name => "Clairvoyance Spell";
+    private static float _defaultFogOfWarRadius = -1f;
+    protected override int Strength => 5;
     public override void Cast()
     {
+        if (_defaultFogOfWarRadius <= 0)
+        {
+            _defaultFogOfWarRadius = GameManager.GetFogOfWarRadius();
+        }
         // Change Fog of War size (lerp it?) by Strength
         this.cooldown = BaseCooldown;
+        GameManager.UpdateFogOfWarRadius(_defaultFogOfWarRadius + Strength);
     }
 
+    public override bool Use()
+    {
+        bool res = base.Use();
+        // If no uses left, cleanup
+        if (!res)
+        {
+            Cleanup();
+        }
+        return res;
+    }
+
+    private static void Cleanup()
+    {
+        if (_defaultFogOfWarRadius > 0f)
+        {
+            GameManager.UpdateFogOfWarRadius(_defaultFogOfWarRadius);
+        }
+    }
+    
     public override Spells GetId()
     {
         return Spells.Clairvoyance;
