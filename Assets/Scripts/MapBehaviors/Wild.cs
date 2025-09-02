@@ -56,7 +56,7 @@ public class Wild : Locale
         SleepWildernessResult result = player.SleepWilderness();
         if (result.succeeded)
         {
-            int exhaustionReduction = Random.Range(1, gm.GameState.MaxRestFromTent);
+            int exhaustionReduction = Random.Range(gm.GameState.MinRestFromTent, gm.GameState.MaxRestFromTent);
             Player.Instance().GetComponent<PlayerResources>().AddExhaustion(-exhaustionReduction);
             UIManager.Instance().OpenDialoguePopup("You curl up in your sleeping bag and watch the stars. In the morning, you feel refreshed.");
         }

@@ -10,6 +10,7 @@ public class GameState : ScriptableObject
     public int ExploreExhaustionPenalty;
     public int MaxFoodFromHunt;
     public int MinFoodFromHunt = 1;
+    public int MinRestFromTent = 1;
     public int MaxRestFromTent;
     public float HuntExhaustionChance;
     public int HuntExhaustionPenalty;

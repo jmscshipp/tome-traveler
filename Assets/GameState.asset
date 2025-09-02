@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExploreExhaustionPenalty: 1
   MaxFoodFromHunt: 3
+  MinFoodFromHunt: 3
+  MinRestFromTent: 3
   MaxRestFromTent: 3
   HuntExhaustionChance: 1
   HuntExhaustionPenalty: 1

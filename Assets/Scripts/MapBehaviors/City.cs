@@ -14,7 +14,7 @@ public class City : Locale
 
     private void Awake()
     {
-        localeType = LocaleTypes.Shop;
+        localeType = LocaleTypes.City;
 
         if (localeDescription == "")
             localeDescription = DefaultDescription;
