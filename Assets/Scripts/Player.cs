@@ -46,6 +46,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     float ZoomRate = 5f;
 
+    [SerializeField]
+    float ZoomMax = 15f;
+
+    [SerializeField]
+    float ZoomMin = 2f;
+
     public void OnEnable()
     {
         if (SpellLearnOrder == null)
@@ -193,11 +199,11 @@ public class Player : MonoBehaviour
         {
             waterwalking.Cast();
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKey(KeyCode.Q))
         {
             ZoomOut(Time.deltaTime);
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKey(KeyCode.E))
         {
             ZoomIn(Time.deltaTime);
         }
@@ -205,7 +211,7 @@ public class Player : MonoBehaviour
 
     private void SetZoom(float zoomPercentage)
     {
-
+        Camera.main.orthographicSize = Mathf.Lerp(ZoomMin, ZoomMax, zoomPercentage/(ZoomMax-ZoomMin));
     }
 
     internal static Spell RandomUnusedSpell()
@@ -370,8 +376,9 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
-        ZoomProgress = Mathf.Lerp(ZoomProgress, 100, f * ZoomRate);
+        ZoomProgress = Mathf.Max(0f, ZoomProgress);
+        float t = Mathf.Clamp01((ZoomProgress + f * ZoomRate) / 100);
+        ZoomProgress = Mathf.Lerp(0, 100, t);
         SetZoom(ZoomProgress);
     }
 
@@ -382,7 +389,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        ZoomProgress = Mathf.Lerp(ZoomProgress, 0, f * ZoomRate);
+        ZoomProgress = Mathf.Min(100f, ZoomProgress);
+        float t = Mathf.Clamp01((ZoomProgress - f * ZoomRate) / 100);
+        ZoomProgress = Mathf.Lerp(0, 100, t);
         SetZoom(ZoomProgress);
     }
 }
