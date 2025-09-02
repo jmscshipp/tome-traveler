@@ -55,6 +55,8 @@ public class PlayerResources : MonoBehaviour
             UIManager.Instance().OpenDialoguePopup("You died of exhaustion!");
             UIManager.Instance().QueueActionAfterPopup(() => Player.Die());
         }
+
+        if (modifier > 0) GameManager.Instance().AdvanceTime(modifier);
     }
 
     public int GetCoins() => coins;

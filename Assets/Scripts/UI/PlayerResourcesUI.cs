@@ -21,6 +21,9 @@ public class PlayerResourcesUI : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI coinsText;
 
+    [SerializeField]
+    TextMeshProUGUI daysText;
+
     public void UpdateHungerUI(int hunger, int maxHunger)
     {
         Image[] pips = hungerPips.GetComponentsInChildren<Image>();
@@ -55,5 +58,10 @@ public class PlayerResourcesUI : MonoBehaviour
     public void UpdateCoinsUI(int coins)
     {
         coinsText.SetText("Coins: {0}", coins);
+    }
+
+    public void UpdateDaysUI(int days)
+    {
+        daysText.SetText("Days: {0}", days);
     }
 }

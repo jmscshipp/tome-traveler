@@ -9,6 +9,7 @@ public class GameState : ScriptableObject
     public Spell StarterSpell = Player.abundance;
     public int ExploreExhaustionPenalty;
     public int MaxFoodFromHunt;
+    public int MinFoodFromHunt = 1;
     public int MaxRestFromTent;
     public float HuntExhaustionChance;
     public int HuntExhaustionPenalty;

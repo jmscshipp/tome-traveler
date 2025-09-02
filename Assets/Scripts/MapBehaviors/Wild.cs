@@ -32,7 +32,7 @@ public class Wild : Locale
 
         if (Random.Range(0f, 1f) < HuntSuccessChance)
         {
-            int num_food = Random.Range(1, gm.GameState.MaxFoodFromHunt);
+            int num_food = Random.Range(gm.GameState.MinFoodFromHunt, gm.GameState.MaxFoodFromHunt);
             for (int i =0; i<num_food; i++)
             {
                 if (player.PlayerInventory.HasSpace())

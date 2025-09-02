@@ -5,13 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/SpellSelection.unity
     guid: bcc57d50551adb446a1a871f49e01fbf
   - enabled: 1
-    path: Assets/Scenes/EmeraldCityLvl.unity
-    guid: 14953245711716145a410383e17daa69
+    path: Assets/Scenes/EmeraldCityLvl1.unity
+    guid: a8a4ae9af7056584cbff7f836d118ac8
   m_configObjects: {}

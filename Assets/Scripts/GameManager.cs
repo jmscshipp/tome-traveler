@@ -21,6 +21,35 @@ public class GameManager : MonoBehaviour
         itemBlueprints.AddRange(Resources.LoadAll<ItemData>(itemDataDirectory));
     }
 
+    public void Start()
+    {
+        SetTimer(20);
+    }
+
+    private int timer = 999;
+
+    private void SetTimer(int n)
+    {
+        timer = n;
+        Player.UI().UpdateDaysUI(timer);
+    }
+
+    public void AdvanceTime()
+    {
+        AdvanceTime(1);
+    }
+
+
+    public void AdvanceTime(int n)
+    {
+        SetTimer(timer - n);
+        if (timer <= 0)
+        {
+            UIManager.Instance().OpenDialoguePopup("The gates of Emerald City have closed forever. You've run out of time. GAME OVER!");
+            Player.Die();
+        }
+    }
+
     [SerializeField]
     public GameState GameState;
     [SerializeField]

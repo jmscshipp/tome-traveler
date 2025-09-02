@@ -340,4 +340,9 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene(0);
         GameManager.WipeProgress();
     }
+
+    internal static PlayerResourcesUI UI()
+    {
+        return Instance().resources.ui;
+    }
 }
