@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     }
     
     private float traverseTimer = 0f;
-    private float traverseSpeed = 10f;
     private Vector3 startPos;
     private Vector3 endPos;
     public MapLocation currentLocation;
@@ -42,6 +41,10 @@ public class Player : MonoBehaviour
     public int StartingFood = 3;
     static Spell[] SpellLearnOrder;
 
+    [SerializeField]
+    float ZoomProgress = 0f;
+    [SerializeField]
+    float ZoomRate = 5f;
 
     public void OnEnable()
     {
@@ -142,6 +145,7 @@ public class Player : MonoBehaviour
         PlayerInventory.SizeLimit = InventorySizeLimit;
         // Clear prices from inventory display
         PlayerInventory.GetInventoryUI().SetPrices(ShopActions.None);
+        SetZoom(ZoomProgress);
     }
 
     void Awake()
@@ -169,26 +173,39 @@ public class Player : MonoBehaviour
         {
             abundance.Cast();
         }
-        if (KnowsSleepless() && Input.GetKeyDown(KeyCode.S) && sleepless.cooldown == 0)
+        else if (KnowsSleepless() && Input.GetKeyDown(KeyCode.S) && sleepless.cooldown == 0)
         {
             sleepless.Cast();
         }
-        if (KnowsTeleportation() && Input.GetKeyDown(KeyCode.T) && teleportation.cooldown == 0)
+        else if (KnowsTeleportation() && Input.GetKeyDown(KeyCode.T) && teleportation.cooldown == 0)
         {
             teleportation.Cast();
         }
-        if (KnowsMindreading() && Input.GetKeyDown(KeyCode.M) && mindreading.cooldown == 0)
+        else if (KnowsMindreading() && Input.GetKeyDown(KeyCode.M) && mindreading.cooldown == 0)
         {
             mindreading.Cast();
         }
-        if (KnowsClairvoyance() && Input.GetKeyDown(KeyCode.C) && clairvoyance.cooldown == 0)
+        else if (KnowsClairvoyance() && Input.GetKeyDown(KeyCode.C) && clairvoyance.cooldown == 0)
         {
             clairvoyance.Cast();
         }
-        if (KnowsWaterwalking() && Input.GetKeyDown(KeyCode.W) && waterwalking.cooldown == 0)
+        else if (KnowsWaterwalking() && Input.GetKeyDown(KeyCode.W) && waterwalking.cooldown == 0)
         {
             waterwalking.Cast();
         }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ZoomOut(Time.deltaTime);
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            ZoomIn(Time.deltaTime);
+        }
+    }
+
+    private void SetZoom(float zoomPercentage)
+    {
+
     }
 
     internal static Spell RandomUnusedSpell()
@@ -344,5 +361,28 @@ public class Player : MonoBehaviour
     internal static PlayerResourcesUI UI()
     {
         return Instance().resources.ui;
+    }
+
+
+    public void ZoomOut(float f)
+    {
+        if (Mathf.Approximately(ZoomProgress, 100f) || ZoomProgress >= 100)
+        {
+            return;
+        }
+
+        ZoomProgress = Mathf.Lerp(ZoomProgress, 100, f * ZoomRate);
+        SetZoom(ZoomProgress);
+    }
+
+    public void ZoomIn(float f)
+    {
+        if (Mathf.Approximately(ZoomProgress, 0) || ZoomProgress <= 0)
+        {
+            return;
+        }
+
+        ZoomProgress = Mathf.Lerp(ZoomProgress, 0, f * ZoomRate);
+        SetZoom(ZoomProgress);
     }
 }
