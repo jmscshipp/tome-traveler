@@ -270,7 +270,7 @@ public class Player : MonoBehaviour
         }
 
         bool foodEaten = food.Use();
-        resources.AddHunger(-2);
+        resources.AddHunger(-3);
         if (foodEaten)
         {
             PlayerInventory.RemoveItem(food);
