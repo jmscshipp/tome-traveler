@@ -1368,6 +1368,10 @@ MonoBehaviour:
   godmode: 1
   StartWithTent: 1
   StartingFood: 2
+  ZoomProgress: 0
+  ZoomRate: 5
+  ZoomMax: 15
+  ZoomMin: 2
   InventorySizeLimit: 24
 --- !u!1001 &695889166683241656
 PrefabInstance:

@@ -1,4 +1,5 @@
 
+using UnityEngine;
 
 public class Cabin : Locale
 {
@@ -14,6 +15,7 @@ public class Cabin : Locale
 
     public void Sleep()
     {
+        Debug.Log("Sleeping in cabin");
         Lodge();
     }
     

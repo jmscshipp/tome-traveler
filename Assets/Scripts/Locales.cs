@@ -24,6 +24,8 @@ public enum Attitude {
 public abstract class Locale : MonoBehaviour
 {
     protected bool Searched = false;
+    protected bool Lodged = false;
+    protected bool Talked = false;
     protected bool IsHiddenShelterDiscovered = false;
     protected Player player;
     protected GameManager gm;
@@ -77,6 +79,13 @@ public abstract class Locale : MonoBehaviour
 
     public void Lodge()
     {
+        if (Lodged)
+        {
+            UIManager.Instance().OpenDialoguePopup("You've already slept here.");
+            return;
+        }
+
+        Lodged = true;
         if (CheckHiddenShelter()) return;
         switch (NPCAttitude)
         {
@@ -147,6 +156,12 @@ public abstract class Locale : MonoBehaviour
 
     public void Talk()
     {
+        if (Talked)
+        {
+            UIManager.Instance().OpenDialoguePopup("You've already spoken with the people here.");
+            return;
+        }
+
         // Auto-succeed if mindreading has charges
         Mindreading m = (Mindreading)Player.mindreading;
         bool mindreadingActive = m.HasCharges();
@@ -189,11 +204,13 @@ public abstract class Locale : MonoBehaviour
         UIManager.Instance().OpenDialoguePopup("You and the NPC get to talking, and really hit it off. They offer to let you stay for free.");
         NPCAttitude = Attitude.Friendly;
         NPCRandomTable.ChooseRandom().Activate();
+        Talked = true;
     }
     protected virtual void TalkFailure()
     {
         UIManager.Instance().OpenDialoguePopup("You do something to make the NPC frustrated. They won't let you stay here anymore, even if you pay.");
         NPCAttitude = Attitude.Hostile;
+        Talked = true;
     }
 
     internal void ActivateHiddenShelter()

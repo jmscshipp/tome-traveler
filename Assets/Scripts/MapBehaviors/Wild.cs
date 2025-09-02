@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Wild : Locale
 {
+    private bool Hunted = false;
+    private bool Camped = false;
+
     public override string DefaultDescription => "You arrive at the wildnerness.";
 
     RandomTable WildsRandomTable = new RandomTable(
@@ -25,6 +28,12 @@ public class Wild : Locale
 
     public void Hunt()
     {
+        if (Hunted)
+        {
+            UIManager.Instance().OpenDialoguePopup("You've already hunted here.");
+            return;
+        }
+
         if (Random.Range(0f, 1f) < HuntSuccessChance)
         {
             int num_food = Random.Range(gm.GameState.MinFoodFromHunt, gm.GameState.MaxFoodFromHunt);
@@ -40,10 +49,17 @@ public class Wild : Locale
         }
 
         WildsRandomTable.ChooseRandom().Activate();
+        Hunted = true;
     }
 
     public void Camp()
     {
+        if (Camped)
+        {
+            UIManager.Instance().OpenDialoguePopup("You've already camped here.");
+            return;
+        }
+
         if (CheckHiddenShelter())
         {
             return;
@@ -61,6 +77,7 @@ public class Wild : Locale
         }
         // Trigger a random event
         WildsRandomTable.ChooseRandom().Activate();
+        Camped = true;
     }
 
 }
