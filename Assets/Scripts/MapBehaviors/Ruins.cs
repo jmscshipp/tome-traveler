@@ -42,8 +42,7 @@ public class Ruins : Wild
             UIManager.Instance().OpenDialoguePopup("After exploring all day, you find something peculiar...!");
             secretLocale.Activate();
         }
-        System.Action penalty = () => Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
-        UIManager.Instance().QueueActionAfterPopup(penalty);
+
         RuinsRandomTable.ChooseRandom().Activate();
         Searched = true;
     }

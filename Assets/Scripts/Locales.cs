@@ -62,8 +62,6 @@ public abstract class Locale : MonoBehaviour
         // if no secret, give nothing
         // if secret, give it 
         SecretLocale secretLocale = GetComponent(typeof(SecretLocale)) as SecretLocale;
-        //add exhaustion as penalty
-        Player.Instance().resources.AddExhaustion(gm.GameState.ExploreExhaustionPenalty);
 
         if (secretLocale != null && !secretLocale.PlayerVisited)
         {

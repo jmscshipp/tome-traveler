@@ -25,11 +25,6 @@ public class Wild : Locale
 
     public void Hunt()
     {
-        if (Random.Range(0f, 1f) < gm.GameState.HuntExhaustionChance)
-        {
-            Player.Instance().GetComponent<PlayerResources>().AddExhaustion(gm.GameState.HuntExhaustionPenalty);
-        }
-
         if (Random.Range(0f, 1f) < HuntSuccessChance)
         {
             int num_food = Random.Range(gm.GameState.MinFoodFromHunt, gm.GameState.MaxFoodFromHunt);
